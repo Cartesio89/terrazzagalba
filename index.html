@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terrazza Galba - Appartamento vacanze nel cuore di Terracina con vista mozzafiato sul mare e tempio di Anxur">
+    <meta name="keywords" content="terracina, appartamento, vacanze, airbnb, terrazza galba, pontine, anxur, mare">
+    <meta property="og:title" content="Terrazza Galba - Appartamento Terracina">
+    <meta property="og:description" content="Appartamento accogliente con vista mozzafiato nel centro storico di Terracina">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/20250530_192259.jpg">
+    
+    <title>Terrazza Galba - Appartamento Terracina</title>
+    
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="apple-touch-icon" href="./favicon.png">
+    
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <div class="nav-logo">Terrazza Galba</div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active" data-i18n="nav.home">Home</a></li>
+                <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Galleria</a></li>
+                <li><a href="#reviews" class="nav-link" data-i18n="nav.reviews">Recensioni</a></li>
+                <li><a href="#info" class="nav-link" data-i18n="nav.info">Info Utili</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contatti</a></li>
+                <li><a href="#guide" class="nav-link" data-i18n="nav.guide">Guida Casa</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="it">IT</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="hero.title">Terrazza Galba</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Appartamento accogliente con vista mozzafiato</p>
+            <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Prenota Ora</a>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="section description">
+        <div class="container">
+            <h2 class="section-title" data-i18n="description.title">Il Tuo Rifugio a Terracina</h2>
+            <div class="description-grid">
+                <div class="description-text">
+                    <p data-i18n="description.text"></p>
+                    <p data-i18n="description.space"></p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📶</span>
+                        <span data-i18n="features.wifi">Wi-Fi gratuito</span>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">❄️</span>
+                        <span data-i18n="features.ac">Aria condizionata</span>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🍳</span>
+                        <span data-i18n="features.kitchen">Cucina attrezzata</span>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🌅</span>
+                        <span data-i18n="features.terrace">Terrazza panoramica</span>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏖️</span>
+                        <span data-i18n="features.view">Vista mare e montagna</span>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🏛️</span>
+                        <span data-i18n="features.center">Centro storico</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title" data-i18n="nav.gallery">Galleria</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section reviews" id="reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2 class="section-title" data-i18n="reviews.title">Cosa Dicono i Nostri Ospiti</h2>
+                <div class="rating-badge">
+                    <span class="rating-star">⭐</span>
+                    <span class="rating-number" data-i18n="reviews.rating">5.0</span>
+                    <span class="rating-total" data-i18n="reviews.total">(6 recensioni)</span>
+                </div>
+            </div>
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section info" id="info">
+        <div class="container">
+            <h2 class="section-title" data-i18n="info.title">Info Utili</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 data-i18n="info.transport.title">Trasporti</h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.cotralspa.it/" target="_blank" rel="noopener">
+                                🚌 <span data-i18n="info.transport.cotral">Autobus Cotral</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.trenitalia.com/" target="_blank" rel="noopener">
+                                🚂 <span data-i18n="info.transport.train">Stazione Trenitalia</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3 data-i18n="info.nearby.title">Nelle Vicinanze</h3>
+                    <ul>
+                        <li>⛵ <span data-i18n="info.nearby.ponza">Isola di Ponza</span></li>
+                        <li>🏛️ <span data-i18n="info.nearby.temple">Tempio di Anxur</span></li>
+                        <li>🏖️ <span data-i18n="info.nearby.beach">Spiaggia (1 km)</span></li>
+                    </ul>
+                </div>
+                <div class="info-card map-card">
+                    <h3>📍 Posizione</h3>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.6449087458287!2d13.249999999999998!3d41.29!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE3JzI0LjAiTiAxM8KwMTUnMDAuMCJF!5e0!3m2!1sit!2sit!4v1234567890"
+                            width="100%" 
+                            height="250" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact.title">Contattaci</h2>
+            <div class="contact-grid">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name" data-i18n="contact.name">Nome</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email" data-i18n="contact.email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" required placeholder=" "></textarea>
+                        <label for="message" data-i18n="contact.message">Messaggio</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-i18n="contact.send">Invia Richiesta</button>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
+                <div class="contact-info">
+                    <p class="contact-or" data-i18n="contact.or">oppure</p>
+                    <a href="https://wa.me/393123456789" class="btn btn-whatsapp" target="_blank" rel="noopener">
+                        💬 <span data-i18n="contact.whatsapp">Scrivici su WhatsApp</span>
+                    </a>
+                    <a href="https://www.airbnb.it/rooms/1182032865433607383" class="btn btn-airbnb" target="_blank" rel="noopener">
+                        🏠 <span data-i18n="contact.airbnb">Vedi su Airbnb</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- House Guide Section -->
+    <section class="section guide" id="guide">
+        <div class="container">
+            <h2 class="section-title" data-i18n="guide.title">Guida della Casa</h2>
+            <div class="guide-container">
+                <div class="guide-lock" id="guideLock">
+                    <p data-i18n="guide.subtitle">Inserisci il PIN per accedere alla guida</p>
+                    <form class="pin-form" id="pinForm">
+                        <input type="password" id="pin" maxlength="4" pattern="[0-9]{4}" placeholder="****" required>
+                        <button type="submit" class="btn btn-primary" data-i18n="guide.unlock">Sblocca</button>
+                    </form>
+                    <div class="pin-error" id="pinError" data-i18n="guide.error"></div>
+                </div>
+                <div class="guide-content" id="guideContent" style="display:none;">
+                    <p>✅ Accesso consentito!</p>
+                    <a href="./assets/house-guide.pdf" class="btn btn-primary" download data-i18n="guide.download">
+                        📄 Scarica la Guida (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Terrazza Galba. <span data-i18n="footer.rights">Tutti i diritti riservati</span></p>
+            <p><span data-i18n="footer.codice">Codice identificativo</span>: IT059032C293SBVPQB</p>
+        </div>
+    </footer>
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
