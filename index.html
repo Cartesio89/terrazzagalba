@@ -33,10 +33,8 @@
         <div class="container nav-container">
             <a href="#home" class="nav-logo">Terrazza Galba</a>
             
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="nav-toggle-box" id="navToggle" aria-label="Toggle navigation">
+                <span class="menu-text">MENU</span>
             </button>
             
             <ul class="nav-menu" id="navMenu">
@@ -116,7 +114,12 @@
     <!-- Gallery Section -->
     <section class="section gallery" id="gallery">
         <div class="container">
-            <h2 class="section-title" data-translate="gallery.title">Galleria</h2>
+            <div class="gallery-header">
+                <h2 class="section-title" data-translate="gallery.title">Galleria</h2>
+                <button class="gallery-toggle" id="galleryToggle" aria-label="Toggle gallery">
+                    <span class="arrow-icon">▼</span>
+                </button>
+            </div>
             <div class="gallery-grid" id="galleryGrid"></div>
         </div>
     </section>
@@ -214,7 +217,7 @@
         </div>
     </section>
 
-    <!-- City Guide Section (Hidden from main page) -->
+    <!-- City Guide Section (Hidden - only accessible via menu click) -->
     <section class="section section-hidden city-guide" id="city-guide">
         <div class="container">
             <h2 class="section-title" data-translate="cityguide.title">Guida alla città</h2>
@@ -237,7 +240,7 @@
         </div>
     </section>
 
-    <!-- House Guide Section (Hidden from main page) -->
+    <!-- House Guide Section (Hidden - only accessible via menu click) -->
     <section class="section section-hidden house-guide" id="house-guide">
         <div class="container">
             <h2 class="section-title" data-translate="houseguide.title">Guida della Casa</h2>
