@@ -1,0 +1,240 @@
+/* Hidden sections - not visible when scrolling main page */
+.section-hidden {
+    display: none;
+}
+
+/* Show hidden sections when directly accessed */
+.section-hidden:target {
+    display: block;
+}
+
+/* Hero image optimization */
+.hero {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Description section layout - text first, features below */
+.description-content-full {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Features grid - compact and below text */
+.features-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card-compact {
+    text-align: center;
+    padding: 1rem;
+}
+
+.feature-card-compact .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card-compact .feature-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c5f7f;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .features-grid-compact {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .feature-card-compact .feature-icon {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card-compact .feature-title {
+        font-size: 0.85rem;
+    }
+}
+
+/* Gallery image optimization - NON CLICKABLE */
+.gallery-item {
+    cursor: default;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    transition: none;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .gallery-item img {
+        height: 250px;
+    }
+}
+
+/* Tabs styling for City Guide */
+.tabs-container {
+    margin-top: 2rem;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.tab-button {
+    padding: 1rem 2rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    color: #2c5f7f;
+}
+
+.tab-button.active {
+    color: #2c5f7f;
+    border-bottom-color: #2c5f7f;
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.empty-content {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* House Guide - Reserved section */
+.guide-reserved {
+    font-weight: 600;
+    color: #2c5f7f;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Special nav links styling */
+.nav-link-cta {
+    font-weight: 600;
+    color: #2c5f7f !important;
+}
+
+.nav-link-special {
+    position: relative;
+}
+
+/* Form improvements - placeholder disappears when typing */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2c5f7f;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* PIN input styling */
+#guidePin {
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .tabs-nav {
+        flex-wrap: wrap;
+    }
+    
+    .tab-button {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .description-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+}
+
+/* Performance improvements */
+.gallery-item img {
+    will-change: auto;
+}
+
+/* Lazy loading placeholder */
+.gallery-item img[loading="lazy"] {
+    background: #f0f0f0;
+}
