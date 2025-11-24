@@ -120,7 +120,7 @@
     "info": {
       "title": "Info Utili",
       "transport": {
-        "title": "Trasporti",
+        "title": "Trasporti - link utili",
         "cotral": "Autobus regionali",
         "train": "Stazione ferroviaria"
       },
@@ -265,7 +265,7 @@
     "info": {
       "title": "Useful Info",
       "transport": {
-        "title": "Transport",
+        "title": "Transport - useful link",
         "cotral": "Regional buses",
         "train": "Train station"
       },
