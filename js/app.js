@@ -1,295 +1,258 @@
-// App State
+// Language management
 let currentLang = 'it';
-let content = null;
+let content = {};
 
-// PIN corretto
-const CORRECT_PIN = '8008';
-
-// Photo list
-const photos = [
-    { filename: '20250530_192259.jpg', alt: 'Cucina con tavolo limoni' },
-    { filename: 'IMG_20240715_221057_056.jpg', alt: 'Vista serale terrazza' },
-    { filename: 'dji_fly_20240728_124530_901_1722164597533_photo.jpg', alt: 'Teatro Romano drone' },
-    { filename: '20240731_210142.jpg', alt: 'Terrazza serale con luci' },
-    { filename: '20250530_211226.jpg', alt: 'Cucina dall\'alto' },
-    { filename: 'IMG_20240715_220049_133.jpg', alt: 'Camera con divano' },
-    { filename: '20240616_153645.jpg', alt: 'Bagno con specchio' },
-    { filename: '20250608_164955.jpg', alt: 'Teatro Romano' },
-    { filename: '20251115_120136.jpg', alt: 'Vista panoramica città' }
-];
-
-// Init
-document.addEventListener('DOMContentLoaded', init);
-
-async function init() {
-    await loadContent();
-    setupNavigation();
-    setupLanguageSwitch();
-    loadGallery();
-    loadReviews();
-    setupContactForm();
-    setupPinForm();
-    updateContent();
-}
-
-// Load content from JSON
+// Load content
 async function loadContent() {
     try {
-        const response = await fetch('./content/content.json');
+        const response = await fetch('content/content.json');
         content = await response.json();
+        updateContent();
     } catch (error) {
         console.error('Error loading content:', error);
     }
 }
 
-// Navigation
-function setupNavigation() {
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = link.getAttribute('href');
-            document.querySelector(target).scrollIntoView({
-                behavior: 'smooth'
-            });
-            navMenu.classList.remove('active');
-            
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        });
-    });
-
-    // Scroll spy
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('.section, .hero');
-        const scrollPos = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            const id = section.getAttribute('id');
-
-            if (scrollPos >= top && scrollPos < top + height) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    });
-}
-
-// Language Switch
-function setupLanguageSwitch() {
-    const langButtons = document.querySelectorAll('.lang-btn');
-    
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentLang = btn.dataset.lang;
-            langButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            updateContent();
-            loadReviews();
-        });
-    });
-}
-
-// Update content based on language
+// Update content based on current language
 function updateContent() {
-    if (!content) return;
-
-    const lang = content[currentLang];
-    
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        const value = getNestedValue(lang, key);
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        const keys = key.split('.');
+        let value = content[currentLang];
         
-        if (value) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = value;
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
             } else {
-                el.textContent = value;
+                return;
             }
         }
+        
+        if (typeof value === 'string') {
+            element.textContent = value;
+        }
     });
-
-    // Update page title and meta
-    document.title = `${lang.siteName} - ${lang.tagline}`;
-    document.documentElement.lang = currentLang;
+    
+    // Update reviews
+    updateReviews();
 }
 
-// Helper to get nested object value
-function getNestedValue(obj, path) {
-    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+// Update reviews
+function updateReviews() {
+    const reviewsGrid = document.getElementById('reviewsGrid');
+    if (!reviewsGrid || !content[currentLang].reviews) return;
+    
+    reviewsGrid.innerHTML = '';
+    content[currentLang].reviews.items.forEach(review => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card';
+        reviewCard.innerHTML = `
+            <div class="review-header">
+                <div class="review-author">
+                    <div class="review-avatar">${review.name.charAt(0)}</div>
+                    <div>
+                        <h3 class="review-name">${review.name}</h3>
+                        <p class="review-date">${review.date}</p>
+                    </div>
+                </div>
+                <div class="review-rating">${'★'.repeat(review.rating)}</div>
+            </div>
+            <p class="review-text">${review.text}</p>
+        `;
+        reviewsGrid.appendChild(reviewCard);
+    });
 }
 
-// Load Gallery
-function loadGallery() {
+// Gallery management
+const images = Array.from({length: 18}, (_, i) => ({
+    src: `images/${i}.jpg`,
+    alt: `Terrazza Galba - Foto ${i + 1}`
+}));
+
+function createGallery() {
     const galleryGrid = document.getElementById('galleryGrid');
-    galleryGrid.innerHTML = '';
-
-    photos.forEach(photo => {
+    if (!galleryGrid) return;
+    
+    images.forEach((image, index) => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
         item.innerHTML = `
-            <img src="./images/${photo.filename}" alt="${photo.alt}" loading="lazy">
+            <img src="${image.src}" alt="${image.alt}" loading="lazy">
         `;
-        
-        item.addEventListener('click', () => {
-            openLightbox(photo.filename);
-        });
-        
+        item.addEventListener('click', () => openLightbox(index));
         galleryGrid.appendChild(item);
     });
 }
 
-// Simple lightbox
-function openLightbox(filename) {
-    const lightbox = document.createElement('div');
-    lightbox.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        cursor: pointer;
-    `;
+// Lightbox management
+let currentImageIndex = 0;
+
+function openLightbox(index) {
+    currentImageIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
     
-    const img = document.createElement('img');
-    img.src = `./images/${filename}`;
-    img.style.cssText = 'max-width: 90%; max-height: 90%; object-fit: contain;';
-    
-    lightbox.appendChild(img);
-    document.body.appendChild(lightbox);
-    
-    lightbox.addEventListener('click', () => {
-        document.body.removeChild(lightbox);
-    });
+    lightboxImage.src = images[index].src;
+    lightboxImage.alt = images[index].alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
-// Load Reviews
-function loadReviews() {
-    if (!content) return;
-
-    const reviewsGrid = document.getElementById('reviewsGrid');
-    reviewsGrid.innerHTML = '';
-
-    const reviews = content[currentLang].reviews.items;
-
-    reviews.forEach(review => {
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-            <div class="review-header">
-                <span class="review-name">${review.name}</span>
-                <span class="review-date">${review.date}</span>
-            </div>
-            <div class="review-stars">⭐⭐⭐⭐⭐</div>
-            <p class="review-text">${review.text}</p>
-        `;
-        reviewsGrid.appendChild(card);
-    });
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
-// Contact Form
-function setupContactForm() {
-    const form = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
+function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    document.getElementById('lightboxImage').src = images[currentImageIndex].src;
+    document.getElementById('lightboxImage').alt = images[currentImageIndex].alt;
+}
 
-    form.addEventListener('submit', async (e) => {
+function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    document.getElementById('lightboxImage').src = images[currentImageIndex].src;
+    document.getElementById('lightboxImage').alt = images[currentImageIndex].alt;
+}
+
+// Navigation
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
+});
+
+// Close menu when clicking on a link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        // In production, integrate with EmailJS or similar service
-        // For now, just show success
-        
-        formStatus.textContent = currentLang === 'it' 
-            ? 'Messaggio inviato! Ti risponderemo presto.' 
-            : 'Message sent! We will reply soon.';
-        formStatus.className = 'form-status success';
-
-        form.reset();
-
-        setTimeout(() => {
-            formStatus.style.display = 'none';
-        }, 5000);
-    });
-}
-
-// PIN Form for House Guide
-function setupPinForm() {
-    const pinForm = document.getElementById('pinForm');
-    const pinInput = document.getElementById('pin');
-    const pinError = document.getElementById('pinError');
-    const guideLock = document.getElementById('guideLock');
-    const guideContent = document.getElementById('guideContent');
-
-    pinForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const enteredPin = pinInput.value;
-
-        if (enteredPin === CORRECT_PIN) {
-            guideLock.style.display = 'none';
-            guideContent.style.display = 'block';
-            pinError.classList.remove('show');
-        } else {
-            pinError.classList.add('show');
-            pinInput.value = '';
-            pinInput.focus();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
-}
+});
 
-// Smooth scroll polyfill for older browsers
-if (!('scrollBehavior' in document.documentElement.style)) {
-    const smoothScroll = (target) => {
-        const targetPosition = target.offsetTop;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        const duration = 1000;
-        let start = null;
+// Language switcher
+const langSwitch = document.getElementById('langSwitch');
+const langOptions = document.querySelectorAll('.lang-option');
 
-        const animation = (currentTime) => {
-            if (start === null) start = currentTime;
-            const timeElapsed = currentTime - start;
-            const run = ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        };
-
-        const ease = (t, b, c, d) => {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
-        };
-
-        requestAnimationFrame(animation);
-    };
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) smoothScroll(target);
-        });
+langOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const lang = option.getAttribute('data-lang');
+        if (lang !== currentLang) {
+            currentLang = lang;
+            langOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            updateContent();
+        }
     });
-}
+});
+
+// Contact form
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(contactForm);
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+    };
+    
+    // Send email (using FormSubmit or similar service)
+    try {
+        const response = await fetch('https://formsubmit.co/appartamentoterrazzagalba@gmail.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.name,
+                email: data.email,
+                message: data.message,
+                _subject: 'Nuova richiesta da Terrazza Galba',
+                _template: 'table'
+            })
+        });
+        
+        if (response.ok) {
+            alert(currentLang === 'it' ? 'Messaggio inviato con successo!' : 'Message sent successfully!');
+            contactForm.reset();
+        } else {
+            throw new Error('Failed to send');
+        }
+    } catch (error) {
+        alert(currentLang === 'it' ? 'Errore nell\'invio del messaggio. Riprova più tardi.' : 'Error sending message. Please try again later.');
+    }
+});
+
+// House guide PIN
+const guideForm = document.getElementById('guideForm');
+const guideSuccess = document.getElementById('guideSuccess');
+const correctPin = '8008';
+
+guideForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const pin = document.getElementById('guidePin').value;
+    
+    if (pin === correctPin) {
+        guideForm.style.display = 'none';
+        guideSuccess.style.display = 'block';
+    } else {
+        alert(currentLang === 'it' ? 'PIN errato. Riprova.' : 'Incorrect PIN. Try again.');
+        document.getElementById('guidePin').value = '';
+    }
+});
+
+// Lightbox event listeners
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxNext').addEventListener('click', nextImage);
+document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+
+document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') {
+        closeLightbox();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+    }
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadContent();
+    createGallery();
+});
