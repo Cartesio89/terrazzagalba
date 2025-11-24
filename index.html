@@ -3,92 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Terrazza Galba - Appartamento vacanze nel cuore di Terracina con vista mozzafiato sul mare e tempio di Anxur">
-    <meta name="keywords" content="terracina, appartamento, vacanze, airbnb, terrazza galba, pontine, anxur, mare">
-    <meta property="og:title" content="Terrazza Galba - Appartamento Terracina">
-    <meta property="og:description" content="Appartamento accogliente con vista mozzafiato nel centro storico di Terracina">
+    <title>Terrazza Galba - Appartamento Vacanze Terracina</title>
+    <meta name="description" content="Appartamento accogliente nel cuore del centro storico di Terracina con vista mozzafiato su foro romano, tempio di Anxur e mare">
+    <meta name="keywords" content="terracina, appartamento vacanze, terrazza galba, centro storico, vista mare, tempio anxur">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Terrazza Galba - Appartamento Vacanze Terracina">
+    <meta property="og:description" content="Appartamento con vista mozzafiato nel centro storico di Terracina">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="./images/20250530_192259.jpg">
+    <meta property="og:url" content="https://holidayhouse-terrazzagalba.com">
     
-    <title>Terrazza Galba - Appartamento Terracina</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     
-    <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="icon" type="image/png" href="./favicon.png">
-    <link rel="apple-touch-icon" href="./favicon.png">
-    
-    <link rel="stylesheet" href="./css/style.css">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav" id="nav">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <div class="nav-logo">Terrazza Galba</div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <a href="#home" class="nav-logo">Terrazza Galba</a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active" data-i18n="nav.home">Home</a></li>
-                <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Galleria</a></li>
-                <li><a href="#reviews" class="nav-link" data-i18n="nav.reviews">Recensioni</a></li>
-                <li><a href="#info" class="nav-link" data-i18n="nav.info">Info Utili</a></li>
-                <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contatti</a></li>
-                <li><a href="#guide" class="nav-link" data-i18n="nav.guide">Guida Casa</a></li>
+                <li class="nav-item"><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li>
+                <li class="nav-item"><a href="#description" class="nav-link" data-translate="nav.description">Descrizione</a></li>
+                <li class="nav-item"><a href="#gallery" class="nav-link" data-translate="nav.gallery">Galleria</a></li>
+                <li class="nav-item"><a href="#reviews" class="nav-link" data-translate="nav.reviews">Recensioni</a></li>
+                <li class="nav-item"><a href="#storia" class="nav-link" data-translate="nav.storia">Storia</a></li>
+                <li class="nav-item"><a href="#news" class="nav-link" data-translate="nav.news">News</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav.contact">Contatti</a></li>
+                <li class="nav-item"><a href="#info" class="nav-link" data-translate="nav.info">Info Utili</a></li>
+                <li class="nav-item"><a href="#guide" class="nav-link" data-translate="nav.guide">Guida Casa</a></li>
+                <li class="nav-item">
+                    <button class="lang-switch" id="langSwitch">
+                        <span class="lang-option active" data-lang="it">IT</span>
+                        <span class="lang-separator">|</span>
+                        <span class="lang-option" data-lang="en">EN</span>
+                    </button>
+                </li>
             </ul>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="it">IT</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" style="background-image: url('images/copertina.jpg');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title" data-i18n="hero.title">Terrazza Galba</h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">Appartamento accogliente con vista mozzafiato</p>
-            <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Prenota Ora</a>
+            <h1 class="hero-title">Terrazza Galba</h1>
+            <p class="hero-subtitle" data-translate="hero.subtitle">Appartamento accogliente con vista mozzafiato</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary" data-translate="hero.cta">Prenota Ora</a>
+                <a href="https://www.instagram.com/casavacanze_terrazzagalba/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    Instagram
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Description Section -->
-    <section class="section description">
+    <section class="section description" id="description">
         <div class="container">
-            <h2 class="section-title" data-i18n="description.title">Il Tuo Rifugio a Terracina</h2>
+            <h2 class="section-title" data-translate="description.title">L'Appartamento</h2>
             <div class="description-grid">
-                <div class="description-text">
-                    <p data-i18n="description.text"></p>
-                    <p data-i18n="description.space"></p>
+                <div class="description-content">
+                    <p class="description-text" data-translate="description.text"></p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <span class="feature-icon">📶</span>
-                        <span data-i18n="features.wifi">Wi-Fi gratuito</span>
+                        <div class="feature-icon">📶</div>
+                        <h3 class="feature-title" data-translate="features.wifi.title">WiFi Gratuito</h3>
+                        <p class="feature-text" data-translate="features.wifi.text">Connessione ad alta velocità</p>
                     </div>
                     <div class="feature-card">
-                        <span class="feature-icon">❄️</span>
-                        <span data-i18n="features.ac">Aria condizionata</span>
+                        <div class="feature-icon">❄️</div>
+                        <h3 class="feature-title" data-translate="features.ac.title">Aria Condizionata</h3>
+                        <p class="feature-text" data-translate="features.ac.text">In tutte le stanze</p>
                     </div>
                     <div class="feature-card">
-                        <span class="feature-icon">🍳</span>
-                        <span data-i18n="features.kitchen">Cucina attrezzata</span>
+                        <div class="feature-icon">🍳</div>
+                        <h3 class="feature-title" data-translate="features.kitchen.title">Cucina Attrezzata</h3>
+                        <p class="feature-text" data-translate="features.kitchen.text">Completa di tutto</p>
                     </div>
                     <div class="feature-card">
-                        <span class="feature-icon">🌅</span>
-                        <span data-i18n="features.terrace">Terrazza panoramica</span>
+                        <div class="feature-icon">🌅</div>
+                        <h3 class="feature-title" data-translate="features.terrace.title">Terrazza Panoramica</h3>
+                        <p class="feature-text" data-translate="features.terrace.text">Vista mare e tempio</p>
                     </div>
                     <div class="feature-card">
-                        <span class="feature-icon">🏖️</span>
-                        <span data-i18n="features.view">Vista mare e montagna</span>
+                        <div class="feature-icon">👁️</div>
+                        <h3 class="feature-title" data-translate="features.view.title">Vista Mozzafiato</h3>
+                        <p class="feature-text" data-translate="features.view.text">Foro romano e mare</p>
                     </div>
                     <div class="feature-card">
-                        <span class="feature-icon">🏛️</span>
-                        <span data-i18n="features.center">Centro storico</span>
+                        <div class="feature-icon">📍</div>
+                        <h3 class="feature-title" data-translate="features.location.title">Centro Storico</h3>
+                        <p class="feature-text" data-translate="features.location.text">Posizione strategica</p>
                     </div>
                 </div>
             </div>
@@ -98,71 +124,50 @@
     <!-- Gallery Section -->
     <section class="section gallery" id="gallery">
         <div class="container">
-            <h2 class="section-title" data-i18n="nav.gallery">Galleria</h2>
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Photos will be loaded dynamically -->
-            </div>
+            <h2 class="section-title" data-translate="gallery.title">Galleria</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-prev" id="lightboxPrev">&#10094;</button>
+        <button class="lightbox-next" id="lightboxNext">&#10095;</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    </div>
 
     <!-- Reviews Section -->
     <section class="section reviews" id="reviews">
         <div class="container">
+            <h2 class="section-title" data-translate="reviews.title">Recensioni</h2>
             <div class="reviews-header">
-                <h2 class="section-title" data-i18n="reviews.title">Cosa Dicono i Nostri Ospiti</h2>
-                <div class="rating-badge">
-                    <span class="rating-star">⭐</span>
-                    <span class="rating-number" data-i18n="reviews.rating">5.0</span>
-                    <span class="rating-total" data-i18n="reviews.total">(6 recensioni)</span>
+                <div class="reviews-rating">
+                    <span class="rating-number">5.0</span>
+                    <div class="rating-stars">★★★★★</div>
+                    <p class="rating-text" data-translate="reviews.rating">6 recensioni</p>
                 </div>
             </div>
-            <div class="reviews-grid" id="reviewsGrid">
-                <!-- Reviews will be loaded dynamically -->
+            <div class="reviews-grid" id="reviewsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Storia Section -->
+    <section class="section storia" id="storia">
+        <div class="container">
+            <h2 class="section-title" data-translate="storia.title">Storia</h2>
+            <div class="storia-content">
+                <p class="storia-text" data-translate="storia.text"></p>
             </div>
         </div>
     </section>
 
-    <!-- Info Section -->
-    <section class="section info" id="info">
+    <!-- News Section -->
+    <section class="section news" id="news">
         <div class="container">
-            <h2 class="section-title" data-i18n="info.title">Info Utili</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3 data-i18n="info.transport.title">Trasporti</h3>
-                    <ul>
-                        <li>
-                            <a href="https://www.cotralspa.it/" target="_blank" rel="noopener">
-                                🚌 <span data-i18n="info.transport.cotral">Autobus Cotral</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.trenitalia.com/" target="_blank" rel="noopener">
-                                🚂 <span data-i18n="info.transport.train">Stazione Trenitalia</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h3 data-i18n="info.nearby.title">Nelle Vicinanze</h3>
-                    <ul>
-                        <li>⛵ <span data-i18n="info.nearby.ponza">Isola di Ponza</span></li>
-                        <li>🏛️ <span data-i18n="info.nearby.temple">Tempio di Anxur</span></li>
-                        <li>🏖️ <span data-i18n="info.nearby.beach">Spiaggia (1 km)</span></li>
-                    </ul>
-                </div>
-                <div class="info-card map-card">
-                    <h3>📍 Posizione</h3>
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.6449087458287!2d13.249999999999998!3d41.29!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE3JzI0LjAiTiAxM8KwMTUnMDAuMCJF!5e0!3m2!1sit!2sit!4v1234567890"
-                            width="100%" 
-                            height="250" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
-                    </div>
-                </div>
+            <h2 class="section-title" data-translate="news.title">News</h2>
+            <div class="news-grid" id="newsGrid">
+                <p class="news-empty" data-translate="news.empty"></p>
             </div>
         </div>
     </section>
@@ -170,55 +175,102 @@
     <!-- Contact Section -->
     <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section-title" data-i18n="contact.title">Contattaci</h2>
+            <h2 class="section-title" data-translate="contact.title">Contatti</h2>
             <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-translate="contact.subtitle">Prenota il tuo soggiorno</h3>
+                    <p data-translate="contact.text">Compila il form o contattaci direttamente</p>
+                    
+                    <div class="contact-links">
+                        <a href="https://wa.me/00393291908536" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="https://www.airbnb.it/rooms/1182032865433607383" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/>
+                            </svg>
+                            <span>Airbnb</span>
+                        </a>
+                    </div>
+                </div>
+                
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
-                        <input type="text" id="name" required placeholder=" ">
-                        <label for="name" data-i18n="contact.name">Nome</label>
+                        <label for="name" data-translate="contact.form.name">Nome</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" required placeholder=" ">
-                        <label for="email" data-i18n="contact.email">Email</label>
+                        <label for="email" data-translate="contact.form.email">Email</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <textarea id="message" rows="5" required placeholder=" "></textarea>
-                        <label for="message" data-i18n="contact.message">Messaggio</label>
+                        <label for="message" data-translate="contact.form.message">Messaggio</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-i18n="contact.send">Invia Richiesta</button>
-                    <div class="form-status" id="formStatus"></div>
+                    <button type="submit" class="btn btn-primary" data-translate="contact.form.submit">Invia</button>
                 </form>
-                <div class="contact-info">
-                    <p class="contact-or" data-i18n="contact.or">oppure</p>
-                    <a href="https://wa.me/00393291908536" class="btn btn-whatsapp" target="_blank" rel="noopener">
-                        💬 <span data-i18n="contact.whatsapp">Scrivici su WhatsApp</span>
-                    </a>
-                    <a href="https://www.airbnb.it/rooms/1182032865433607383" class="btn btn-airbnb" target="_blank" rel="noopener">
-                        🏠 <span data-i18n="contact.airbnb">Vedi su Airbnb</span>
-                    </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section info" id="info">
+        <div class="container">
+            <h2 class="section-title" data-translate="info.title">Info Utili</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 data-translate="info.transport.title">Trasporti</h3>
+                    <ul class="info-list">
+                        <li><a href="https://www.cotralspa.it/" target="_blank" rel="noopener noreferrer">Cotral</a> - <span data-translate="info.transport.cotral">Autobus regionali</span></li>
+                        <li><a href="https://www.trenitalia.com/" target="_blank" rel="noopener noreferrer">Trenitalia</a> - <span data-translate="info.transport.train">Stazione ferroviaria</span></li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3 data-translate="info.nearby.title">Nelle Vicinanze</h3>
+                    <ul class="info-list">
+                        <li data-translate="info.nearby.beach">Spiaggia (1 km)</li>
+                        <li data-translate="info.nearby.temple">Tempio di Giove - Anxur</li>
+                        <li data-translate="info.nearby.ponza">Isola di Ponza e Isole Pontine</li>
+                        <li data-translate="info.nearby.circeo">Circeo (20 km)</li>
+                        <li data-translate="info.nearby.appia">Appia Antica e Via Francigena</li>
+                        <li data-translate="info.nearby.fossanova">Abbazia di Fossanova</li>
+                        <li data-translate="info.nearby.rome">Roma (100 km)</li>
+                        <li data-translate="info.nearby.naples">Napoli (150 km)</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card info-map">
+                    <h3 data-translate="info.map.title">Posizione</h3>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3006.892397826691!2d13.248085!3d41.287445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE3JzE0LjgiTiAxM8KwMTQnNTMuMSJF!5e0!3m2!1sit!2sit!4v1234567890" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- House Guide Section -->
+    <!-- Guide Section -->
     <section class="section guide" id="guide">
         <div class="container">
-            <h2 class="section-title" data-i18n="guide.title">Guida della Casa</h2>
-            <div class="guide-container">
-                <div class="guide-lock" id="guideLock">
-                    <p data-i18n="guide.subtitle">Inserisci il PIN per accedere alla guida</p>
-                    <form class="pin-form" id="pinForm">
-                        <input type="password" id="pin" maxlength="4" pattern="[0-9]{4}" placeholder="****" required>
-                        <button type="submit" class="btn btn-primary" data-i18n="guide.unlock">Sblocca</button>
-                    </form>
-                    <div class="pin-error" id="pinError" data-i18n="guide.error"></div>
-                </div>
-                <div class="guide-content" id="guideContent" style="display:none;">
-                    <p>✅ Accesso consentito!</p>
-                    <a href="./assets/house-guide.pdf" class="btn btn-primary" download data-i18n="guide.download">
-                        📄 Scarica la Guida (PDF)
-                    </a>
+            <h2 class="section-title" data-translate="guide.title">Guida della Casa</h2>
+            <div class="guide-content">
+                <p data-translate="guide.text">Accedi alla guida completa della casa con tutte le informazioni utili</p>
+                
+                <form class="guide-form" id="guideForm">
+                    <div class="form-group">
+                        <label for="guidePin" data-translate="guide.pin.label">Inserisci il PIN</label>
+                        <input type="password" id="guidePin" name="guidePin" placeholder="****" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-translate="guide.pin.submit">Sblocca Guida</button>
+                </form>
+                
+                <div class="guide-success" id="guideSuccess" style="display: none;">
+                    <p>✅ <span data-translate="guide.success">Accesso consentito!</span></p>
+                    <a href="assets/house-guide.pdf" download class="btn btn-primary" data-translate="guide.download">Scarica la Guida (PDF)</a>
                 </div>
             </div>
         </div>
@@ -227,11 +279,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Terrazza Galba. <span data-i18n="footer.rights">Tutti i diritti riservati</span></p>
-            <p><span data-i18n="footer.codice">Codice identificativo</span>: IT059032C293SBVPQB</p>
+            <p>&copy; 2024 Terrazza Galba. <span data-translate="footer.rights">Tutti i diritti riservati</span>.</p>
+            <p data-translate="footer.cir">CIR: IT059032C293SBVPQB</p>
         </div>
     </footer>
 
-    <script src="./js/app.js"></script>
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
 </body>
 </html>
