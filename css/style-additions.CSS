@@ -1,14 +1,122 @@
-/* Hidden sections - not visible when scrolling main page */
+/* ========================================
+   HIDDEN SECTIONS - ABSOLUTE ENFORCEMENT
+   ======================================== */
+
+/* Hidden sections - NEVER visible when scrolling */
 .section-hidden {
-    display: none;
+    display: none !important;
 }
 
-/* Show hidden sections when directly accessed */
+/* Show ONLY when directly accessed via hash */
 .section-hidden:target {
+    display: block !important;
+}
+
+/* Additional safeguard - hide from document flow */
+.city-guide:not(:target),
+.house-guide:not(:target) {
+    position: absolute !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* ========================================
+   MOBILE MENU - BOX "MENU"
+   ======================================== */
+
+/* Replace hamburger with box */
+.nav-toggle-box {
+    display: none;
+    background: #2c5f7f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.nav-toggle-box:hover {
+    background: #1f4560;
+}
+
+.nav-toggle-box .menu-text {
     display: block;
 }
 
-/* Hero image optimization */
+@media (max-width: 768px) {
+    .nav-toggle-box {
+        display: block;
+    }
+}
+
+/* ========================================
+   GALLERY MOBILE ACCORDION
+   ======================================== */
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.gallery-toggle {
+    display: none;
+    background: #2c5f7f;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.gallery-toggle .arrow-icon {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-toggle.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Show toggle only on mobile */
+@media (max-width: 768px) {
+    .gallery-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Gallery collapsed by default on mobile */
+    .gallery-grid {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+    
+    .gallery-grid.expanded {
+        max-height: 10000px;
+    }
+}
+
+/* Desktop - gallery always visible */
+@media (min-width: 769px) {
+    .gallery-grid {
+        max-height: none !important;
+    }
+}
+
+/* ========================================
+   HERO IMAGE OPTIMIZATION
+   ======================================== */
+
 .hero {
     min-height: 100vh;
     background-size: cover;
@@ -17,7 +125,10 @@
     position: relative;
 }
 
-/* Description section layout - text first, features below */
+/* ========================================
+   DESCRIPTION - FEATURES COMPACT
+   ======================================== */
+
 .description-content-full {
     max-width: 900px;
     margin: 0 auto;
@@ -71,7 +182,10 @@
     }
 }
 
-/* Gallery image optimization - NON CLICKABLE */
+/* ========================================
+   GALLERY - NON CLICKABLE
+   ======================================== */
+
 .gallery-item {
     cursor: default;
 }
@@ -92,7 +206,10 @@
     }
 }
 
-/* Tabs styling for City Guide */
+/* ========================================
+   TABS FOR CITY GUIDE
+   ======================================== */
+
 .tabs-container {
     margin-top: 2rem;
 }
@@ -152,7 +269,10 @@
     font-style: italic;
 }
 
-/* House Guide - Reserved section */
+/* ========================================
+   HOUSE GUIDE
+   ======================================== */
+
 .guide-reserved {
     font-weight: 600;
     color: #2c5f7f;
@@ -161,7 +281,10 @@
     text-align: center;
 }
 
-/* Special nav links styling */
+/* ========================================
+   NAVIGATION STYLING
+   ======================================== */
+
 .nav-link-cta {
     font-weight: 600;
     color: #2c5f7f !important;
@@ -171,7 +294,10 @@
     position: relative;
 }
 
-/* Form improvements - placeholder disappears when typing */
+/* ========================================
+   FORM IMPROVEMENTS
+   ======================================== */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -206,7 +332,10 @@
     letter-spacing: 0.5rem;
 }
 
-/* Mobile optimization */
+/* ========================================
+   MOBILE OPTIMIZATION
+   ======================================== */
+
 @media (max-width: 768px) {
     .tabs-nav {
         flex-wrap: wrap;
@@ -229,12 +358,14 @@
     }
 }
 
-/* Performance improvements */
+/* ========================================
+   PERFORMANCE
+   ======================================== */
+
 .gallery-item img {
     will-change: auto;
 }
 
-/* Lazy loading placeholder */
 .gallery-item img[loading="lazy"] {
     background: #f0f0f0;
 }
