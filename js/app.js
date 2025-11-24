@@ -108,6 +108,17 @@ function createGallery() {
     });
 }
 
+// Gallery accordion toggle (mobile only)
+const galleryToggle = document.getElementById('galleryToggle');
+const galleryGrid = document.getElementById('galleryGrid');
+
+if (galleryToggle && galleryGrid) {
+    galleryToggle.addEventListener('click', () => {
+        galleryGrid.classList.toggle('expanded');
+        galleryToggle.classList.toggle('active');
+    });
+}
+
 // Navigation
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
@@ -144,7 +155,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             // Show hidden sections when navigating to them
             if (target.classList.contains('section-hidden')) {
+                // Remove hidden state temporarily
                 target.style.display = 'block';
+                target.style.position = 'static';
+                target.style.visibility = 'visible';
+                target.style.height = 'auto';
             }
             
             target.scrollIntoView({
