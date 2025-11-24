@@ -2,17 +2,15 @@
   "it": {
     "nav": {
       "home": "Home",
-      "description": "Descrizione",
       "gallery": "Galleria",
-      "reviews": "Recensioni",
-      "storia": "Storia",
-      "news": "News",
-      "contact": "Contatti",
       "info": "Info Utili",
-      "guide": "Guida Casa"
+      "contact": "Contatti",
+      "book": "Prenota ora",
+      "cityguide": "Guida alla città",
+      "houseguide": "Guida Casa"
     },
     "hero": {
-      "subtitle": "Appartamento accogliente con vista mozzafiato",
+      "subtitle": "Appartamento accogliente con vista mozzafiato su Terracina",
       "cta": "Prenota Ora"
     },
     "description": {
@@ -21,28 +19,22 @@
     },
     "features": {
       "wifi": {
-        "title": "WiFi Gratuito",
-        "text": "Connessione ad alta velocità"
+        "title": "WiFi Gratuito"
       },
       "ac": {
-        "title": "Aria Condizionata",
-        "text": "In tutte le stanze"
+        "title": "Aria Condizionata"
       },
       "kitchen": {
-        "title": "Cucina Attrezzata",
-        "text": "Completa di tutto"
+        "title": "Cucina Attrezzata"
       },
       "terrace": {
-        "title": "Terrazza Panoramica",
-        "text": "Vista mare e tempio"
+        "title": "Terrazza Panoramica"
       },
       "view": {
-        "title": "Vista Mozzafiato",
-        "text": "Foro romano e mare"
+        "title": "Vista Mozzafiato"
       },
       "location": {
-        "title": "Centro Storico",
-        "text": "Posizione strategica"
+        "title": "Centro Storico"
       }
     },
     "gallery": {
@@ -90,13 +82,29 @@
         }
       ]
     },
-    "storia": {
-      "title": "Storia",
-      "text": "Contenuti in arrivo..."
+    "cityguide": {
+      "title": "Guida alla città",
+      "tabs": {
+        "storia": "Storia",
+        "notizie": "Notizie"
+      },
+      "storia": {
+        "empty": "Contenuti in arrivo..."
+      },
+      "notizie": {
+        "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!"
+      }
     },
-    "news": {
-      "title": "News",
-      "empty": "Nessuna news al momento. Torna presto per aggiornamenti!"
+    "houseguide": {
+      "title": "Guida della Casa",
+      "reserved": "Sezione riservata agli ospiti",
+      "text": "Accedi alla guida completa della casa con tutte le informazioni utili",
+      "pin": {
+        "placeholder": "PIN (4 cifre)",
+        "submit": "Sblocca Guida"
+      },
+      "success": "Accesso consentito!",
+      "download": "Scarica la Guida (PDF)"
     },
     "contact": {
       "title": "Contatti",
@@ -131,16 +139,6 @@
         "title": "Posizione"
       }
     },
-    "guide": {
-      "title": "Guida della Casa",
-      "text": "Accedi alla guida completa della casa con tutte le informazioni utili",
-      "pin": {
-        "label": "Inserisci il PIN",
-        "submit": "Sblocca Guida"
-      },
-      "success": "Accesso consentito!",
-      "download": "Scarica la Guida (PDF)"
-    },
     "footer": {
       "rights": "Tutti i diritti riservati",
       "cir": "CIR: IT059032C293SBVPQB"
@@ -149,17 +147,15 @@
   "en": {
     "nav": {
       "home": "Home",
-      "description": "Description",
       "gallery": "Gallery",
-      "reviews": "Reviews",
-      "storia": "History",
-      "news": "News",
-      "contact": "Contact",
       "info": "Useful Info",
-      "guide": "House Guide"
+      "contact": "Contact",
+      "book": "Book now",
+      "cityguide": "City Guide",
+      "houseguide": "House Guide"
     },
     "hero": {
-      "subtitle": "Cozy apartment with breathtaking views",
+      "subtitle": "Cozy apartment with breathtaking views of Terracina",
       "cta": "Book Now"
     },
     "description": {
@@ -168,28 +164,22 @@
     },
     "features": {
       "wifi": {
-        "title": "Free WiFi",
-        "text": "High-speed connection"
+        "title": "Free WiFi"
       },
       "ac": {
-        "title": "Air Conditioning",
-        "text": "In all rooms"
+        "title": "Air Conditioning"
       },
       "kitchen": {
-        "title": "Equipped Kitchen",
-        "text": "Fully equipped"
+        "title": "Equipped Kitchen"
       },
       "terrace": {
-        "title": "Panoramic Terrace",
-        "text": "Sea and temple views"
+        "title": "Panoramic Terrace"
       },
       "view": {
-        "title": "Breathtaking View",
-        "text": "Roman forum and sea"
+        "title": "Breathtaking View"
       },
       "location": {
-        "title": "Historic Center",
-        "text": "Strategic location"
+        "title": "Historic Center"
       }
     },
     "gallery": {
@@ -237,13 +227,29 @@
         }
       ]
     },
-    "storia": {
-      "title": "History",
-      "text": "Content coming soon..."
+    "cityguide": {
+      "title": "City Guide",
+      "tabs": {
+        "storia": "History",
+        "notizie": "News"
+      },
+      "storia": {
+        "empty": "Content coming soon..."
+      },
+      "notizie": {
+        "empty": "No news at the moment. Check back soon for updates!"
+      }
     },
-    "news": {
-      "title": "News",
-      "empty": "No news at the moment. Check back soon for updates!"
+    "houseguide": {
+      "title": "House Guide",
+      "reserved": "Section reserved for guests",
+      "text": "Access the complete house guide with all useful information",
+      "pin": {
+        "placeholder": "PIN (4 digits)",
+        "submit": "Unlock Guide"
+      },
+      "success": "Access granted!",
+      "download": "Download Guide (PDF)"
     },
     "contact": {
       "title": "Contact",
@@ -277,16 +283,6 @@
       "map": {
         "title": "Location"
       }
-    },
-    "guide": {
-      "title": "House Guide",
-      "text": "Access the complete house guide with all useful information",
-      "pin": {
-        "label": "Enter PIN",
-        "submit": "Unlock Guide"
-      },
-      "success": "Access granted!",
-      "download": "Download Guide (PDF)"
     },
     "footer": {
       "rights": "All rights reserved",
