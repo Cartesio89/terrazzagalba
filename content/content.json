@@ -1,210 +1,296 @@
 {
   "it": {
-    "siteName": "Terrazza Galba",
-    "tagline": "Appartamento nel cuore di Terracina",
     "nav": {
       "home": "Home",
+      "description": "Descrizione",
       "gallery": "Galleria",
       "reviews": "Recensioni",
-      "info": "Info Utili",
+      "storia": "Storia",
+      "news": "News",
       "contact": "Contatti",
+      "info": "Info Utili",
       "guide": "Guida Casa"
     },
     "hero": {
-      "title": "Terrazza Galba",
       "subtitle": "Appartamento accogliente con vista mozzafiato",
       "cta": "Prenota Ora"
     },
     "description": {
-      "title": "Il Tuo Rifugio a Terracina",
-      "text": "Appartamento accogliente nel cuore del centro storico di Terracina. Dall'appartamento si può ammirare l'antica via Appia, il foro Romano recentemente ripristinato, monte Giove con il basamento del Tempio di Anxur, il Castello Frangipane, il Mare, le Isole Pontine ed il Monte Circeo. Il mare è a 1 km (circa 10 min a piedi), nelle immediate vicinanze diversi siti archeologici, oltre a bar, un'alimentari, negozi per lo shopping ed una vasta scelta di ristoranti e locali.",
-      "space": "L'alloggio, situato al secondo piano di un edificio storico, si sviluppa su due livelli: al primo trovate la zona giorno con cucina attrezzata, il bagno e la camera da letto con vista sul foro e sul teatro romano. Al piano superiore una stanza con divano letto da cui si accede alla terrazza con vista mare e tempio di Giove/Anxur."
+      "title": "L'Appartamento",
+      "text": "Appartamento accogliente nel cuore del centro storico di Terracina. Vista su via Appia, foro Romano, monte Giove con Tempio di Anxur, Castello Frangipane, Mare, Isole Pontine, Monte Circeo. Mare a 1 km (10 min a piedi). Secondo piano edificio storico, due livelli: primo livello zona giorno con cucina attrezzata, bagno, camera con vista foro e teatro romano. Piano superiore stanza con divano letto e accesso terrazza con vista mare e tempio."
     },
     "features": {
-      "title": "Caratteristiche",
-      "wifi": "Wi-Fi gratuito",
-      "ac": "Aria condizionata",
-      "kitchen": "Cucina attrezzata",
-      "terrace": "Terrazza panoramica",
-      "view": "Vista mare e montagna",
-      "center": "Centro storico"
+      "wifi": {
+        "title": "WiFi Gratuito",
+        "text": "Connessione ad alta velocità"
+      },
+      "ac": {
+        "title": "Aria Condizionata",
+        "text": "In tutte le stanze"
+      },
+      "kitchen": {
+        "title": "Cucina Attrezzata",
+        "text": "Completa di tutto"
+      },
+      "terrace": {
+        "title": "Terrazza Panoramica",
+        "text": "Vista mare e tempio"
+      },
+      "view": {
+        "title": "Vista Mozzafiato",
+        "text": "Foro romano e mare"
+      },
+      "location": {
+        "title": "Centro Storico",
+        "text": "Posizione strategica"
+      }
+    },
+    "gallery": {
+      "title": "Galleria"
     },
     "reviews": {
-      "title": "Cosa Dicono i Nostri Ospiti",
-      "rating": "5.0",
-      "total": "6 recensioni",
+      "title": "Recensioni",
+      "rating": "6 recensioni",
       "items": [
         {
           "name": "Paola",
           "date": "Agosto 2025",
-          "text": "Appartamento super ben fornito e con vista mozzafiato! Decorato in modo simpatico e con un sacco di angoli pieni di carattere. Martino è stato gentile e disponibile e ci siamo sentiti accolti in modo molto caloroso."
+          "rating": 5,
+          "text": "Appartamento super ben fornito e con vista mozzafiato"
         },
         {
           "name": "Danilo",
           "date": "Luglio 2025",
-          "text": "Siamo stati benissimo, la casa pulita e in ordine. Martino è stato sempre disponibile, grazie per la tua disponibilità!"
+          "rating": 5,
+          "text": "Casa pulita e in ordine, Martino sempre disponibile"
         },
         {
           "name": "Ingar",
           "date": "Settembre 2025",
-          "text": "Meraviglioso appartamento per due persone. La terrazza sul tetto era perfetta per la colazione e per un bicchiere della staffa. Martino e suo padre Alessandro sono stati molto gentili. Siamo stati a Terracina molte volte, e questo è stato il miglior letto che abbiamo mai avuto a Terracina."
+          "rating": 5,
+          "text": "Terrazza sul tetto perfetta, miglior letto mai avuto a Terracina"
         },
         {
           "name": "Bernhard",
           "date": "Agosto 2025",
-          "text": "Abbiamo trascorso 3 settimane nell'appartamento di Martino. L'appartamento è molto personale e arredato con cura. In entrambe le camere c'è l'aria condizionata. La cucina ha tutto il necessario per cucinare. Ci sono anche alcuni ingredienti per cucinare. C'è una cartella informativa in 4 lingue con foto di tutte le informazioni importanti per l'appartamento. Martino risponde molto velocemente, è disponibile e dà consigli. Semplicemente un ottimo soggiorno con un superhost."
+          "rating": 5,
+          "text": "3 settimane, appartamento personale, cartella informativa 4 lingue"
         },
         {
           "name": "Alessandro",
           "date": "Agosto 2024",
-          "text": "Casa molto carina su due piani, ben tenuta e con tantissimi piccoli accorgimenti che danno un bel plus. Prima tra tutti aria condizionata in tutti i locali che funziona come si deve. Una bella bottiglia di vino in frigo come benvenuto, i giochi da tavola, una stupenda e ventilata terrazza, e tante altre cose che mi sono davvero piaciute. Geniale la presenza del 'libro mastro' con cui abbiamo avuto risposta ad ogni nostra domanda. Consiglio assolutamente questo host!"
+          "rating": 5,
+          "text": "Aria condizionata ovunque, libro mastro geniale"
         },
         {
           "name": "Saverio",
           "date": "Giugno 2025",
-          "text": "Soggiorno eccellente, host super cordiale!"
+          "rating": 5,
+          "text": "Host super cordiale"
         }
       ]
+    },
+    "storia": {
+      "title": "Storia",
+      "text": "Contenuti in arrivo..."
+    },
+    "news": {
+      "title": "News",
+      "empty": "Nessuna news al momento. Torna presto per aggiornamenti!"
+    },
+    "contact": {
+      "title": "Contatti",
+      "subtitle": "Prenota il tuo soggiorno",
+      "text": "Compila il form o contattaci direttamente",
+      "form": {
+        "name": "Nome",
+        "email": "Email",
+        "message": "Messaggio",
+        "submit": "Invia"
+      }
     },
     "info": {
       "title": "Info Utili",
       "transport": {
         "title": "Trasporti",
-        "cotral": "Autobus Cotral",
-        "train": "Stazione Trenitalia"
+        "cotral": "Autobus regionali",
+        "train": "Stazione ferroviaria"
       },
       "nearby": {
         "title": "Nelle Vicinanze",
-        "ponza": "Isola di Ponza",
-        "temple": "Tempio di Anxur",
-        "beach": "Spiaggia (1 km)"
+        "beach": "Spiaggia (1 km)",
+        "temple": "Tempio di Giove - Anxur",
+        "ponza": "Isola di Ponza e Isole Pontine",
+        "circeo": "Circeo (20 km)",
+        "appia": "Appia Antica e Via Francigena",
+        "fossanova": "Abbazia di Fossanova",
+        "rome": "Roma (100 km)",
+        "naples": "Napoli (150 km)"
+      },
+      "map": {
+        "title": "Posizione"
       }
-    },
-    "contact": {
-      "title": "Contattaci",
-      "name": "Nome",
-      "email": "Email",
-      "message": "Messaggio",
-      "send": "Invia Richiesta",
-      "or": "oppure",
-      "whatsapp": "Scrivici su WhatsApp",
-      "airbnb": "Vedi su Airbnb"
     },
     "guide": {
       "title": "Guida della Casa",
-      "subtitle": "Inserisci il PIN per accedere alla guida",
-      "pin": "PIN (4 cifre)",
-      "unlock": "Sblocca",
-      "download": "Scarica la Guida (PDF)",
-      "error": "PIN errato. Riprova."
+      "text": "Accedi alla guida completa della casa con tutte le informazioni utili",
+      "pin": {
+        "label": "Inserisci il PIN",
+        "submit": "Sblocca Guida"
+      },
+      "success": "Accesso consentito!",
+      "download": "Scarica la Guida (PDF)"
     },
     "footer": {
       "rights": "Tutti i diritti riservati",
-      "codice": "Codice identificativo"
+      "cir": "CIR: IT059032C293SBVPQB"
     }
   },
   "en": {
-    "siteName": "Terrazza Galba",
-    "tagline": "Apartment in the heart of Terracina",
     "nav": {
       "home": "Home",
+      "description": "Description",
       "gallery": "Gallery",
       "reviews": "Reviews",
-      "info": "Useful Info",
+      "storia": "History",
+      "news": "News",
       "contact": "Contact",
+      "info": "Useful Info",
       "guide": "House Guide"
     },
     "hero": {
-      "title": "Terrazza Galba",
       "subtitle": "Cozy apartment with breathtaking views",
       "cta": "Book Now"
     },
     "description": {
-      "title": "Your Refuge in Terracina",
-      "text": "Cozy apartment in the heart of Terracina's historic center. From the apartment you can admire the ancient Via Appia, the recently restored Roman Forum, Mount Jupiter with the base of the Temple of Anxur, Frangipane Castle, the Sea, the Pontine Islands and Mount Circeo. The sea is 1 km away (about 10 minutes walk), in the immediate vicinity several archaeological sites, as well as bars, a grocery store, shopping and a wide choice of restaurants and clubs.",
-      "space": "The accommodation, located on the second floor of a historic building, is spread over two levels: on the first you will find the living area with equipped kitchen, bathroom and bedroom overlooking the forum and Roman theater. Upstairs, a room with sofa bed from which you can access the terrace with sea view and Jupiter/Anxur temple."
+      "title": "The Apartment",
+      "text": "Cozy apartment in the heart of Terracina's historic center. View of Via Appia, Roman Forum, Mount Jupiter with Temple of Anxur, Frangipane Castle, Sea, Pontine Islands, Mount Circeo. Sea at 1 km (10 min walk). Second floor of historic building, two levels: first level living area with equipped kitchen, bathroom, bedroom overlooking forum and Roman theater. Upper floor room with sofa bed and access to terrace with sea and temple views."
     },
     "features": {
-      "title": "Features",
-      "wifi": "Free Wi-Fi",
-      "ac": "Air conditioning",
-      "kitchen": "Equipped kitchen",
-      "terrace": "Panoramic terrace",
-      "view": "Sea and mountain view",
-      "center": "Historic center"
+      "wifi": {
+        "title": "Free WiFi",
+        "text": "High-speed connection"
+      },
+      "ac": {
+        "title": "Air Conditioning",
+        "text": "In all rooms"
+      },
+      "kitchen": {
+        "title": "Equipped Kitchen",
+        "text": "Fully equipped"
+      },
+      "terrace": {
+        "title": "Panoramic Terrace",
+        "text": "Sea and temple views"
+      },
+      "view": {
+        "title": "Breathtaking View",
+        "text": "Roman forum and sea"
+      },
+      "location": {
+        "title": "Historic Center",
+        "text": "Strategic location"
+      }
+    },
+    "gallery": {
+      "title": "Gallery"
     },
     "reviews": {
-      "title": "What Our Guests Say",
-      "rating": "5.0",
-      "total": "6 reviews",
+      "title": "Reviews",
+      "rating": "6 reviews",
       "items": [
         {
           "name": "Paola",
           "date": "August 2025",
-          "text": "Super well-equipped apartment with breathtaking views! Decorated in a nice way with lots of charming corners full of character. Martino was kind and helpful and we felt welcomed very warmly."
+          "rating": 5,
+          "text": "Super well-equipped apartment with breathtaking view"
         },
         {
           "name": "Danilo",
           "date": "July 2025",
-          "text": "We had a great time, the house was clean and tidy. Martino was always available, thank you for your availability!"
+          "rating": 5,
+          "text": "Clean and tidy house, Martino always available"
         },
         {
           "name": "Ingar",
           "date": "September 2025",
-          "text": "Wonderful apartment for two people. The rooftop terrace was perfect for breakfast and for a nightcap. Martino and his father Alessandro were very kind. We have been to Terracina many times, and this was the best bed we have ever had in Terracina."
+          "rating": 5,
+          "text": "Perfect rooftop terrace, best bed I've ever had in Terracina"
         },
         {
           "name": "Bernhard",
           "date": "August 2025",
-          "text": "We spent 3 weeks in Martino's apartment. The apartment is very personal and furnished with care. Both rooms have air conditioning. The kitchen has everything you need for cooking. There are also some ingredients for cooking. There is an information folder in 4 languages with photos of all the important information for the apartment. Martino responds very quickly, is available and gives advice. Simply a great stay with a superhost."
+          "rating": 5,
+          "text": "3 weeks, personal apartment, information folder in 4 languages"
         },
         {
           "name": "Alessandro",
           "date": "August 2024",
-          "text": "Very nice house on two floors, well maintained and with many small touches that give a nice plus. First of all, air conditioning in all rooms that works as it should. A nice bottle of wine in the fridge as a welcome, board games, a wonderful and ventilated terrace, and many other things that I really liked. The presence of the 'master book' with which we had an answer to every question was brilliant. I absolutely recommend this host!"
+          "rating": 5,
+          "text": "Air conditioning everywhere, brilliant master book"
         },
         {
           "name": "Saverio",
           "date": "June 2025",
-          "text": "Excellent stay, super friendly host!"
+          "rating": 5,
+          "text": "Super friendly host"
         }
       ]
+    },
+    "storia": {
+      "title": "History",
+      "text": "Content coming soon..."
+    },
+    "news": {
+      "title": "News",
+      "empty": "No news at the moment. Check back soon for updates!"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Book your stay",
+      "text": "Fill out the form or contact us directly",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "submit": "Send"
+      }
     },
     "info": {
       "title": "Useful Info",
       "transport": {
         "title": "Transport",
-        "cotral": "Cotral Bus",
-        "train": "Trenitalia Station"
+        "cotral": "Regional buses",
+        "train": "Train station"
       },
       "nearby": {
         "title": "Nearby",
-        "ponza": "Ponza Island",
-        "temple": "Temple of Anxur",
-        "beach": "Beach (1 km)"
+        "beach": "Beach (1 km)",
+        "temple": "Temple of Jupiter - Anxur",
+        "ponza": "Ponza Island and Pontine Islands",
+        "circeo": "Circeo (20 km)",
+        "appia": "Appian Way and Via Francigena",
+        "fossanova": "Fossanova Abbey",
+        "rome": "Rome (100 km)",
+        "naples": "Naples (150 km)"
+      },
+      "map": {
+        "title": "Location"
       }
-    },
-    "contact": {
-      "title": "Contact Us",
-      "name": "Name",
-      "email": "Email",
-      "message": "Message",
-      "send": "Send Request",
-      "or": "or",
-      "whatsapp": "WhatsApp Us",
-      "airbnb": "View on Airbnb"
     },
     "guide": {
       "title": "House Guide",
-      "subtitle": "Enter PIN to access the guide",
-      "pin": "PIN (4 digits)",
-      "unlock": "Unlock",
-      "download": "Download Guide (PDF)",
-      "error": "Wrong PIN. Try again."
+      "text": "Access the complete house guide with all useful information",
+      "pin": {
+        "label": "Enter PIN",
+        "submit": "Unlock Guide"
+      },
+      "success": "Access granted!",
+      "download": "Download Guide (PDF)"
     },
     "footer": {
       "rights": "All rights reserved",
-      "codice": "Registration code"
+      "cir": "CIR: IT059032C293SBVPQB"
     }
   }
 }
