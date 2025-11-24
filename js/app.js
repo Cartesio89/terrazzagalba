@@ -34,6 +34,26 @@ function updateContent() {
         }
     });
     
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-translate-placeholder');
+        const keys = key.split('.');
+        let value = content[currentLang];
+        
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                return;
+            }
+        }
+        
+        if (typeof value === 'string') {
+            element.placeholder = value;
+        }
+    });
+    
     // Update reviews
     updateReviews();
 }
@@ -64,7 +84,7 @@ function updateReviews() {
     });
 }
 
-// Gallery management
+// Gallery management - NON CLICKABLE
 const images = Array.from({length: 18}, (_, i) => ({
     src: `images/${i}.jpg`,
     alt: `Terrazza Galba - Foto ${i + 1}`
@@ -74,47 +94,18 @@ function createGallery() {
     const galleryGrid = document.getElementById('galleryGrid');
     if (!galleryGrid) return;
     
-    images.forEach((image, index) => {
+    // Clear existing to avoid duplicates
+    galleryGrid.innerHTML = '';
+    
+    images.forEach((image) => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
         item.innerHTML = `
             <img src="${image.src}" alt="${image.alt}" loading="lazy">
         `;
-        item.addEventListener('click', () => openLightbox(index));
+        // NO click event - images are not clickable
         galleryGrid.appendChild(item);
     });
-}
-
-// Lightbox management
-let currentImageIndex = 0;
-
-function openLightbox(index) {
-    currentImageIndex = index;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    
-    lightboxImage.src = images[index].src;
-    lightboxImage.alt = images[index].alt;
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-function nextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    document.getElementById('lightboxImage').src = images[currentImageIndex].src;
-    document.getElementById('lightboxImage').alt = images[currentImageIndex].alt;
-}
-
-function prevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    document.getElementById('lightboxImage').src = images[currentImageIndex].src;
-    document.getElementById('lightboxImage').alt = images[currentImageIndex].alt;
 }
 
 // Navigation
@@ -143,12 +134,19 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Smooth scroll
+// Smooth scroll with special handling for hidden sections
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        
         if (target) {
+            // Show hidden sections when navigating to them
+            if (target.classList.contains('section-hidden')) {
+                target.style.display = 'block';
+            }
+            
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -170,6 +168,24 @@ langOptions.forEach(option => {
             option.classList.add('active');
             updateContent();
         }
+    });
+});
+
+// Tabs management for City Guide
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+        
+        // Remove active class from all buttons and panels
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding panel
+        button.classList.add('active');
+        document.getElementById(`tab-${targetTab}`).classList.add('active');
     });
 });
 
@@ -228,26 +244,6 @@ guideForm.addEventListener('submit', (e) => {
     } else {
         alert(currentLang === 'it' ? 'PIN errato. Riprova.' : 'Incorrect PIN. Try again.');
         document.getElementById('guidePin').value = '';
-    }
-});
-
-// Lightbox event listeners
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightboxNext').addEventListener('click', nextImage);
-document.getElementById('lightboxPrev').addEventListener('click', prevImage);
-
-document.getElementById('lightbox').addEventListener('click', (e) => {
-    if (e.target.id === 'lightbox') {
-        closeLightbox();
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox.classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') prevImage();
     }
 });
 
