@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida alla città - Terrazza Galba</title>
+    <meta name="description" content="Scopri la storia e le notizie di Terracina">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-additions.css">
+    <link rel="stylesheet" href="css/guida-citta.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">Terrazza Galba</a>
+            
+            <button class="lang-switch" id="langSwitch">
+                <span class="lang-option active" data-lang="it">IT</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-option" data-lang="en">EN</span>
+            </button>
+            
+            <button class="nav-toggle-box" id="navToggle" aria-label="Toggle navigation">
+                <span class="menu-text">MENU</span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link" data-translate="nav.home">Home</a></li>
+                <li class="nav-item"><a href="index.html#gallery" class="nav-link" data-translate="nav.gallery">Galleria</a></li>
+                <li class="nav-item"><a href="index.html#info" class="nav-link" data-translate="nav.info">Info Utili</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link" data-translate="nav.contact">Contatti</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link nav-link-cta" data-translate="nav.book">Prenota ora</a></li>
+                <li class="nav-item"><a href="guida-citta.html" class="nav-link nav-link-special active" data-translate="nav.cityguide">Guida alla città</a></li>
+                <li class="nav-item"><a href="index.html#house-guide" class="nav-link nav-link-special" data-translate="nav.houseguide">Guida Casa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Small) -->
+    <section class="hero-small">
+        <div class="container">
+            <h1 class="page-title" data-translate="cityguide.title">Guida alla città</h1>
+            <p class="page-subtitle" data-translate="cityguide.subtitle">Scopri la storia e le notizie di Terracina</p>
+        </div>
+    </section>
+
+    <!-- City Guide Content -->
+    <section class="section city-guide-page">
+        <div class="container">
+            <!-- Tabs Navigation -->
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-button active" data-tab="storia" data-translate="cityguide.tabs.storia">Storia</button>
+                    <button class="tab-button" data-tab="notizie" data-translate="cityguide.tabs.notizie">Notizie</button>
+                </div>
+                
+                <!-- Tabs Content -->
+                <div class="tabs-content">
+                    <!-- Storia Tab -->
+                    <div class="tab-panel active" id="tab-storia">
+                        <div class="articles-list" id="storiaArticles">
+                            <p class="empty-content" data-translate="cityguide.storia.empty">Contenuti in arrivo...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Notizie Tab -->
+                    <div class="tab-panel" id="tab-notizie">
+                        <div class="articles-list" id="notizieArticles">
+                            <p class="empty-content" data-translate="cityguide.notizie.empty">Nessuna notizia al momento. Torna presto per aggiornamenti!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Terrazza Galba. <span data-translate="footer.rights">Tutti i diritti riservati</span>.</p>
+            <p data-translate="footer.cir">CIR: IT059032C293SBVPQB</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/guida-citta.js"></script>
+</body>
+</html>
