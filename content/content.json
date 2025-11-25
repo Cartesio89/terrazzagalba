@@ -88,15 +88,18 @@
     },
     "cityguide": {
       "title": "Guida alla città",
+      "subtitle": "Scopri la storia e le notizie di Terracina",
       "tabs": {
         "storia": "Storia",
         "notizie": "Notizie"
       },
       "storia": {
-        "empty": "Contenuti in arrivo..."
+        "empty": "Contenuti in arrivo...",
+        "articles": []
       },
       "notizie": {
-        "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!"
+        "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!",
+        "articles": []
       }
     },
     "houseguide": {
@@ -237,15 +240,18 @@
     },
     "cityguide": {
       "title": "City Guide",
+      "subtitle": "Discover the history and news of Terracina",
       "tabs": {
         "storia": "History",
         "notizie": "News"
       },
       "storia": {
-        "empty": "Content coming soon..."
+        "empty": "Content coming soon...",
+        "articles": []
       },
       "notizie": {
-        "empty": "No news at the moment. Check back soon for updates!"
+        "empty": "No news at the moment. Check back soon for updates!",
+        "articles": []
       }
     },
     "houseguide": {
