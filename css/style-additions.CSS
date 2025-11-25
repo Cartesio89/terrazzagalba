@@ -138,6 +138,42 @@
     .nav-menu.active {
         max-height: 500px !important;
     }
+    
+    /* Hide first nav-item (Home) on mobile - visible only in menu */
+    .nav-menu .nav-item:first-child {
+        display: block;
+    }
+}
+
+/* ========================================
+   GALLERY MOBILE ACCORDION
+   ======================================== */
+
+/* Review toggle button */
+.review-toggle {
+    background: none;
+    border: none;
+    color: #2c5f7f;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.review-toggle:hover {
+    color: #1f4560;
+}
+
+.review-content {
+    position: relative;
+}
+
+.review-text-preview,
+.review-text-full {
+    margin: 0;
+    line-height: 1.6;
 }
 
 /* ========================================
