@@ -16,6 +16,15 @@ function renderStoriaArticles() {
     articles.forEach((article, index) => {
         const articleEl = document.createElement('div');
         articleEl.className = 'article-item';
+        articleEl.id = article.id; // Add ID for direct linking
+        
+        let contentHTML = article.content;
+        
+        // Add booking button for Ponza article if present
+        if (article.bookingButton) {
+            contentHTML = `<a href="${article.bookingButton.url}" target="_blank" rel="noopener noreferrer" class="booking-button">${article.bookingButton.text}</a>${contentHTML}`;
+        }
+        
         articleEl.innerHTML = `
             <div class="article-header" data-article="storia-${index}">
                 <h3 class="article-title">${article.title}</h3>
@@ -23,7 +32,7 @@ function renderStoriaArticles() {
             </div>
             <div class="article-preview">${article.preview}</div>
             <div class="article-content" id="storia-${index}">
-                ${article.content}
+                ${contentHTML}
             </div>
         `;
         container.appendChild(articleEl);
@@ -33,6 +42,9 @@ function renderStoriaArticles() {
     document.querySelectorAll('.article-header[data-article^="storia-"]').forEach(header => {
         header.addEventListener('click', () => toggleArticle(header));
     });
+    
+    // Auto-expand article if URL has hash
+    autoExpandArticle();
 }
 
 // Render Notizie articles (sorted by date DESC)
@@ -111,6 +123,35 @@ function initCityGuidePage() {
     if (document.getElementById('storiaArticles')) {
         renderStoriaArticles();
         renderNotizieArticles();
+    }
+}
+
+// Auto-expand article based on URL hash
+function autoExpandArticle() {
+    const hash = window.location.hash.substring(1); // Remove #
+    if (!hash) return;
+    
+    // Find article by ID
+    const articleEl = document.getElementById(hash);
+    if (!articleEl || !articleEl.classList.contains('article-item')) return;
+    
+    // Expand the article
+    const header = articleEl.querySelector('.article-header');
+    if (header) {
+        articleEl.classList.add('expanded');
+        const content = articleEl.querySelector('.article-content');
+        const arrow = header.querySelector('.article-arrow');
+        if (content) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+        if (arrow) {
+            arrow.style.transform = 'rotate(180deg)';
+        }
+        
+        // Scroll to article
+        setTimeout(() => {
+            articleEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     }
 }
 
