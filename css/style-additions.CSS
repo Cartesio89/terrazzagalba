@@ -1,27 +1,4 @@
 /* ========================================
-   HIDDEN SECTIONS - ABSOLUTE ENFORCEMENT
-   ======================================== */
-
-/* Hidden sections - NEVER visible when scrolling */
-.section-hidden {
-    display: none !important;
-}
-
-/* Show ONLY when directly accessed via hash */
-.section-hidden:target {
-    display: block !important;
-}
-
-/* Additional safeguard - hide from document flow */
-.city-guide:not(:target),
-.house-guide:not(:target) {
-    position: absolute !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
-}
-
-/* ========================================
    MOBILE MENU - BOX "MENU"
    ======================================== */
 
