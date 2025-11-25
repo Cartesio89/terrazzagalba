@@ -47,12 +47,15 @@
     "reviews": {
       "title": "Recensioni",
       "rating": "6 recensioni",
+      "readMore": "Leggi tutto",
+      "readLess": "Mostra meno",
       "items": [
         {
           "name": "Paola",
           "date": "Agosto 2025",
           "rating": 5,
-          "text": "Appartamento super ben fornito e con vista mozzafiato"
+          "preview": "appartamento super ben fornito e con vista mozzafiato! decorato in modo simpatico e con un sacco di angoli simpatico...",
+          "text": "appartamento super ben fornito e con vista mozzafiato! decorato in modo simpatico e con un sacco di angoli simpatico e pieni di carattere. Martino é stato gentile e disponibile e ci siamo sentiti accolti in modo molto caloroso. grazie!"
         },
         {
           "name": "Danilo",
@@ -64,19 +67,22 @@
           "name": "Ingar",
           "date": "Settembre 2025",
           "rating": 5,
-          "text": "Terrazza sul tetto perfetta, miglior letto mai avuto a Terracina"
+          "preview": "Meraviglioso appartamento per due persone. La terrazza sul tetto era perfetta per la colazione e per un bicchiere...",
+          "text": "Meraviglioso appartamento per due persone. La terrazza sul tetto era perfetta per la colazione e per un bicchiere della staffa. Martino e suo padre Alessandro sono stati molto gentili. Siamo stati a Terracina molte volte, e questo è stato il miglior letto che abbiamo mai avuto a Terracina."
         },
         {
           "name": "Bernhard",
           "date": "Agosto 2025",
           "rating": 5,
-          "text": "3 settimane, appartamento personale, cartella informativa 4 lingue"
+          "preview": "Abbiamo trascorso 3 settimane nell'appartamento di Martino. L'appartamento è molto personale e arredato con cura...",
+          "text": "Abbiamo trascorso 3 settimane nell'appartamento di Martino. L'appartamento è molto personale e arredato con cura. In entrambe le camere c'è l'aria condizionata. La cucina ha tutto il necessario per cucinare. Ci sono anche alcuni ingredienti per cucinare👍😊. C'è una cartella informativa in 4 lingue con foto di tutte le informazioni importanti per l'appartamento. Ci sono anche ombrellone e asciugamani extra per la spiaggia. L'appartamento si trova nel centro storico sopra la piazza centrale. Al piano superiore c'è una grande terrazza da cui si gode di una splendida vista, soprattutto sui tramonti.Martino risponde molto velocemente, è disponibile e dà consigli. Semplicemente un ottimo soggiorno con un superhost"
         },
         {
           "name": "Alessandro",
           "date": "Agosto 2024",
           "rating": 5,
-          "text": "Aria condizionata ovunque, libro mastro geniale"
+          "preview": "Casa molto carina su due piani, ben tenuta e con tantissimi piccoli accorgimenti che danno un bel plus...",
+          "text": "Casa molto carina su due piani, ben tenuta e con tantissimi piccoli accorgimenti che danno un bel plus.Prima tra tutti aria condizionata in tutti i locali che funziona come si deve.Una bella bottiglia di vino in frigo come benvenuto, i giochi da tavola, una stupenda e ventilata terrazza, e tante altre cose che mi sono davvero piaciute ( tipo i piccoli brick di latte senza lattosio pronti in frigo e i biscotti! sono stati una salvezza).Geniale la presenza del \"libro mastro\" come l'abbiamo rinominato con la mia compagna con cui abbiamo avuto risposta ad ogni nostra domanda.Consiglio assolutamente questo host! Grazie ancora Martino (sopratutto per averci tenuto il posto per scaricare i bagagli!!)"
         },
         {
           "name": "Saverio",
@@ -90,12 +96,47 @@
       "title": "Guida alla città",
       "subtitle": "Scopri la storia e le notizie di Terracina",
       "tabs": {
-        "storia": "Storia",
-        "notizie": "Notizie"
+        "storia": "Cenni storici",
+        "notizie": "News ed eventi"
       },
       "storia": {
         "empty": "Contenuti in arrivo...",
-        "articles": []
+        "articles": [
+          {
+            "id": "tempio-giove",
+            "title": "Il Tempio di Giove Anxur: il simbolo eterno di Terracina",
+            "preview": "Il Tempio di Giove Anxur è il monumento più iconico di Terracina, arroccato a 227 metri sul Monte Sant'Angelo, da cui domina la città, la costa e il mare...",
+            "content": "<p>Il Tempio di Giove Anxur è il monumento più iconico di Terracina, arroccato a 227 metri sul Monte Sant'Angelo, da cui domina la città, la costa e il mare fino al Circeo e alle Isole Pontine. Edificato in età romana tra il II e il I secolo a.C., il santuario sorge in un luogo scelto per il suo forte valore simbolico: un punto di incontro tra cielo, terra e mare, ideale per un culto religioso rivolto alle divinità. Il complesso era articolato su terrazze, con un tempio principale, un piccolo tempio più antico e un criptoportico ancora perfettamente conservato, che affaccia scenograficamente sul Tirreno.</p><p>Nel tempo il sito ha ospitato anche un convento medievale, restaurato di recente e impreziosito da affreschi unici. Oltre alla sua importanza storica e archeologica, il Tempio offre un percorso immersivo nella natura del Parco dei Monti Ausoni: camminando lungo il sentiero si possono osservare fossili marini di 65 milioni di anni fa, testimonianza dell'antica origine geologica del monte.</p><p>Visitare il Tempio di Giove Anxur significa vivere un viaggio nella storia e nella natura, tra panorami mozzafiato e tracce di civiltà millenarie che hanno segnato l'identità di Terracina.</p>"
+          },
+          {
+            "id": "ponza",
+            "title": "Ponza: una fuga tra mare cristallino, storia e panorami unici",
+            "preview": "Ponza è un'isola che conquista subito: colori vividi, mare trasparente e un centro storico affacciato sul porto che invita a passeggiare tra scalette e case dai toni pastello...",
+            "content": "<p>Ponza è un'isola che conquista subito: colori vividi, mare trasparente e un centro storico affacciato sul porto che invita a passeggiare tra scalette e case dai toni pastello. Il periodo migliore per visitarla va da maggio a ottobre; giugno e settembre sono perfetti per chi cerca tranquillità, mentre luglio e agosto offrono un'atmosfera più vivace.</p><p>Oltre alle sue acque turchesi, l'isola custodisce gioielli archeologici di grande fascino. Le Grotte di Pilato, antiche vasche romane scavate nella roccia, si visitano dal mare. La Cisterna della Dragonara, un'opera sotterranea impressionante, è accessibile con guida nei mesi estivi. In vari punti dell'isola emergono poi resti di ville romane, testimonianza del suo passato prestigioso.</p><p>Per raggiungere le cale più suggestive — come Chiaia di Luna, le Piscine Naturali e Bagno Vecchio — la soluzione migliore è noleggiare un gozzo, affidarsi ai taxi boat o partecipare a un tour in barca. Le Piscine Naturali, scolpite nella roccia, sono una tappa iconica e raggiungibili anche a piedi. Cala Feola è invece l'unica grande spiaggia sabbiosa dell'isola.</p><p>Ponza merita anche qualche passo fuori dai percorsi classici: dal Sentiero di Monte Guardia, con una vista a 360° sull'arcipelago, al panoramico Sentiero della Parata che porta alle Piscine Naturali. Per gli appassionati di natura, da non perdere il piccolo giardino botanico dedicato alla flora locale.</p><p>L'isola è facilmente raggiungibile in traghetto o aliscafo, e si presta benissimo anche a una gita in giornata da Terracina. Un modo semplice e affascinante per aggiungere un tocco di avventura alla tua vacanza.</p>",
+            "bookingButton": {
+              "text": "Prenota un traghetto",
+              "url": "https://www.traghetti.com/traghetti-per-ponza"
+            }
+          },
+          {
+            "id": "circeo",
+            "title": "Il Monte Circeo: tra mito, natura e mare spettacolare",
+            "preview": "Il Circeo è uno di quei luoghi che sembrano sospesi tra leggenda e realtà. Da millenni è associato alla maga Circe dell'Odissea, ritenuta la misteriosa abitante dell'isola di Eea...",
+            "content": "<p>Il Circeo è uno di quei luoghi che sembrano sospesi tra leggenda e realtà. Da millenni è associato alla maga Circe dell'Odissea, ritenuta la misteriosa abitante dell'isola di Eea. La sagoma del monte — che vista da lontano ricorda il profilo di una donna distesa — ha alimentato nei secoli il mito: era qui, si dice, che Circe avrebbe trasformato i compagni di Ulisse in porci con le sue pozioni, prima di cedere all'eroe aiutato dal dio Hermes.</p><p>Oltre al fascino della storia, il promontorio del Circeo è oggi uno dei simboli del Parco Nazionale del Circeo. Sulla cima del monte, raggiungibile con un trekking panoramico tra i più belli della zona, si trovano i resti del tempio romano dedicato proprio alla maga Circe e le antiche mura ciclopiche dell'antica città di Circei. Un percorso che unisce natura, archeologia e una vista mozzafiato sul Tirreno e sull'intero litorale.</p><p>Ma il Circeo non è solo leggenda e buon trekking: è anche mare da cartolina. Le spiagge ai piedi del promontorio sono splendide, protette dalle dune e immerse nel verde del parco. In particolare, proseguendo oltre il Circeo in direzione nord, verso Sabaudia, si incontrano alcuni dei tratti di litorale più belli del Lazio: lunghi, selvaggi, con sabbia fine e acqua limpida. Una tappa perfetta per una giornata di relax in combinazione con la visita del monte.</p><p>Il Circeo è facilmente raggiungibile da Terracina e rappresenta una delle escursioni più complete della zona: mito, natura, storia e mare… tutto in un unico luogo.</p>"
+          },
+          {
+            "id": "appia-francigena",
+            "title": "Appia Antica e Via Francigena: a Terracina si incontrano duemila anni di cammini",
+            "preview": "Terracina è uno dei pochi luoghi in Italia dove due vie storiche straordinarie si incrociano: l'Appia Antica, la celebre \"Regina Viarum\", e la Via Francigena del Sud...",
+            "content": "<p>Terracina è uno dei pochi luoghi in Italia dove due vie storiche straordinarie si incrociano: l'Appia Antica, la celebre \"Regina Viarum\", e la Via Francigena del Sud, il cammino che da Roma scende verso la Puglia e il Mediterraneo. Qui i pellegrini moderni camminano letteralmente sugli stessi basoli che percorrevano i romani oltre duemila anni fa.</p><p>L'Appia Antica attraversava Terracina nel suo tracciato principale, oggi riconoscibile nella zona di Piazza Palatina, dove si conservano splendidi basolati originali. Da lì il percorso prosegue ricalcando l'attuale Corso Garibaldi, passando accanto a monumenti come il Capitolium e il Teatro romano, fino a salire verso il Monte Sant'Angelo e l'imponente Tempio di Giove Anxur. In città si può osservare anche la suggestiva variante Traianea, visibile nella zona di Villa Salvini e dell'ex bagno penale, dove restano tratti dell'antico porto romano.</p><p>La Via Francigena del Sud, nel suo tratto terracinese, utilizza proprio alcuni segmenti dell'Appia Antica. L'incrocio più evidente è quello vicino a Piazza Palatina, dove i due percorsi si sovrappongono. Da qui parte una delle tappe più panoramiche del cammino, quella che da Terracina conduce a Fondi, passando per la via Panoramica, tra scorci sul mare e resti della grande strada romana. Esiste anche una variante pedemontana, che segue antichi percorsi utilizzati nei fondovalle e che collegavano Roma a Terracina già in epoca preromana.</p><p>A Terracina, dunque, storia, archeologia e cammini si fondono in un itinerario unico: un invito perfetto per chi ama passeggiare nella natura, scoprire tracce del passato e vivere un pezzo autentico dell'Italia antica.</p>"
+          },
+          {
+            "id": "abbazia-fossanova",
+            "title": "Abbazia di Fossanova: un viaggio nel Medioevo cistercense",
+            "preview": "L'Abbazia di Fossanova, nel territorio di Priverno e a pochi minuti da Terracina, è uno dei più straordinari esempi di architettura cistercense in Italia...",
+            "content": "<p>L'Abbazia di Fossanova, nel territorio di Priverno e a pochi minuti da Terracina, è uno dei più straordinari esempi di architettura cistercense in Italia. Il piccolo borgo che la circonda, dall'atmosfera raccolta e quasi senza tempo, deve il nome a un'antica cloaca medievale chiamata \"Fossa Nova\", da cui l'intero complesso ha ereditato la sua identità.</p><p>Costruita tra il 1163 e il 1208 dai monaci cistercensi, l'abbazia rappresenta perfettamente la transizione dal romanico al gotico. L'interno, volutamente spoglio secondo la tradizione dell'ordine, conserva solo pochi frammenti di affreschi: tutto è pensato per la meditazione e la purezza delle linee architettoniche. Nel XIII secolo visse il suo periodo di massimo splendore, per poi trasformarsi gradualmente, nei secoli successivi, in un borgo rurale.</p><p>Il cuore del complesso è la grande chiesa di Santa Maria, consacrata da Innocenzo III nel 1208. Sobria e maestosa, colpisce per il portale strombato, il grande rosone e i poderosi contrafforti che la rendono imponente pur nella sua essenzialità. Qui morì San Tommaso d'Aquino nel 1274: nella navata è ancora conservata la sua semplice tomba originaria, oggi vuota poiché le reliquie furono trasferite a Tolosa nel XIV secolo.</p><p>Intorno alla chiesa si sviluppano gli ambienti monastici: il chiostro, luogo di meditazione dei frati; la Sala Capitolare, dove ogni giorno veniva letta la Regola di San Benedetto; e il Refettorio, il più grande ambiente dopo la chiesa, riconoscibile dal pulpito in pietra da cui un monaco leggeva durante i pasti. Interessante anche l'edicola del lavabo nel chiostro, costruita riutilizzando una pietra miliare dell'antica Via Appia.</p><p>Completano il complesso l'antica infermeria, oggi sala culturale, la foresteria che ospita il Museo Medievale, e ciò che resta dell'ospizio per i pellegrini, le stalle e la grangia.</p><p>Visitare Fossanova significa immergersi in un luogo dove il silenzio, la pietra e la luce raccontano otto secoli di storia monastica: un angolo di Medioevo perfettamente conservato, ideale per una passeggiata tra spiritualità, architettura e natura.</p>"
+          }
+        ]
       },
       "notizie": {
         "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!",
@@ -199,12 +240,15 @@
     "reviews": {
       "title": "Reviews",
       "rating": "6 reviews",
+      "readMore": "Read more",
+      "readLess": "Show less",
       "items": [
         {
           "name": "Paola",
           "date": "August 2025",
           "rating": 5,
-          "text": "Super well-equipped apartment with breathtaking view"
+          "preview": "Super well-equipped apartment with breathtaking views! Decorated in a nice way with lots of charming corners...",
+          "text": "Super well-equipped apartment with breathtaking views! Decorated in a nice way with lots of charming corners full of character. Martino was kind and helpful and we felt welcomed very warmly. Thank you!"
         },
         {
           "name": "Danilo",
@@ -216,19 +260,22 @@
           "name": "Ingar",
           "date": "September 2025",
           "rating": 5,
-          "text": "Perfect rooftop terrace, best bed I've ever had in Terracina"
+          "preview": "Wonderful apartment for two people. The rooftop terrace was perfect for breakfast and a nightcap...",
+          "text": "Wonderful apartment for two people. The rooftop terrace was perfect for breakfast and a nightcap. Martino and his father Alessandro were very kind. We have been to Terracina many times, and this was the best bed we've ever had in Terracina."
         },
         {
           "name": "Bernhard",
           "date": "August 2025",
           "rating": 5,
-          "text": "3 weeks, personal apartment, information folder in 4 languages"
+          "preview": "We spent 3 weeks in Martino's apartment. The apartment is very personal and carefully furnished...",
+          "text": "We spent 3 weeks in Martino's apartment. The apartment is very personal and carefully furnished. Both rooms have air conditioning. The kitchen has everything you need for cooking. There are also some ingredients for cooking👍😊. There is an information folder in 4 languages with photos of all the important information about the apartment. There are also umbrellas and extra towels for the beach. The apartment is located in the historic center above the central square. On the upper floor there is a large terrace with a wonderful view, especially of the sunsets. Martino responds very quickly, is helpful and gives advice. Simply an excellent stay with a superhost"
         },
         {
           "name": "Alessandro",
           "date": "August 2024",
           "rating": 5,
-          "text": "Air conditioning everywhere, brilliant master book"
+          "preview": "Very nice house on two floors, well maintained and with many small touches that give a nice plus...",
+          "text": "Very nice house on two floors, well maintained and with many small touches that give a nice plus. First of all, air conditioning in all rooms that works properly. A nice bottle of wine in the fridge as a welcome, board games, a wonderful and airy terrace, and many other things that I really liked (like the small lactose-free milk bricks ready in the fridge and the biscuits! they were a lifesaver). Brilliant the presence of the \"master book\" as we renamed it with my partner with which we had an answer to every question. I absolutely recommend this host! Thanks again Martino (especially for keeping the spot for us to unload luggage!!)"
         },
         {
           "name": "Saverio",
@@ -242,12 +289,47 @@
       "title": "City Guide",
       "subtitle": "Discover the history and news of Terracina",
       "tabs": {
-        "storia": "History",
-        "notizie": "News"
+        "storia": "Historical notes",
+        "notizie": "News and events"
       },
       "storia": {
         "empty": "Content coming soon...",
-        "articles": []
+        "articles": [
+          {
+            "id": "tempio-giove",
+            "title": "The Temple of Jupiter Anxur: Terracina's eternal symbol",
+            "preview": "The Temple of Jupiter Anxur is Terracina's most iconic monument, perched at 227 meters on Monte Sant'Angelo, from where it dominates the city, coast and sea...",
+            "content": "<p>The Temple of Jupiter Anxur is Terracina's most iconic monument, perched at 227 meters on Monte Sant'Angelo, from where it dominates the city, coast and sea as far as Circeo and the Pontine Islands. Built in Roman times between the 2nd and 1st century BC, the sanctuary stands in a location chosen for its strong symbolic value: a meeting point between sky, earth and sea, ideal for a religious cult dedicated to the deities. The complex was arranged on terraces, with a main temple, a smaller older temple and a cryptoporticus still perfectly preserved, which dramatically overlooks the Tyrrhenian Sea.</p><p>Over time the site also hosted a medieval convent, recently restored and embellished with unique frescoes. Beyond its historical and archaeological importance, the Temple offers an immersive journey through the nature of the Ausoni Mountains Park: walking along the path you can observe marine fossils 65 million years old, evidence of the ancient geological origin of the mountain.</p><p>Visiting the Temple of Jupiter Anxur means experiencing a journey through history and nature, between breathtaking views and traces of millenary civilizations that have marked Terracina's identity.</p>"
+          },
+          {
+            "id": "ponza",
+            "title": "Ponza: an escape among crystal-clear sea, history and unique views",
+            "preview": "Ponza is an island that immediately captivates: vivid colors, transparent sea and a historic center overlooking the port that invites you to stroll among small steps and pastel-colored houses...",
+            "content": "<p>Ponza is an island that immediately captivates: vivid colors, transparent sea and a historic center overlooking the port that invites you to stroll among small steps and pastel-colored houses. The best period to visit ranges from May to October; June and September are perfect for those seeking tranquility, while July and August offer a more lively atmosphere.</p><p>Beyond its turquoise waters, the island preserves archaeological jewels of great charm. The Pilate's Caves, ancient Roman pools carved into the rock, are visited from the sea. The Dragonara Cistern, an impressive underground work, is accessible with a guide during summer months. Throughout the island emerge remains of Roman villas, evidence of its prestigious past.</p><p>To reach the most evocative coves — such as Chiaia di Luna, the Natural Pools and Bagno Vecchio — the best solution is to rent a gozzo boat, rely on taxi boats or join a boat tour. The Natural Pools, carved into the rock, are an iconic stop and also reachable on foot. Cala Feola is instead the island's only large sandy beach.</p><p>Ponza also deserves a few steps off the classic paths: from the Monte Guardia Trail, with a 360° view of the archipelago, to the panoramic Parata Trail leading to the Natural Pools. For nature enthusiasts, don't miss the small botanical garden dedicated to local flora.</p><p>The island is easily reachable by ferry or hydrofoil, and is also perfect for a day trip from Terracina. A simple and fascinating way to add a touch of adventure to your vacation.</p>",
+            "bookingButton": {
+              "text": "Book a ferry",
+              "url": "https://www.traghetti.com/traghetti-per-ponza"
+            }
+          },
+          {
+            "id": "circeo",
+            "title": "Mount Circeo: between myth, nature and spectacular sea",
+            "preview": "Circeo is one of those places that seem suspended between legend and reality. For millennia it has been associated with the sorceress Circe from the Odyssey, believed to be the mysterious inhabitant of the island of Aeaea...",
+            "content": "<p>Circeo is one of those places that seem suspended between legend and reality. For millennia it has been associated with the sorceress Circe from the Odyssey, believed to be the mysterious inhabitant of the island of Aeaea. The mountain's silhouette — which seen from afar resembles the profile of a reclining woman — has fueled the myth through the centuries: it was here, it is said, that Circe would have transformed Ulysses' companions into pigs with her potions, before yielding to the hero aided by the god Hermes.</p><p>Beyond the charm of history, the Circeo promontory is today one of the symbols of Circeo National Park. On the mountain's summit, reachable via a panoramic trek among the most beautiful in the area, are found the remains of the Roman temple dedicated to the sorceress Circe herself and the ancient cyclopean walls of the ancient city of Circei. A route that combines nature, archaeology and a breathtaking view over the Tyrrhenian Sea and the entire coastline.</p><p>But Circeo is not just legend and good trekking: it's also postcard-perfect sea. The beaches at the foot of the promontory are splendid, protected by dunes and immersed in the park's greenery. In particular, continuing beyond Circeo heading north, towards Sabaudia, you encounter some of the most beautiful coastal stretches in Lazio: long, wild, with fine sand and clear water. A perfect stop for a day of relaxation combined with visiting the mountain.</p><p>Circeo is easily reachable from Terracina and represents one of the area's most complete excursions: myth, nature, history and sea… all in one place.</p>"
+          },
+          {
+            "id": "appia-francigena",
+            "title": "Via Appia Antica and Via Francigena: in Terracina two thousand years of paths meet",
+            "preview": "Terracina is one of the few places in Italy where two extraordinary historical routes intersect: the Via Appia Antica, the famous \"Regina Viarum\", and the Via Francigena del Sud...",
+            "content": "<p>Terracina is one of the few places in Italy where two extraordinary historical routes intersect: the Via Appia Antica, the famous \"Regina Viarum\", and the Via Francigena del Sud, the path that descends from Rome towards Puglia and the Mediterranean. Here modern pilgrims literally walk on the same paving stones that Romans traversed over two thousand years ago.</p><p>The Via Appia Antica crossed Terracina in its main route, today recognizable in the Piazza Palatina area, where splendid original paving stones are preserved. From there the route continues following today's Corso Garibaldi, passing by monuments such as the Capitolium and the Roman Theater, up to climbing towards Monte Sant'Angelo and the imposing Temple of Jupiter Anxur. In the city you can also observe the evocative Trajan variant, visible in the Villa Salvini and former prison bath area, where sections of the ancient Roman port remain.</p><p>The Via Francigena del Sud, in its Terracina section, actually uses some segments of the Via Appia Antica. The most evident intersection is near Piazza Palatina, where the two routes overlap. From here begins one of the path's most panoramic stages, the one that leads from Terracina to Fondi, passing through via Panoramica, between sea views and remains of the great Roman road. There is also a foothill variant, which follows ancient paths used in valley bottoms and which connected Rome to Terracina already in pre-Roman times.</p><p>In Terracina, therefore, history, archaeology and paths merge in a unique itinerary: a perfect invitation for those who love walking in nature, discovering traces of the past and experiencing an authentic piece of ancient Italy.</p>"
+          },
+          {
+            "id": "abbazia-fossanova",
+            "title": "Fossanova Abbey: a journey into the Cistercian Middle Ages",
+            "preview": "Fossanova Abbey, in the territory of Priverno and a few minutes from Terracina, is one of the most extraordinary examples of Cistercian architecture in Italy...",
+            "content": "<p>Fossanova Abbey, in the territory of Priverno and a few minutes from Terracina, is one of the most extraordinary examples of Cistercian architecture in Italy. The small village surrounding it, with a collected and almost timeless atmosphere, owes its name to an ancient medieval sewer called \"Fossa Nova\", from which the entire complex inherited its identity.</p><p>Built between 1163 and 1208 by Cistercian monks, the abbey perfectly represents the transition from Romanesque to Gothic. The interior, deliberately bare according to the order's tradition, preserves only a few fresco fragments: everything is designed for meditation and the purity of architectural lines. In the 13th century it experienced its period of maximum splendor, to then gradually transform, in subsequent centuries, into a rural village.</p><p>The heart of the complex is the great church of Santa Maria, consecrated by Innocent III in 1208. Sober and majestic, it strikes for its splayed portal, the large rose window and the powerful buttresses that make it imposing despite its essentiality. Here died Saint Thomas Aquinas in 1274: in the nave is still preserved his simple original tomb, now empty since the relics were transferred to Toulouse in the 14th century.</p><p>Around the church develop the monastic environments: the cloister, place of meditation for the friars; the Chapter House, where every day the Rule of Saint Benedict was read; and the Refectory, the largest environment after the church, recognizable by the stone pulpit from which a monk read during meals. Also interesting is the washbasin aedicule in the cloister, built reusing a milestone from the ancient Via Appia.</p><p>Completing the complex are the ancient infirmary, now a cultural hall, the guesthouse hosting the Medieval Museum, and what remains of the hospice for pilgrims, the stables and the grange.</p><p>Visiting Fossanova means immersing yourself in a place where silence, stone and light tell eight centuries of monastic history: a perfectly preserved corner of the Middle Ages, ideal for a walk among spirituality, architecture and nature.</p>"
+          }
+        ]
       },
       "notizie": {
         "empty": "No news at the moment. Check back soon for updates!",
