@@ -55,6 +55,39 @@
     }
 }
 
+/* Mobile: show lang-switch next to MENU button */
+@media (max-width: 768px) {
+    .lang-switch {
+        display: flex !important;
+        align-items: center;
+        gap: 0.3rem;
+        background: #f0f0f0;
+        padding: 0.5rem 0.8rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+        position: absolute !important;
+        right: 90px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+    }
+    
+    .lang-option {
+        color: #666;
+        font-weight: 500;
+    }
+    
+    .lang-option.active {
+        color: #2c5f7f;
+        font-weight: 600;
+    }
+    
+    .lang-separator {
+        color: #999;
+    }
+}
+
 /* Replace hamburger with box */
 .nav-toggle-box {
     display: none;
