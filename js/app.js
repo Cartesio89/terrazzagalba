@@ -111,11 +111,21 @@ function createGallery() {
 // Gallery accordion toggle (mobile only)
 const galleryToggle = document.getElementById('galleryToggle');
 const galleryGrid = document.getElementById('galleryGrid');
+const galleryToggleText = document.getElementById('galleryToggleText');
 
-if (galleryToggle && galleryGrid) {
+if (galleryToggle && galleryGrid && galleryToggleText) {
     galleryToggle.addEventListener('click', () => {
-        galleryGrid.classList.toggle('expanded');
+        const isExpanded = galleryGrid.classList.toggle('expanded');
         galleryToggle.classList.toggle('active');
+        
+        // Update text based on state
+        if (isExpanded) {
+            galleryToggleText.textContent = content[currentLang].gallery.toggle.hide;
+            galleryToggleText.setAttribute('data-translate', 'gallery.toggle.hide');
+        } else {
+            galleryToggleText.textContent = content[currentLang].gallery.toggle.show;
+            galleryToggleText.setAttribute('data-translate', 'gallery.toggle.show');
+        }
     });
 }
 
