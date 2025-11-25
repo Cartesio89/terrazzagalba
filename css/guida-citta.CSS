@@ -138,6 +138,23 @@
     margin-bottom: 0.5rem;
 }
 
+/* Booking button for Ponza article */
+.booking-button {
+    display: inline-block;
+    background: #2c5f7f;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 1rem 0 1.5rem;
+    transition: background 0.3s ease;
+}
+
+.booking-button:hover {
+    background: #1f4560;
+}
+
 /* Empty state */
 .empty-content {
     text-align: center;
