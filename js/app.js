@@ -64,9 +64,14 @@ function updateReviews() {
     if (!reviewsGrid || !content[currentLang].reviews) return;
     
     reviewsGrid.innerHTML = '';
-    content[currentLang].reviews.items.forEach(review => {
+    content[currentLang].reviews.items.forEach((review, index) => {
         const reviewCard = document.createElement('div');
         reviewCard.className = 'review-card';
+        
+        const hasPreview = review.preview && review.preview !== review.text;
+        const readMoreText = content[currentLang].reviews.readMore || 'Leggi tutto';
+        const readLessText = content[currentLang].reviews.readLess || 'Mostra meno';
+        
         reviewCard.innerHTML = `
             <div class="review-header">
                 <div class="review-author">
@@ -78,9 +83,41 @@ function updateReviews() {
                 </div>
                 <div class="review-rating">${'★'.repeat(review.rating)}</div>
             </div>
-            <p class="review-text">${review.text}</p>
+            <div class="review-content">
+                <p class="review-text-preview">${hasPreview ? review.preview : review.text}</p>
+                ${hasPreview ? `
+                    <p class="review-text-full" style="display: none;">${review.text}</p>
+                    <button class="review-toggle" data-review-index="${index}">
+                        <span class="toggle-show">${readMoreText} ▼</span>
+                        <span class="toggle-hide" style="display: none;">${readLessText} ▲</span>
+                    </button>
+                ` : ''}
+            </div>
         `;
         reviewsGrid.appendChild(reviewCard);
+    });
+    
+    // Add toggle functionality
+    document.querySelectorAll('.review-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.review-card');
+            const preview = card.querySelector('.review-text-preview');
+            const full = card.querySelector('.review-text-full');
+            const showBtn = button.querySelector('.toggle-show');
+            const hideBtn = button.querySelector('.toggle-hide');
+            
+            if (full.style.display === 'none') {
+                preview.style.display = 'none';
+                full.style.display = 'block';
+                showBtn.style.display = 'none';
+                hideBtn.style.display = 'inline';
+            } else {
+                preview.style.display = 'block';
+                full.style.display = 'none';
+                showBtn.style.display = 'inline';
+                hideBtn.style.display = 'none';
+            }
+        });
     });
 }
 
@@ -226,9 +263,9 @@ contactForm.addEventListener('submit', async (e) => {
         message: formData.get('message')
     };
     
-    // Send email (using FormSubmit or similar service)
+    // Send email (using FormSubmit)
     try {
-        const response = await fetch('https://formsubmit.co/appartamentoterrazzagalba@gmail.com', {
+        const response = await fetch('https://formsubmit.co/terrazzagalba@gmail.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -239,6 +276,7 @@ contactForm.addEventListener('submit', async (e) => {
                 email: data.email,
                 message: data.message,
                 _subject: 'Nuova richiesta da Terrazza Galba',
+                _cc: 'martino.cicerani@gmail.com',
                 _template: 'table'
             })
         });
