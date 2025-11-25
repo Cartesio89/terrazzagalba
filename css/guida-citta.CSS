@@ -1,0 +1,189 @@
+/* ========================================
+   CITY GUIDE PAGE STYLES
+   ======================================== */
+
+/* Small Hero */
+.hero-small {
+    background: linear-gradient(135deg, #2c5f7f 0%, #1f4560 100%);
+    padding: 6rem 0 4rem;
+    text-align: center;
+    color: white;
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .hero-small {
+        padding: 5rem 0 3rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================
+   ARTICLES ACCORDION
+   ======================================== */
+
+.articles-list {
+    margin-top: 2rem;
+}
+
+.article-item {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.article-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.article-header:hover {
+    background: #f8f8f8;
+}
+
+.article-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c5f7f;
+    margin: 0 0 0.3rem 0;
+}
+
+.article-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.article-arrow {
+    font-size: 1.2rem;
+    color: #2c5f7f;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.article-preview {
+    padding: 0 1.5rem 1.5rem;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.article-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 1.5rem;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.article-item.expanded .article-content {
+    padding: 0 1.5rem 1.5rem;
+}
+
+/* Article content formatting */
+.article-content p {
+    margin-bottom: 1rem;
+}
+
+.article-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c5f7f;
+    font-weight: 600;
+}
+
+.article-content ul,
+.article-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Empty state */
+.empty-content {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #999;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   MOBILE OPTIMIZATION
+   ======================================== */
+
+@media (max-width: 768px) {
+    .article-header {
+        padding: 1rem;
+    }
+    
+    .article-title {
+        font-size: 1.1rem;
+    }
+    
+    .article-date {
+        font-size: 0.85rem;
+    }
+    
+    .article-preview {
+        padding: 0 1rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .article-content {
+        padding: 0 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .article-item.expanded .article-content {
+        padding: 0 1rem 1rem;
+    }
+}
+
+/* ========================================
+   ACTIVE NAV LINK
+   ======================================== */
+
+.nav-link.active {
+    font-weight: 600;
+    color: #2c5f7f !important;
+}
