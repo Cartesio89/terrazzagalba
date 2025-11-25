@@ -38,7 +38,11 @@
       }
     },
     "gallery": {
-      "title": "Galleria"
+      "title": "Galleria",
+      "toggle": {
+        "show": "Mostra",
+        "hide": "Nascondi"
+      }
     },
     "reviews": {
       "title": "Recensioni",
@@ -120,7 +124,7 @@
     "info": {
       "title": "Info Utili",
       "transport": {
-        "title": "Trasporti - link utili",
+        "title": "Trasporti",
         "cotral": "Autobus regionali",
         "train": "Stazione ferroviaria"
       },
@@ -183,7 +187,11 @@
       }
     },
     "gallery": {
-      "title": "Gallery"
+      "title": "Gallery",
+      "toggle": {
+        "show": "Show",
+        "hide": "Hide"
+      }
     },
     "reviews": {
       "title": "Reviews",
@@ -265,7 +273,7 @@
     "info": {
       "title": "Useful Info",
       "transport": {
-        "title": "Transport - useful link",
+        "title": "Transport",
         "cotral": "Regional buses",
         "train": "Train station"
       },
