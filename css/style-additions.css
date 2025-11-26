@@ -1,0 +1,584 @@
+/* ========================================
+   HERO BUTTONS BOTTOM - ROSSO SU BIANCO
+   ======================================== */
+
+/* Posizionamento bottoni in basso */
+.hero-buttons-bottom {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+}
+
+.btn-bottom {
+    background: white;
+    color: #dc2626;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-bottom:hover {
+    background: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.btn-bottom svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-buttons-bottom {
+        bottom: 30px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn-bottom {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   SCROLL OFFSET FIX FOR NAVBAR
+   ======================================== */
+
+/* Fix scroll offset when clicking anchor links - compensates for fixed navbar height */
+section[id],
+div[id] {
+    scroll-margin-top: 80px;
+}
+
+/* ========================================
+   MOBILE MENU - BOX "MENU"
+   ======================================== */
+
+/* Navbar always visible with white background on desktop */
+.navbar {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Desktop menu styling */
+@media (min-width: 769px) {
+    .nav-menu {
+        background: transparent !important;
+    }
+    
+    .nav-link {
+        color: #333 !important;
+    }
+    
+    .nav-link-cta {
+        color: #2c5f7f !important;
+        font-weight: 600;
+    }
+    
+    /* Lang-switch on desktop - keep it in the normal menu flow */
+    .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-left: 1rem;
+    }
+    
+    .lang-option {
+        color: #666;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    
+    .lang-option.active {
+        color: #2c5f7f;
+        font-weight: 600;
+    }
+    
+    .lang-separator {
+        color: #999;
+    }
+}
+
+/* Mobile: show lang-switch next to MENU button */
+@media (max-width: 768px) {
+    .lang-switch {
+        display: flex !important;
+        align-items: center;
+        gap: 0.3rem;
+        background: #f0f0f0;
+        padding: 0.5rem 0.8rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+        position: absolute !important;
+        right: 105px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 1001 !important;
+    }
+    
+    .lang-option {
+        color: #666;
+        font-weight: 500;
+    }
+    
+    .lang-option.active {
+        color: #2c5f7f;
+        font-weight: 600;
+    }
+    
+    .lang-separator {
+        color: #999;
+    }
+}
+
+/* Replace hamburger with box */
+.nav-toggle-box {
+    display: none;
+    background: #2c5f7f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.nav-toggle-box:hover {
+    background: #1f4560;
+}
+
+.nav-toggle-box .menu-text {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle-box {
+        display: block;
+    }
+    
+    /* Mobile menu dropdown - ABOVE hero */
+    .nav-menu {
+        position: fixed !important;
+        top: 60px !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(10px);
+        z-index: 999 !important;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .nav-menu.active {
+        max-height: 500px !important;
+    }
+    
+    /* Hide first nav-item (Home) on mobile - visible only in menu */
+    .nav-menu .nav-item:first-child {
+        display: block;
+    }
+}
+
+/* ========================================
+   GALLERY MOBILE ACCORDION
+   ======================================== */
+
+/* Review toggle button */
+.review-toggle {
+    background: none;
+    border: none;
+    color: #2c5f7f;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.review-toggle:hover {
+    color: #1f4560;
+}
+
+.review-content {
+    position: relative;
+}
+
+.review-text-preview,
+.review-text-full {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ========================================
+   GALLERY MOBILE ACCORDION
+   ======================================== */
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.gallery-toggle {
+    display: none;
+    background: #2c5f7f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.gallery-toggle .toggle-text {
+    font-weight: 500;
+}
+
+.gallery-toggle .arrow-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.gallery-toggle.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Show toggle only on mobile */
+@media (max-width: 768px) {
+    .gallery-toggle {
+        display: flex;
+    }
+    
+    /* Gallery collapsed by default on mobile */
+    .gallery-grid {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+    
+    .gallery-grid.expanded {
+        max-height: 10000px;
+    }
+}
+
+/* Desktop - gallery always visible */
+@media (min-width: 769px) {
+    .gallery-grid {
+        max-height: none !important;
+    }
+}
+
+/* ========================================
+   HERO IMAGE OPTIMIZATION
+   ======================================== */
+
+.hero {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* ========================================
+   DESCRIPTION - FEATURES COMPACT
+   ======================================== */
+
+.description-content-full {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Features grid - compact and below text */
+.features-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card-compact {
+    text-align: center;
+    padding: 1rem;
+}
+
+.feature-card-compact .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card-compact .feature-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c5f7f;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .features-grid-compact {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .feature-card-compact .feature-icon {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card-compact .feature-title {
+        font-size: 0.85rem;
+    }
+}
+
+/* ========================================
+   GALLERY - NON CLICKABLE
+   ======================================== */
+
+.gallery-item {
+    cursor: default;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    transition: none;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .gallery-item img {
+        height: 250px;
+    }
+}
+
+/* ========================================
+   TABS FOR CITY GUIDE
+   ======================================== */
+
+.tabs-container {
+    margin-top: 2rem;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.tab-button {
+    padding: 1rem 2rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    color: #2c5f7f;
+}
+
+.tab-button.active {
+    color: #2c5f7f;
+    border-bottom-color: #2c5f7f;
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.empty-content {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* ========================================
+   HOUSE GUIDE
+   ======================================== */
+
+.guide-reserved {
+    font-weight: 600;
+    color: #2c5f7f;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* ========================================
+   NAVIGATION STYLING
+   ======================================== */
+
+.nav-link-cta {
+    font-weight: 600;
+    color: #2c5f7f !important;
+}
+
+.nav-link-special {
+    position: relative;
+}
+
+/* ========================================
+   FORM IMPROVEMENTS
+   ======================================== */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2c5f7f;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* PIN input styling */
+#guidePin {
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+}
+
+/* ========================================
+   MOBILE OPTIMIZATION
+   ======================================== */
+
+@media (max-width: 768px) {
+    .tabs-nav {
+        flex-wrap: wrap;
+    }
+    
+    .tab-button {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .description-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+}
+
+/* ========================================
+   PERFORMANCE
+   ======================================== */
+
+.gallery-item img {
+    will-change: auto;
+}
+
+.gallery-item img[loading="lazy"] {
+    background: #f0f0f0;
+}
+
+/* ========================================
+   BOOKING BUTTON (Ponza)
+   ======================================== */
+
+.booking-button {
+    display: inline-block;
+    background: #2c5f7f;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.booking-button:hover {
+    background: #1f4560;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
