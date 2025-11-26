@@ -1,4 +1,14 @@
 /* ========================================
+   SCROLL OFFSET FIX FOR NAVBAR
+   ======================================== */
+
+/* Fix scroll offset when clicking anchor links - compensates for fixed navbar height */
+section[id],
+div[id] {
+    scroll-margin-top: 80px;
+}
+
+/* ========================================
    MOBILE MENU - BOX "MENU"
    ======================================== */
 
