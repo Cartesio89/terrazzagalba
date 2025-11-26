@@ -16,13 +16,17 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
             <a href="index.html" class="nav-logo">Terrazza Galba</a>
             
-            <button class="lang-switch" id="langSwitch">IT | EN</button>
+            <button class="lang-switch" id="langSwitch">
+                <span class="lang-option active" data-lang="it">IT</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-option" data-lang="en">EN</span>
+            </button>
             
-            <button class="nav-toggle" id="navToggle">
+            <button class="nav-toggle-box" id="navToggle" aria-label="Toggle navigation">
                 <span class="menu-text">MENU</span>
             </button>
             
@@ -30,10 +34,10 @@
                 <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="index.html#gallery" class="nav-link">Galleria</a></li>
                 <li class="nav-item"><a href="index.html#info" class="nav-link">Info Utili</a></li>
-                <li class="nav-item"><a href="index.html#reviews" class="nav-link">Recensioni</a></li>
                 <li class="nav-item"><a href="index.html#contact" class="nav-link">Contatti</a></li>
-                <li class="nav-item"><a href="guida-citta.html" class="nav-link active">Guida alla città</a></li>
-                <li class="nav-item"><a href="index.html#house-guide" class="nav-link">Guida Casa</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link nav-link-cta">Prenota ora</a></li>
+                <li class="nav-item"><a href="guida-citta.html" class="nav-link nav-link-special active">Guida alla città</a></li>
+                <li class="nav-item"><a href="index.html#house-guide" class="nav-link nav-link-special">Guida Casa</a></li>
             </ul>
         </div>
     </nav>
@@ -72,7 +76,7 @@
         </div>
     </footer>
 
-    <!-- SOLO guida-citta.js - NO app.js! -->
+    <!-- SOLO guida-citta.js -->
     <script src="js/guida-citta.js"></script>
 </body>
 </html>
