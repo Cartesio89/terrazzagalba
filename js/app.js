@@ -8,6 +8,7 @@ async function loadContent() {
         const response = await fetch('content/content.json');
         content = await response.json();
         updateContent();
+        setupGalleryToggle(); // Setup dopo aver caricato content
     } catch (error) {
         console.error('Error loading content:', error);
     }
@@ -56,6 +57,8 @@ function updateContent() {
     
     // Update reviews
     updateReviews();
+    // Update gallery toggle text
+    updateGalleryToggleText();
 }
 
 // Update reviews
@@ -145,25 +148,42 @@ function createGallery() {
     });
 }
 
-// Gallery accordion toggle (mobile only)
-const galleryToggle = document.getElementById('galleryToggle');
-const galleryGrid = document.getElementById('galleryGrid');
-const galleryToggleText = document.getElementById('galleryToggleText');
+// Setup gallery toggle (chiamata dopo loadContent)
+function setupGalleryToggle() {
+    const galleryToggle = document.getElementById('galleryToggle');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const galleryToggleText = document.getElementById('galleryToggleText');
 
-if (galleryToggle && galleryGrid && galleryToggleText) {
-    galleryToggle.addEventListener('click', () => {
-        const isExpanded = galleryGrid.classList.toggle('expanded');
-        galleryToggle.classList.toggle('active');
-        
-        // Update text based on state
+    if (galleryToggle && galleryGrid && galleryToggleText) {
+        galleryToggle.addEventListener('click', () => {
+            const isExpanded = galleryGrid.classList.toggle('expanded');
+            galleryToggle.classList.toggle('active');
+            
+            // Update text based on state
+            if (isExpanded) {
+                galleryToggleText.textContent = content[currentLang].gallery.toggle.hide;
+                galleryToggleText.setAttribute('data-translate', 'gallery.toggle.hide');
+            } else {
+                galleryToggleText.textContent = content[currentLang].gallery.toggle.show;
+                galleryToggleText.setAttribute('data-translate', 'gallery.toggle.show');
+            }
+        });
+    }
+}
+
+// Update gallery toggle text when language changes
+function updateGalleryToggleText() {
+    const galleryToggleText = document.getElementById('galleryToggleText');
+    const galleryGrid = document.getElementById('galleryGrid');
+    
+    if (galleryToggleText && galleryGrid) {
+        const isExpanded = galleryGrid.classList.contains('expanded');
         if (isExpanded) {
             galleryToggleText.textContent = content[currentLang].gallery.toggle.hide;
-            galleryToggleText.setAttribute('data-translate', 'gallery.toggle.hide');
         } else {
             galleryToggleText.textContent = content[currentLang].gallery.toggle.show;
-            galleryToggleText.setAttribute('data-translate', 'gallery.toggle.show');
         }
-    });
+    }
 }
 
 // Navigation
