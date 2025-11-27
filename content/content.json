@@ -4,14 +4,13 @@
       "home": "Home",
       "gallery": "Galleria",
       "info": "Info Utili",
-      "contact": "Contatti",
-      "book": "Prenota ora",
+      "contact": "Contattaci",
       "cityguide": "Guida alla città",
       "houseguide": "Guida Casa"
     },
     "hero": {
       "subtitle": "Appartamento accogliente con vista mozzafiato su Terracina",
-      "cta": "Prenota Ora"
+      "cta": "Contattaci"
     },
     "description": {
       "title": "L'Appartamento",
@@ -197,14 +196,13 @@
       "home": "Home",
       "gallery": "Gallery",
       "info": "Useful Info",
-      "contact": "Contact",
-      "book": "Book now",
+      "contact": "Contact us",
       "cityguide": "City Guide",
       "houseguide": "House Guide"
     },
     "hero": {
       "subtitle": "Cozy apartment with breathtaking views of Terracina",
-      "cta": "Book Now"
+      "cta": "Contact us"
     },
     "description": {
       "title": "The Apartment",
