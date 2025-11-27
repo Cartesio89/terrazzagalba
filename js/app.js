@@ -186,152 +186,183 @@ function updateGalleryToggleText() {
     }
 }
 
-// Navigation
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+// Navigation setup (chiamata dopo DOM ready)
+function setupNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (!navToggle || !navMenu) {
+        console.log('Navigation elements not found - skipping setup');
+        return;
     }
-});
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
-});
-
-// Close menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
+    window.addEventListener('scroll', () => {
+        if (navbar && window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else if (navbar) {
+            navbar.classList.remove('scrolled');
+        }
     });
-});
 
-// Smooth scroll with special handling for hidden sections
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const target = document.getElementById(targetId);
-        
-        if (target) {
-            // Show hidden sections when navigating to them
-            if (target.classList.contains('section-hidden')) {
-                // Remove hidden state temporarily
-                target.style.display = 'block';
-                target.style.position = 'static';
-                target.style.visibility = 'visible';
-                target.style.height = 'auto';
-            }
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        });
+    });
+}
+
+// Smooth scroll setup
+function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
             
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+            if (target) {
+                // Show hidden sections when navigating to them
+                if (target.classList.contains('section-hidden')) {
+                    target.style.display = 'block';
+                    target.style.position = 'static';
+                    target.style.visibility = 'visible';
+                    target.style.height = 'auto';
+                }
+                
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
-});
+}
 
-// Language switcher
-const langSwitch = document.getElementById('langSwitch');
-const langOptions = document.querySelectorAll('.lang-option');
+// Language switcher setup
+function setupLanguageSwitcher() {
+    const langSwitch = document.getElementById('langSwitch');
+    const langOptions = document.querySelectorAll('.lang-option');
 
-langOptions.forEach(option => {
-    option.addEventListener('click', () => {
-        const lang = option.getAttribute('data-lang');
-        if (lang !== currentLang) {
-            currentLang = lang;
-            langOptions.forEach(opt => opt.classList.remove('active'));
-            option.classList.add('active');
-            updateContent();
-        }
+    if (!langOptions.length) return;
+
+    langOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            if (lang !== currentLang) {
+                currentLang = lang;
+                langOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                updateContent();
+            }
+        });
     });
-});
+}
 
 // Tabs management for City Guide
-const tabButtons = document.querySelectorAll('.tab-button');
-const tabPanels = document.querySelectorAll('.tab-panel');
+function setupTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
 
-tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const targetTab = button.getAttribute('data-tab');
-        
-        // Remove active class from all buttons and panels
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabPanels.forEach(panel => panel.classList.remove('active'));
-        
-        // Add active class to clicked button and corresponding panel
-        button.classList.add('active');
-        document.getElementById(`tab-${targetTab}`).classList.add('active');
-    });
-});
+    if (!tabButtons.length) return;
 
-// Contact form
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-    };
-    
-    // Send email (using FormSubmit)
-    try {
-        const response = await fetch('https://formsubmit.co/terrazzagalba@gmail.com', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.name,
-                email: data.email,
-                message: data.message,
-                _subject: 'Nuova richiesta da Terrazza Galba',
-                _cc: 'martino.cicerani@gmail.com',
-                _template: 'table'
-            })
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and panels
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding panel
+            button.classList.add('active');
+            const targetPanel = document.getElementById(`tab-${targetTab}`);
+            if (targetPanel) targetPanel.classList.add('active');
         });
+    });
+}
+
+// Contact form setup
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
         
-        if (response.ok) {
-            alert(currentLang === 'it' ? 'Messaggio inviato con successo!' : 'Message sent successfully!');
-            contactForm.reset();
-        } else {
-            throw new Error('Failed to send');
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            message: formData.get('message')
+        };
+        
+        // Send email (using FormSubmit)
+        try {
+            const response = await fetch('https://formsubmit.co/terrazzagalba@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    message: data.message,
+                    _subject: 'Nuova richiesta da Terrazza Galba',
+                    _cc: 'martino.cicerani@gmail.com',
+                    _template: 'table'
+                })
+            });
+            
+            if (response.ok) {
+                alert(currentLang === 'it' ? 'Messaggio inviato con successo!' : 'Message sent successfully!');
+                contactForm.reset();
+            } else {
+                throw new Error('Failed to send');
+            }
+        } catch (error) {
+            alert(currentLang === 'it' ? 'Errore nell\'invio del messaggio. Riprova più tardi.' : 'Error sending message. Please try again later.');
         }
-    } catch (error) {
-        alert(currentLang === 'it' ? 'Errore nell\'invio del messaggio. Riprova più tardi.' : 'Error sending message. Please try again later.');
-    }
-});
+    });
+}
 
-// House guide PIN
-const guideForm = document.getElementById('guideForm');
-const guideSuccess = document.getElementById('guideSuccess');
-const correctPin = '8008';
-
-guideForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const pin = document.getElementById('guidePin').value;
+// House guide PIN setup
+function setupHouseGuide() {
+    const guideForm = document.querySelector('.pin-form');
+    const correctPin = '8008';
     
-    if (pin === correctPin) {
-        guideForm.style.display = 'none';
-        guideSuccess.style.display = 'block';
-    } else {
-        alert(currentLang === 'it' ? 'PIN errato. Riprova.' : 'Incorrect PIN. Try again.');
-        document.getElementById('guidePin').value = '';
-    }
-});
+    if (!guideForm) return;
+
+    guideForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pin = document.getElementById('guidePin').value;
+        
+        if (pin === correctPin) {
+            guideForm.style.display = 'none';
+            const guideSuccess = document.getElementById('guideSuccess');
+            if (guideSuccess) guideSuccess.style.display = 'block';
+        } else {
+            alert(currentLang === 'it' ? 'PIN errato. Riprova.' : 'Incorrect PIN. Try again.');
+            document.getElementById('guidePin').value = '';
+        }
+    });
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadContent();
     createGallery();
+    setupNavigation();
+    setupSmoothScroll();
+    setupLanguageSwitcher();
+    setupTabs();
+    setupContactForm();
+    setupHouseGuide();
 });
