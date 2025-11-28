@@ -31,7 +31,30 @@ function updateContent() {
         }
         
         if (typeof value === 'string') {
-            element.textContent = value;
+            // Check if element contains SVG (button with icon)
+            const svg = element.querySelector('svg');
+            if (svg) {
+                // Find and update text node, or create one
+                let textNode = null;
+                for (let node of element.childNodes) {
+                    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                        textNode = node;
+                        break;
+                    }
+                }
+                
+                if (textNode) {
+                    // Update existing text node
+                    textNode.textContent = ' ' + value;
+                } else {
+                    // Create new text node after SVG
+                    const newTextNode = document.createTextNode(' ' + value);
+                    element.appendChild(newTextNode);
+                }
+            } else {
+                // No SVG, replace all content as before
+                element.textContent = value;
+            }
         }
     });
     
