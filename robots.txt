@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Blocca contenuto riservato
+Disallow: /assets/
+
 Sitemap: https://holidayhouse-terrazzagalba.com/sitemap.xml
