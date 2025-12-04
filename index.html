@@ -29,108 +29,119 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-additions.css">
-<!-- Aggiungi questo PRIMA di </head> in index.html -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LodgingBusiness",
-  "name": "Terrazza Galba",
-  "description": "Casa vacanze nel centro storico di Terracina con vista mozzafiato su mare e Tempio di Giove Anxur",
-  "image": "https://holidayhouse-terrazzagalba.com/images/copertina.jpg",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Centro Storico",
-    "addressLocality": "Terracina",
-    "addressRegion": "LT",
-    "postalCode": "04019",
-    "addressCountry": "IT"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 41.2916546,
-    "longitude": 13.247274
-  },
-  "url": "https://holidayhouse-terrazzagalba.com",
-  "telephone": "+393291908536",
-  "priceRange": "$$",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "6"
-  },
-  "amenityFeature": [
+    <link rel="stylesheet" href="css/new-masthead.css">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
     {
-      "@type": "LocationFeatureSpecification",
-      "name": "WiFi gratuito"
-    },
-    {
-      "@type": "LocationFeatureSpecification",
-      "name": "Aria condizionata"
-    },
-    {
-      "@type": "LocationFeatureSpecification",
-      "name": "Terrazza panoramica"
-    },
-    {
-      "@type": "LocationFeatureSpecification",
-      "name": "Vista mare"
-    },
-    {
-      "@type": "LocationFeatureSpecification",
-      "name": "Cucina attrezzata"
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Terrazza Galba",
+      "description": "Casa vacanze nel centro storico di Terracina con vista mozzafiato su mare e Tempio di Giove Anxur",
+      "image": "https://holidayhouse-terrazzagalba.com/images/copertina.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Centro Storico",
+        "addressLocality": "Terracina",
+        "addressRegion": "LT",
+        "postalCode": "04019",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.2916546,
+        "longitude": 13.247274
+      },
+      "url": "https://holidayhouse-terrazzagalba.com",
+      "telephone": "+393291908536",
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "6"
+      },
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "WiFi gratuito"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Aria condizionata"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Terrazza panoramica"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Vista mare"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Cucina attrezzata"
+        }
+      ]
     }
-  ]
-}
-</script>
+    </script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#home" class="nav-logo">Terrazza Galba</a>
+    <!-- Navigation - Fixed Top -->
+    <nav class="navbar-top" id="navbar">
+        <div class="container nav-container-top">
+            <ul class="nav-menu-horizontal" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li>
+                <li class="nav-item"><a href="#gallery" class="nav-link" data-translate="nav.gallery">Galleria</a></li>
+                <li class="nav-item"><a href="#info" class="nav-link" data-translate="nav.info">Info Utili</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav.contact">Contattaci</a></li>
+                <li class="nav-item"><a href="guida-citta.html" class="nav-link" data-translate="nav.cityguide">Guida alla città</a></li>
+                <li class="nav-item"><a href="#house-guide" class="nav-link" data-translate="nav.houseguide">Guida Casa</a></li>
+            </ul>
             
-            <button class="lang-switch" id="langSwitch">
+            <button class="lang-switch-top" id="langSwitch">
                 <span class="lang-option active" data-lang="it">IT</span>
                 <span class="lang-separator">|</span>
                 <span class="lang-option" data-lang="en">EN</span>
             </button>
             
-            <button class="nav-toggle-box" id="navToggle" aria-label="Toggle navigation">
-                <span class="menu-text">MENU</span>
+            <button class="nav-toggle-mobile" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-icon">☰</span>
             </button>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a href="#home" class="nav-link" data-translate="nav.home">Home</a></li>
-                <li class="nav-item"><a href="#gallery" class="nav-link" data-translate="nav.gallery">Galleria</a></li>
-                <li class="nav-item"><a href="#info" class="nav-link" data-translate="nav.info">Info Utili</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link nav-link-cta" data-translate="nav.contact">Contattaci</a></li>
-                <li class="nav-item"><a href="guida-citta.html" class="nav-link nav-link-special" data-translate="nav.cityguide">Guida alla città</a></li>
-                <li class="nav-item"><a href="#house-guide" class="nav-link nav-link-special" data-translate="nav.houseguide">Guida Casa</a></li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home" style="background-image: url('images/copertina.jpg');">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title"> </h1>
-            <p class="hero-subtitle" data-translate="hero.subtitle">Appartamento accogliente con vista mozzafiato su Terracina</p>
+    <!-- Masthead Section -->
+    <section class="masthead" id="home">
+        <div class="masthead-content">
+            <img src="images/logo.jpg" alt="Terrazza Galba Logo" class="masthead-logo">
+            <div class="masthead-text">
+                <h1 class="masthead-title">TERRAZZA GALBA</h1>
+                <p class="masthead-subtitle">APPARTAMENTO</p>
+            </div>
         </div>
-        <!-- Bottoni spostati in basso -->
-        <div class="hero-buttons-bottom">
-            <a href="#contact" class="btn-bottom btn-contact" data-translate="hero.cta">
+        
+        <!-- Action Buttons -->
+        <div class="masthead-buttons">
+            <a href="#contact" class="masthead-btn btn-contact" data-translate="hero.cta">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
                 Contattaci
             </a>
-            <a href="https://www.instagram.com/casavacanze_terrazzagalba/" target="_blank" rel="noopener noreferrer" class="btn-bottom btn-instagram">
+            <a href="https://www.instagram.com/casavacanze_terrazzagalba/" target="_blank" rel="noopener noreferrer" class="masthead-btn btn-instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
                 Instagram
             </a>
+        </div>
+    </section>
+
+    <!-- Hero Section - Reduced -->
+    <section class="hero-reduced" style="background-image: url('images/copertina.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-reduced">
+            <p class="hero-subtitle-reduced" data-translate="hero.subtitle">Appartamento accogliente con vista mozzafiato su Terracina</p>
         </div>
     </section>
 
@@ -216,14 +227,14 @@
                 <div class="info-card">
                     <h3 data-translate="info.nearby.title">Nelle Vicinanze</h3>
                     <ul class="info-list">
-                        <li><a href="https://www.google.com/search?sca_esv=2da0fcebb3bfa148&rlz=1C1GCEA_enIT1021IT1021&sxsrf=AE3TifMsZbSynVORwu9DLg9Nx1KljxJRyw:1764265585563&udm=2&fbs=AIIjpHxzmpoCcR7riwVnyxJfgM_UgjReKiFFY5BLpAI7BPT9v1hGSJldd6v9OHpBh0khnBHQpr6Ei-hf0tlSLNzck0w9rszGVWwqa6ql5I1TYfVDcX4-vgmeMNPNaJHyunoSsDkp_3rMM6MdzgusN8tZFVNCCBEjOunkNBoRiRpQQcyIlTZr6podBuZCU7a3cjE0hfkJoyxm00i8GzAQgyRXqtv8eqPFUQ&q=spiaggia+di+terracina&sa=X&ved=2ahUKEwiwg5G88ZKRAxWZhIkEHU1xCvwQtKgLegQIFRAB&biw=1707&bih=772&dpr=1.13" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.beach">Spiaggia (1 km)</a></li>
+                        <li><a href="https://www.google.com/search?q=spiaggia+di+terracina" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.beach">Spiaggia (1 km)</a></li>
                         <li><a href="guida-citta.html#tempio-giove" data-translate="info.nearby.temple">Tempio di Giove - Anxur</a></li>
                         <li><a href="guida-citta.html#ponza" data-translate="info.nearby.ponza">Isola di Ponza e Isole Pontine</a></li>
                         <li><a href="guida-citta.html#circeo" data-translate="info.nearby.circeo">Circeo (20 km)</a></li>
                         <li><a href="guida-citta.html#appia-francigena" data-translate="info.nearby.appia">Appia Antica e Via Francigena</a></li>
                         <li><a href="guida-citta.html#abbazia-fossanova" data-translate="info.nearby.fossanova">Abbazia di Fossanova</a></li>
-                        <li><a href="https://www.google.com/maps/dir/Terracina,+LT/Roma+RM/@41.6094347,12.5446955,10z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x132522f268f0d987:0x71b0c09381c3fd55!2m2!1d13.2488501!2d41.2903024!1m5!1m1!1s0x132f6196f9928ebb:0xb90f770693656e38!2m2!1d12.4822025!2d41.8967068!3e0!5m1!1e4" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.rome">Roma (100 km)</a></li>
-                        <li><a href="https://www.google.com/maps/dir/Terracina,+LT/Napoli,+NA/@41.2301233,13.0957288,9z/data=!4m14!4m13!1m5!1m1!1s0x132522f268f0d987:0x71b0c09381c3fd55!2m2!1d13.2488501!2d41.2903024!1m5!1m1!1s0x133b084f6a6c7e99:0x3df52cc13b78191d!2m2!1d14.26812!2d40.8517983!3e0!5m1!1e4" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.naples">Napoli (150 km)</a></li>
+                        <li><a href="https://www.google.com/maps/dir/Terracina,+LT/Roma+RM" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.rome">Roma (100 km)</a></li>
+                        <li><a href="https://www.google.com/maps/dir/Terracina,+LT/Napoli,+NA" target="_blank" rel="noopener noreferrer" data-translate="info.nearby.naples">Napoli (150 km)</a></li>
                     </ul>
                 </div>
                 
@@ -283,24 +294,24 @@
         </div>
     </section>
 
-    <!-- House Guide Section -->
+    <!-- House Guide Section - FIX INTEGRATO -->
     <section class="section guide" id="house-guide">
-    <div class="container">
-        <h2 class="section-title" data-translate="houseguide.title">Guida della Casa</h2>
-        <div class="guide-container">
-            <p class="guide-reserved" data-translate="houseguide.reserved">Sezione riservata agli ospiti</p>
-            <p data-translate="houseguide.text">Accedi alla guida completa della casa con tutte le informazioni utili</p>
-            <form class="pin-form" id="guideForm">
-                <input type="password" id="guidePin" maxlength="4" placeholder="PIN" inputmode="numeric">
-                <button type="submit" class="btn btn-primary">Accedi</button>
-            </form>
-            <div id="guideSuccess" style="display: none;">
-                <p style="color: green; font-weight: 600; margin-top: 1rem;">✓ Accesso consentito! Il PDF si sta scaricando...</p>
+        <div class="container">
+            <h2 class="section-title" data-translate="houseguide.title">Guida della Casa</h2>
+            <div class="guide-container">
+                <p class="guide-reserved" data-translate="houseguide.reserved">Sezione riservata agli ospiti</p>
+                <p data-translate="houseguide.text">Accedi alla guida completa della casa con tutte le informazioni utili</p>
+                <form class="pin-form" id="guideForm">
+                    <input type="password" id="guidePin" maxlength="4" placeholder="PIN" inputmode="numeric">
+                    <button type="submit" class="btn btn-primary">Accedi</button>
+                </form>
+                <div id="guideSuccess" style="display: none;">
+                    <p style="color: green; font-weight: 600; margin-top: 1rem;">✓ Accesso consentito! Il PDF si sta scaricando...</p>
+                </div>
+                <p class="pin-error" id="pinError" style="display: none;">PIN non valido</p>
             </div>
-            <p class="pin-error" id="pinError" style="display: none;">PIN non valido</p>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
