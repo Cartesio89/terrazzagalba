@@ -368,6 +368,10 @@ function setupHouseGuide() {
         const pin = document.getElementById('guidePin').value;
         
         if (pin === correctPin) {
+            // Scarica il PDF
+            window.open('/assets/guida-casa.pdf', '_blank');
+            
+            // Mostra messaggio successo
             guideForm.style.display = 'none';
             const guideSuccess = document.getElementById('guideSuccess');
             if (guideSuccess) guideSuccess.style.display = 'block';
