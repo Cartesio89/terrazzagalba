@@ -368,8 +368,14 @@ function setupHouseGuide() {
         const pin = document.getElementById('guidePin').value;
         
         if (pin === correctPin) {
-            // Scarica il PDF
-            window.open('/assets/guida-casa.pdf', '_blank');
+            // Download diretto del PDF (evita popup blocker)
+            const link = document.createElement('a');
+            link.href = '/assets/guida-casa.pdf';
+            link.download = 'Guida-Casa-Terrazza-Galba.pdf';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             
             // Mostra messaggio successo
             guideForm.style.display = 'none';
