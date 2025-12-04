@@ -101,7 +101,7 @@
 /* Masthead Section */
 .masthead {
     background: linear-gradient(135deg, #2C5F7F 0%, #1a3f5c 100%);
-    padding: 8rem 2rem 2rem;
+    padding: 5rem 2rem 1.5rem;
     text-align: center;
     margin-top: 60px;
 }
@@ -110,8 +110,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .masthead-logo {
@@ -245,7 +245,7 @@
     }
     
     .masthead {
-        padding: 6rem 2rem 1.5rem;
+        padding: 4.5rem 2rem 1.2rem;
     }
     
     .masthead-logo {
@@ -324,13 +324,13 @@
     
     /* Masthead mobile */
     .masthead {
-        padding: 5rem 1rem 1.5rem;
+        padding: 4rem 1rem 1.2rem;
         margin-top: 60px;
     }
     
     .masthead-content {
-        gap: 1rem;
-        margin-bottom: 1.5rem;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
     }
     
     .masthead-logo {
@@ -390,7 +390,7 @@
     }
     
     .masthead {
-        padding: 4.5rem 1rem 1.2rem;
+        padding: 3.5rem 1rem 1rem;
     }
     
     .masthead-logo {
