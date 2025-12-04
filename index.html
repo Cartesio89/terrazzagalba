@@ -285,19 +285,22 @@
 
     <!-- House Guide Section -->
     <section class="section guide" id="house-guide">
-        <div class="container">
-            <h2 class="section-title" data-translate="houseguide.title">Guida della Casa</h2>
-            <div class="guide-container">
-                <p class="guide-reserved" data-translate="houseguide.reserved">Sezione riservata agli ospiti</p>
-                <p data-translate="houseguide.text">Accedi alla guida completa della casa con tutte le informazioni utili</p>
-                <form class="pin-form">
-                    <input type="password" id="guidePin" maxlength="4" placeholder="PIN" inputmode="numeric">
-                    <button type="submit" class="btn btn-primary">Accedi</button>
-                </form>
-                <p class="pin-error" id="pinError">PIN non valido</p>
+    <div class="container">
+        <h2 class="section-title" data-translate="houseguide.title">Guida della Casa</h2>
+        <div class="guide-container">
+            <p class="guide-reserved" data-translate="houseguide.reserved">Sezione riservata agli ospiti</p>
+            <p data-translate="houseguide.text">Accedi alla guida completa della casa con tutte le informazioni utili</p>
+            <form class="pin-form" id="guideForm">
+                <input type="password" id="guidePin" maxlength="4" placeholder="PIN" inputmode="numeric">
+                <button type="submit" class="btn btn-primary">Accedi</button>
+            </form>
+            <div id="guideSuccess" style="display: none;">
+                <p style="color: green; font-weight: 600; margin-top: 1rem;">✓ Accesso consentito! Il PDF si sta scaricando...</p>
             </div>
+            <p class="pin-error" id="pinError" style="display: none;">PIN non valido</p>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
