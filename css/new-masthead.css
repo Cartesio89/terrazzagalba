@@ -1,0 +1,449 @@
+/* ========================================
+   NUOVO MASTHEAD DESIGN
+   ======================================== */
+
+/* Navbar Fixed Top */
+.navbar-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 0.8rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-top.scrolled {
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.nav-menu-horizontal {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    letter-spacing: 0.3px;
+}
+
+.nav-link:hover {
+    color: #2C5F7F;
+}
+
+/* Language Switch Top */
+.lang-switch-top {
+    background: transparent;
+    border: none;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.9rem;
+    cursor: default;
+}
+
+.lang-option {
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.lang-option.active {
+    color: #2C5F7F;
+    font-weight: 600;
+}
+
+.lang-option:hover {
+    color: #2C5F7F;
+}
+
+.lang-separator {
+    color: #ddd;
+}
+
+/* Mobile Toggle */
+.nav-toggle-mobile {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #333;
+    padding: 0.5rem;
+}
+
+/* Masthead Section */
+.masthead {
+    background: linear-gradient(135deg, #2C5F7F 0%, #1a3f5c 100%);
+    padding: 10rem 2rem 3rem;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.masthead-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.masthead-logo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.masthead-text {
+    color: white;
+}
+
+.masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.masthead-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Masthead Buttons */
+.masthead-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.masthead-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.masthead-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-contact {
+    background: white;
+    color: #c41e3a;
+    border: 2px solid white;
+}
+
+.btn-contact:hover {
+    background: #c41e3a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+}
+
+.btn-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    border: 2px solid transparent;
+}
+
+.btn-instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(188, 24, 136, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Hero Reduced */
+.hero-reduced {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content-reduced {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 800px;
+}
+
+.hero-subtitle-reduced {
+    font-size: 1.8rem;
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.4;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+@media (max-width: 1024px) {
+    .nav-menu-horizontal {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .masthead {
+        padding: 8rem 2rem 2.5rem;
+    }
+    
+    .masthead-logo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .masthead-title {
+        font-size: 2.8rem;
+        letter-spacing: 3px;
+    }
+    
+    .masthead-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-reduced {
+        height: 350px;
+    }
+    
+    .hero-subtitle-reduced {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+@media (max-width: 768px) {
+    /* Show mobile toggle */
+    .nav-toggle-mobile {
+        display: block;
+    }
+    
+    /* Hide horizontal menu on mobile */
+    .nav-menu-horizontal {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu-horizontal.active {
+        max-height: 500px;
+        opacity: 1;
+    }
+    
+    .nav-item {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    /* Language switch mobile */
+    .lang-switch-top {
+        position: absolute;
+        top: 50%;
+        right: 4rem;
+        transform: translateY(-50%);
+    }
+    
+    /* Masthead mobile */
+    .masthead {
+        padding: 6rem 1rem 2rem;
+        margin-top: 60px;
+    }
+    
+    .masthead-content {
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .masthead-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .masthead-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .masthead-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+    
+    .masthead-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .masthead-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    /* Hero reduced mobile */
+    .hero-reduced {
+        height: 300px;
+    }
+    
+    .hero-content-reduced {
+        padding: 0 1rem;
+    }
+    
+    .hero-subtitle-reduced {
+        font-size: 1.3rem;
+    }
+}
+
+/* ========================================
+   MOBILE SMALL
+   ======================================== */
+@media (max-width: 480px) {
+    .navbar-top {
+        padding: 0.6rem 0;
+    }
+    
+    .nav-container-top {
+        padding: 0 1rem;
+    }
+    
+    .masthead {
+        padding: 5rem 1rem 1.5rem;
+    }
+    
+    .masthead-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .masthead-title {
+        font-size: 1.6rem;
+        letter-spacing: 1.5px;
+    }
+    
+    .masthead-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 1.5px;
+    }
+    
+    .masthead-buttons {
+        max-width: 280px;
+    }
+    
+    .masthead-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero-reduced {
+        height: 250px;
+    }
+    
+    .hero-subtitle-reduced {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .navbar-top,
+    .nav-link,
+    .lang-option,
+    .masthead-btn,
+    .nav-menu-horizontal {
+        transition: none;
+    }
+}
+
+/* Focus states */
+.nav-link:focus,
+.lang-option:focus,
+.masthead-btn:focus,
+.nav-toggle-mobile:focus {
+    outline: 2px solid #2C5F7F;
+    outline-offset: 2px;
+}
