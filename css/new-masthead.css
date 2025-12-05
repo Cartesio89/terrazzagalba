@@ -120,6 +120,7 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: none; /* Nascosto di default su desktop */
 }
 
 .masthead-text {
@@ -334,6 +335,7 @@
     }
     
     .masthead-logo {
+        display: block; /* Mostra su mobile */
         width: 120px;
         height: 120px;
     }
