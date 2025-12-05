@@ -123,7 +123,7 @@ body {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     max-height: none;
     overflow: hidden;
@@ -514,5 +514,15 @@ body {
     
     .info-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - DESKTOP LARGE
+   ======================================== */
+@media (min-width: 1400px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
     }
 }
