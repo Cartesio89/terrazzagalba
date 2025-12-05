@@ -9,35 +9,34 @@
     <!-- Stili -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-additions.css">
+    <link rel="stylesheet" href="css/new-masthead.css">
     <link rel="stylesheet" href="css/guida-citta.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="nav-logo">Terrazza Galba</a>
+    <!-- Navigation - Fixed Top -->
+    <nav class="navbar-top" id="navbar">
+        <div class="container nav-container-top">
+            <ul class="nav-menu-horizontal" id="navMenu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#gallery" class="nav-link">Galleria</a></li>
+                <li class="nav-item"><a href="index.html#info" class="nav-link">Info Utili</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contattaci</a></li>
+                <li class="nav-item"><a href="guida-citta.html" class="nav-link" style="color: #2C5F7F; font-weight: 600;">Guida alla città</a></li>
+                <li class="nav-item"><a href="index.html#house-guide" class="nav-link">Guida Casa</a></li>
+            </ul>
             
-            <button class="lang-switch" id="langSwitch">
+            <button class="lang-switch-top" id="langSwitch">
                 <span class="lang-option active" data-lang="it">IT</span>
                 <span class="lang-separator">|</span>
                 <span class="lang-option" data-lang="en">EN</span>
             </button>
             
-            <button class="nav-toggle-box home-button" id="navToggle" aria-label="Go to homepage">
-                <span class="menu-text">HOME</span>
+            <button class="nav-toggle-mobile" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-icon">☰</span>
             </button>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="index.html#gallery" class="nav-link">Galleria</a></li>
-                <li class="nav-item"><a href="index.html#info" class="nav-link">Info Utili</a></li>
-                <li class="nav-item"><a href="index.html#contact" class="nav-link nav-link-cta">Contattaci</a></li>
-                <li class="nav-item"><a href="guida-citta.html" class="nav-link nav-link-special active">Guida alla città</a></li>
-                <li class="nav-item"><a href="index.html#house-guide" class="nav-link nav-link-special">Guida Casa</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -75,7 +74,8 @@
         </div>
     </footer>
 
-    <!-- SOLO guida-citta.js -->
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
     <script src="js/guida-citta.js"></script>
 </body>
 </html>
