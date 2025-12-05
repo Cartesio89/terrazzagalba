@@ -1,5 +1,40 @@
 /* CITY GUIDE PAGE - Stili specifici */
 
+/* ========================================
+   NAVBAR GUIDA-CITTA FIX
+   ======================================== */
+
+/* Desktop: menu sempre visibile in riga, bottone HOME visibile */
+@media (min-width: 769px) {
+    .navbar .nav-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        position: static !important;
+        max-height: none !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    
+    /* Bottone HOME sempre visibile */
+    .navbar .nav-toggle-box {
+        display: block !important;
+    }
+}
+
+/* Mobile: dropdown normale */
+@media (max-width: 768px) {
+    .navbar .nav-menu {
+        display: none;
+    }
+    
+    .navbar .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 /* Fix scroll offset for navbar */
 section[id],
 .article-item[data-article-id] {
