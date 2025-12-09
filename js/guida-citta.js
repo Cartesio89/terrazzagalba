@@ -148,7 +148,7 @@ function renderStoriaArticles() {
             </div>
             <div class="article-content">
                 <div class="article-preview">${article.preview}</div>
-                <div class="article-full">${bookingBtn}${article.content}</div>
+                <div class="article-full">${bookingBtn}${article.content.replace(article.preview, '').trim()}</div>
             </div>
         `;
         container.appendChild(articleEl);
@@ -192,7 +192,7 @@ function renderNotizieArticles() {
             </div>
             <div class="article-content">
                 <div class="article-preview">${article.preview}</div>
-                <div class="article-full">${article.content}</div>
+                <div class="article-full">${article.content.replace(article.preview, '').trim()}</div>
             </div>
         `;
         container.appendChild(articleEl);
