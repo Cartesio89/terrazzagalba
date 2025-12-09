@@ -1,10 +1,10 @@
 /* ========================================
-   FIX MENU DESKTOP GUIDA-CITTA
+   FIX FINALE GUIDA-CITTA
    ======================================== */
 
-/* Fix scroll offset per anchor links */
-.article-item[data-article-id] {
-    scroll-margin-top: 120px;
+/* Quando articolo è espanso, nascondi preview per evitare duplicazione */
+.article-item.expanded .article-preview {
+    display: none;
 }
 
 /* Desktop: menu sempre in riga orizzontale */
@@ -84,4 +84,11 @@
         display: block;
         padding: 1rem 2rem;
     }
+}
+
+/* Spazio sotto ultimo articolo per scroll corretto */
+.articles-container::after {
+    content: '';
+    display: block;
+    height: 50vh;
 }
