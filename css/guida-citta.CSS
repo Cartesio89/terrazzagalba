@@ -1,327 +1,82 @@
-/* CITY GUIDE PAGE - Stili specifici */
-
 /* ========================================
-   NAVBAR GUIDA-CITTA FIX
+   FIX MENU DESKTOP GUIDA-CITTA
    ======================================== */
 
-/* Desktop: menu sempre visibile in riga, bottone HOME visibile */
+/* Desktop: menu sempre in riga orizzontale */
 @media (min-width: 769px) {
     .navbar .nav-menu {
         display: flex !important;
         flex-direction: row !important;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
         position: static !important;
-        max-height: none !important;
-        opacity: 1 !important;
         background: transparent !important;
         box-shadow: none !important;
-        padding: 0 !important;
+        max-height: none !important;
+        opacity: 1 !important;
     }
     
-    /* Bottone HOME sempre visibile */
+    .navbar .nav-item {
+        margin: 0;
+        border-bottom: none !important;
+        width: auto !important;
+    }
+    
+    .navbar .nav-link {
+        padding: 0.5rem 0 !important;
+        display: inline !important;
+        text-align: left !important;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+    }
+    
+    .navbar .nav-link:hover {
+        color: #2C5F7F;
+    }
+    
+    .navbar .nav-link-special {
+        color: #2C5F7F !important;
+        font-weight: 600;
+    }
+    
+    /* Nascondi bottone HOME su desktop */
     .navbar .nav-toggle-box {
-        display: block !important;
+        display: none !important;
     }
 }
 
-/* Mobile: dropdown normale */
+/* Mobile: menu dropdown normale */
 @media (max-width: 768px) {
     .navbar .nav-menu {
         display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
     }
     
     .navbar .nav-menu.active {
         display: flex;
-        flex-direction: column;
-    }
-}
-
-/* Fix scroll offset for navbar */
-section[id],
-.article-item[data-article-id] {
-    scroll-margin-top: 80px;
-}
-
-/* Hero ridotto per pagina guida città */
-.hero-small {
-    min-height: 35vh; /* Ridotto da 60vh */
-    padding: 80px 0 40px; /* Ridotto padding */
-}
-
-.hero-small .hero-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.hero-small .subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* City Guide Section */
-.city-guide-section {
-    padding: 60px 0;
-    background: #f8f9fa;
-}
-
-/* Tabs */
-.city-guide-tabs {
-    display: flex;
-    gap: 0;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #ddd;
-}
-
-.tab-button {
-    flex: 1;
-    padding: 15px 30px;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: #666;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.tab-button:hover {
-    color: #2c5f7c;
-    background: rgba(44, 95, 124, 0.05);
-}
-
-.tab-button.active {
-    color: #2c5f7c;
-    border-bottom-color: #2c5f7c;
-    background: white;
-}
-
-/* Tab Content */
-.tab-content {
-    display: none;
-    animation: fadeIn 0.3s;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Articles Container */
-.articles-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* Empty Content */
-.empty-content,
-.no-articles {
-    text-align: center;
-    padding: 60px 20px;
-    color: #666;
-    font-size: 1.1rem;
-    font-style: italic;
-}
-
-/* Article Item */
-.article-item {
-    background: white;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: all 0.3s;
-}
-
-.article-item:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Article Header (clickable) */
-.article-header {
-    padding: 20px 25px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    background: white;
-    transition: background 0.2s;
-}
-
-.article-header:hover {
-    background: #f8f9fa;
-}
-
-.article-item.expanded .article-header {
-    background: #f0f4f7;
-}
-
-/* Article Title & Date container */
-.article-header > div {
-    flex: 1;
-}
-
-.article-header h3 {
-    margin: 0 0 5px 0;
-    color: #2c5f7c;
-    font-size: 1.3rem;
-}
-
-/* Article Date */
-.article-date {
-    color: #888;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-/* Article Toggle Arrow */
-.article-toggle {
-    color: #2c5f7c;
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-    min-width: 20px;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.article-item.expanded .article-toggle {
-    transform: rotate(180deg);
-}
-
-/* Article Content - CONTIENE sia preview che full */
-.article-content {
-    overflow: hidden;
-}
-
-/* Article Preview (sempre visibile) */
-.article-preview {
-    padding: 0 25px 20px;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* Article Full (nascosto, si espande con click) */
-.article-full {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-}
-
-.article-item.expanded .article-full {
-    max-height: 10000px; /* Valore alto per contenuti lunghi */
-    transition: max-height 0.8s ease-in;
-}
-
-.article-full > * {
-    padding: 0 25px 25px;
-    border-top: 1px solid #e0e0e0;
-}
-
-/* Stili per contenuto articolo */
-.article-full p {
-    color: #333;
-    line-height: 1.8;
-    margin-bottom: 15px;
-}
-
-.article-full h4 {
-    color: #2c5f7c;
-    margin: 20px 0 10px;
-    font-size: 1.2rem;
-}
-
-.article-full ul,
-.article-full ol {
-    margin: 15px 0;
-    padding-left: 25px;
-    color: #333;
-}
-
-.article-full li {
-    margin-bottom: 8px;
-    line-height: 1.7;
-}
-
-.article-full img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 20px 0;
-}
-
-/* Booking Button dentro articoli */
-.booking-button {
-    display: inline-block;
-    margin: 20px 0;
-    padding: 12px 24px;
-    background: #2c5f7c;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background 0.3s;
-}
-
-.booking-button:hover {
-    background: #1f4456;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .hero-small {
-        min-height: 30vh;
-        padding: 70px 0 30px;
     }
     
-    .hero-small .hero-content h1 {
-        font-size: 2rem;
+    .navbar .nav-item {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
     }
     
-    .hero-small .subtitle {
-        font-size: 1rem;
-    }
-    
-    .city-guide-section {
-        padding: 40px 0;
-    }
-    
-    .tab-button {
-        padding: 12px 20px;
-        font-size: 1rem;
-    }
-    
-    .article-header h3 {
-        font-size: 1.1rem;
-    }
-    
-    .article-header,
-    .article-preview,
-    .article-full > * {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-small {
-        min-height: 25vh;
-        padding: 60px 0 25px;
-    }
-    
-    .hero-small .hero-content h1 {
-        font-size: 1.75rem;
-    }
-    
-    .tab-button {
-        padding: 10px 15px;
-        font-size: 0.95rem;
-    }
-    
-    .article-header h3 {
-        font-size: 1rem;
+    .navbar .nav-link {
+        display: block;
+        padding: 1rem 2rem;
     }
 }
