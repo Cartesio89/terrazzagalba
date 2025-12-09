@@ -2,6 +2,11 @@
    FIX MENU DESKTOP GUIDA-CITTA
    ======================================== */
 
+/* Fix scroll offset per anchor links */
+.article-item[data-article-id] {
+    scroll-margin-top: 120px;
+}
+
 /* Desktop: menu sempre in riga orizzontale */
 @media (min-width: 769px) {
     .navbar .nav-menu {
