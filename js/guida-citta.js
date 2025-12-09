@@ -148,7 +148,7 @@ function renderStoriaArticles() {
             </div>
             <div class="article-content">
                 <div class="article-preview">${article.preview}</div>
-                <div class="article-full">${bookingBtn}${article.content.replace(article.preview, '').trim()}</div>
+                <div class="article-full">${bookingBtn}${article.content}</div>
             </div>
         `;
         container.appendChild(articleEl);
@@ -192,7 +192,7 @@ function renderNotizieArticles() {
             </div>
             <div class="article-content">
                 <div class="article-preview">${article.preview}</div>
-                <div class="article-full">${article.content.replace(article.preview, '').trim()}</div>
+                <div class="article-full">${article.content}</div>
             </div>
         `;
         container.appendChild(articleEl);
@@ -231,7 +231,19 @@ function handleAnchorLinks() {
             const header = article.querySelector('.article-header');
             if (header) {
                 toggleArticle(header);
-                setTimeout(() => article.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+                
+                // Aspetta espansione, poi scroll preciso al titolo
+                setTimeout(() => {
+                    const titleElement = article.querySelector('h3');
+                    if (titleElement) {
+                        const navbarHeight = 80;
+                        const elementTop = titleElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - navbarHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 400);
             }
         }
     }, 500);
