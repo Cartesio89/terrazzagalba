@@ -833,7 +833,7 @@ function renderTipForm(){
   });
   document.getElementById("tipSubmitBtn").addEventListener("click", submitTip);
 }
-const SUPABASE_FUNCTION_URL = SUPABASE_URL ? (SUPABASE_URL + "/functions/v1/translate-tip") : "";
+const SUPABASE_FUNCTION_URL = SUPABASE_URL ? (SUPABASE_URL + "/functions/v1/quick-handler") : "";
 
 async function submitTip(){
   const msg = document.getElementById("tipFormMsg");
