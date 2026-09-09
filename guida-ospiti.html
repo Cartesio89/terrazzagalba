@@ -172,10 +172,10 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
 <footer data-i18n="footer">Dati verificati a settembre 2026 · orari e contatti possono variare</footer>
 
 <script>
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
+const SUPABASE_URL = "https://tafdebnpuoefsvnawtjh.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRhZmRlYm5wdW9lZnN2bmF3dGpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5ODE2NzIsImV4cCI6MjEwNDU1NzY3Mn0.vTuXeFd9g_C-zxYu3YZBZU1NrZ9BcPgwGsHNO1sB9Wc";
 
-const TOP_CATEGORIES = ["wifi","raccolta","serviziutili","mangiare","supermercati","spiagge","shopping","trasporti","dintorni","checkout","farmacie","emergenza","eventi","consigli","recensione"];
+const TOP_CATEGORIES = ["wifi","raccolta","serviziutili","mangiare","supermercati","spiagge","shopping","eventi","consigli","dintorni","farmacie","trasporti","checkout","recensione","emergenza"];
 const SUBMENUS = {
   mangiare: ["ristoranti","fishchips","pizza","barpasticceria","nightlife"],
   serviziutili: ["gommoni","bici","banche","poste","benzinai","chiese"],
@@ -238,11 +238,13 @@ const DESC = {
   ostematto:{it:"Qualità e cordialità.",en:"Quality and warmth.",fr:"Qualité et convivialité.",es:"Calidad y cordialidad.",de:"Qualität und Herzlichkeit.",no:"Kvalitet og hjertevarme."},
   kursaal:{it:"Pizzetta fritta, la storia di Terracina, ottima per un pranzo al mare, rigorosamente su ordinazione.",en:"Fried mini pizza, a piece of Terracina's history, great for a beach lunch, order ahead.",fr:"Petite pizza frite, un morceau d'histoire de Terracina, parfait pour un déjeuner à la plage, sur commande uniquement.",es:"Pizzeta frita, un trozo de la historia de Terracina, ideal para un almuerzo en la playa, solo por encargo.",de:"Frittierte Mini-Pizza, ein Stück Terracina-Geschichte, perfekt für ein Strand-Mittagessen, nur auf Vorbestellung.",no:"Frityrstekt minipizza, et stykke Terracina-historie, perfekt til lunsj på stranden, kun etter forhåndsbestilling."},
   leda:{it:"Pizza rossa al taglio, storica.",en:"Historic red pizza by the slice.",fr:"Pizza rouge à la coupe, historique.",es:"Pizza roja al corte, histórica.",de:"Historische rote Pizza vom Blech.",no:"Historisk rød pizza i skiver."},
-  fiumetta:{it:"Raggiungibile in macchina o scooter, fiume gelato che sfocia in mare, acqua pulita, bel panorama, posti all'ombra.",en:"Reachable by car or scooter, an ice-cold stream flowing into the sea, clean water, great views, shaded spots.",fr:"Accessible en voiture ou scooter, un ruisseau glacé qui se jette dans la mer, eau propre, belle vue, coins ombragés.",es:"Se llega en coche o scooter, un arroyo helado que desemboca en el mar, agua limpia, buenas vistas, zonas con sombra.",de:"Mit Auto oder Roller erreichbar, ein eiskalter Bach, der ins Meer mündet, sauberes Wasser, schöne Aussicht, schattige Plätze.",no:"Nås med bil eller scooter, en iskald bekk som renner ut i havet, rent vann, fin utsikt, skyggefulle plasser."}
+  fiumetta:{it:"Raggiungibile in macchina o scooter, fiume gelato che sfocia in mare, acqua pulita, bel panorama, posti all'ombra.",en:"Reachable by car or scooter, an ice-cold stream flowing into the sea, clean water, great views, shaded spots.",fr:"Accessible en voiture ou scooter, un ruisseau glacé qui se jette dans la mer, eau propre, belle vue, coins ombragés.",es:"Se llega en coche o scooter, un arroyo helado que desemboca en el mar, agua limpia, buenas vistas, zonas con sombra.",de:"Mit Auto oder Roller erreichbar, ein eiskalter Bach, der ins Meer mündet, sauberes Wasser, schöne Aussicht, schattige Plätze.",no:"Nås med bil eller scooter, en iskald bekk som renner ut i havet, rent vann, fin utsikt, skyggefulle plasser."},
+  avenafranca:{it:"A pochi passi da casa, appena dopo la Piazza del centro storico.",en:"Just steps from home, right after the main square of the old town.",fr:"À quelques pas de la maison, juste après la place du centre historique.",es:"A pocos pasos de casa, justo después de la plaza del centro histórico.",de:"Nur wenige Schritte von zu Hause entfernt, gleich hinter dem Platz der Altstadt.",no:"Bare noen skritt hjemmefra, rett etter plassen i den historiske bydelen."}
 };
 
 const VENUES = {
   supermercati: [
+    {name:"Alimentari Avena Franca", address:"Corso Anita Garibaldi, 110", phone:"+39 0773 709732", placeId:"ChIJNZIbjUEjJRMRvV6I_2xhc-0", desc:DESC.avenafranca},
     {name:"Conad Superstore", address:"Via Badino, SNC — aperto 24h", phone:"+39 0773 731045", placeId:"ChIJMVLgtR0jJRMRtARFID5TNDM"},
     {name:"Todis", address:"Via Appia, Km 100", phone:"+39 0773 701271", placeId:"ChIJEyZ3JGcjJRMRWc4s97vWXmc"},
     {name:"Eurospin", address:"Via Pontina", phone:"+39 045 786 2000", placeId:"ChIJ46SzPxIjJRMR95ZaRDs7w6M"},
@@ -252,8 +254,7 @@ const VENUES = {
     {name:"Supermercato Primavera", address:"Via Sarti, 21", phone:"+39 0773 709375", placeId:"ChIJ-dql-GgjJRMRbEWjOyCoFzY"},
     {name:"Market Bottasso", address:"Via Antonio Bottasso, 21", phone:"+39 351 473 7108", placeId:"ChIJW-C-jGsjJRMRFf54Vgyf0CE"},
     {name:"Conad City", address:"Via Antonio Bottasso, 83", phone:"+39 0773 368549", placeId:"ChIJdTWNMcwjJRMRxo1rUzuOtiI"},
-    {name:"Conad City", address:"Via Tripoli, snc", phone:"+39 0773 142 0011", placeId:"ChIJrbZacVwjJRMRU9eEAl3qPqM"},
-    {name:"Alimentari Avena Franca", address:"Corso Anita Garibaldi, 110", phone:"+39 0773 709732", placeId:"ChIJNZIbjUEjJRMRvV6I_2xhc-0"}
+    {name:"Conad City", address:"Via Tripoli, snc", phone:"+39 0773 142 0011", placeId:"ChIJrbZacVwjJRMRU9eEAl3qPqM"}
   ],
   farmacie: [
     {name:"Farmacia Centrale di Terracina", address:"Via Badino, 135 — anche la domenica", phone:"+39 0773 726080", placeId:"ChIJW63xZwAjJRMRS6xkfvVu_5o"},
