@@ -695,48 +695,48 @@ function showView(id){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
+function renderSubHub(parentId){
+  document.getElementById("subHubTitle").textContent = catLabel(parentId);
+  document.getElementById("subHubNote").textContent = catNote(parentId);
+  renderGrid("subHubGrid", SUBMENUS[parentId], openSubCategory);
+}
+const VIEW_IDS = {hub:"hub", subHub:"subHub", detail:"detailView", external:"externalView", info:"infoView", tipForm:"tipFormView", tipList:"tipListView"};
+
+function renderCurrentView(){
+  if(currentView === "subHub") renderSubHub(currentParent);
+  else if(currentView === "detail") renderDetail();
+  else if(currentView === "external") renderExternal();
+  else if(currentView === "info") renderInfo();
+  else if(currentView === "tipForm") renderTipForm();
+  else if(currentView === "tipList") renderTipList();
+}
+function applyState(state){
+  currentView = (state && state.view) || "hub";
+  currentParent = (state && state.parent) || null;
+  currentCat = (state && state.cat) || null;
+  showView(VIEW_IDS[currentView] || "hub");
+  renderCurrentView();
+}
+function navigate(state){
+  history.pushState(state, "");
+  applyState(state);
+}
+window.addEventListener("popstate", (e)=>{ applyState(e.state); });
 
 function openTopCategory(id){
-  if(INFO_TYPES.includes(id)){ openInfo(id); return; }
-  if(SUBMENUS[id]){
-    currentView = "subHub"; currentParent = id;
-    showView("subHub");
-    document.getElementById("subHubTitle").textContent = catLabel(id);
-    document.getElementById("subHubNote").textContent = catNote(id);
-    renderGrid("subHubGrid", SUBMENUS[id], openSubCategory);
-    return;
-  }
-  if(id === "come-arrivare" || id === "guida-casa" || id === "recensione"){ openExternal(id); return; }
-  currentParent = "hub"; currentCat = id; currentView = "detail";
-  showView("detailView"); renderDetail();
+  if(INFO_TYPES.includes(id)){ navigate({view:"info", cat:id}); return; }
+  if(SUBMENUS[id]){ navigate({view:"subHub", parent:id}); return; }
+  if(id === "come-arrivare" || id === "guida-casa" || id === "recensione"){ navigate({view:"external", cat:id}); return; }
+  navigate({view:"detail", parent:"hub", cat:id});
 }
 
 function openSubCategory(id){
   if(currentParent === "consigli"){
-    if(id === "lascia"){ currentCat = id; currentView="tipForm"; showView("tipFormView"); renderTipForm(); }
-    if(id === "leggi"){ currentCat = id; currentView="tipList"; showView("tipListView"); renderTipList(); }
+    if(id === "lascia"){ navigate({view:"tipForm", parent:"consigli", cat:id}); }
+    if(id === "leggi"){ navigate({view:"tipList", parent:"consigli", cat:id}); }
     return;
   }
-  currentCat = id; currentView = "detail";
-  showView("detailView"); renderDetail();
-}
-
-function goBack(targetId){
-  if(targetId === "consigliHub"){
-    currentView = "subHub"; currentParent = "consigli"; showView("subHub");
-    document.getElementById("subHubTitle").textContent = catLabel("consigli");
-    document.getElementById("subHubNote").textContent = catNote("consigli");
-    renderGrid("subHubGrid", SUBMENUS.consigli, openSubCategory);
-    return;
-  }
-  if(currentView === "detail" && currentParent && currentParent !== "hub"){
-    currentView = "subHub"; showView("subHub");
-    document.getElementById("subHubTitle").textContent = catLabel(currentParent);
-    document.getElementById("subHubNote").textContent = catNote(currentParent);
-    renderGrid("subHubGrid", SUBMENUS[currentParent], openSubCategory);
-  } else {
-    currentView = "hub"; currentCat = null; currentParent = null; showView("hub");
-  }
+  navigate({view:"detail", parent:currentParent, cat:id});
 }
 
 function renderVenueCard(v){
@@ -791,7 +791,6 @@ function renderDetail(){
   venueList.innerHTML = items.map(renderVenueCard).join("");
 }
 
-function openExternal(id){ currentView = "external"; currentCat = id; showView("externalView"); renderExternal(); }
 function renderExternal(){
   const box = document.getElementById("externalBox");
   if(currentCat === "come-arrivare"){
@@ -806,7 +805,6 @@ function renderExternal(){
   }
 }
 
-function openInfo(id){ currentView = "info"; currentCat = id; showView("infoView"); renderInfo(); }
 function renderInfo(){
   document.getElementById("infoTitle").textContent = catLabel(currentCat);
   const box = document.getElementById("infoBox");
@@ -835,6 +833,8 @@ function renderTipForm(){
   });
   document.getElementById("tipSubmitBtn").addEventListener("click", submitTip);
 }
+const SUPABASE_FUNCTION_URL = SUPABASE_URL ? (SUPABASE_URL + "/functions/v1/translate-tip") : "";
+
 async function submitTip(){
   const msg = document.getElementById("tipFormMsg");
   msg.className = "form-msg"; msg.style.display = "none";
@@ -846,10 +846,10 @@ async function submitTip(){
   const testo = document.getElementById("tipTesto").value.slice(0,300).trim();
   if(!testo){ return; }
   try{
-    const res = await fetch(SUPABASE_URL + "/rest/v1/consigli", {
+    const res = await fetch(SUPABASE_FUNCTION_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY, "Prefer": "return=minimal" },
-      body: JSON.stringify({ nome: nome || null, mese: mese || null, testo: testo })
+      headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ nome: nome || null, mese: mese || null, testo: testo, lang: currentLang })
     });
     if(res.ok){
       msg.textContent = t().formOk; msg.className = "form-msg ok";
@@ -872,29 +872,26 @@ async function renderTipList(){
     if(!res.ok) throw new Error("fetch failed");
     const rows = await res.json();
     if(rows.length === 0){ box.innerHTML = "<div class='empty-state'>" + t().nessunConsiglio + "</div>"; return; }
-    box.innerHTML = rows.map(r =>
-      "<div class='tip-card'><div class='tip-meta'>" + (r.nome || t().anonimo) + (r.mese ? " · " + r.mese : "") + "</div><div class='tip-text'>" + r.testo + "</div></div>").join("");
+    box.innerHTML = rows.map(r => {
+      let testoShown = r.testo;
+      if(testoShown && typeof testoShown === "object"){
+        testoShown = testoShown[currentLang] || testoShown.it || Object.values(testoShown).find(v=>v) || "";
+      }
+      return "<div class='tip-card'><div class='tip-meta'>" + (r.nome || t().anonimo) + (r.mese ? " · " + r.mese : "") + "</div><div class='tip-text'>" + testoShown + "</div></div>";
+    }).join("");
   } catch(e){ box.innerHTML = "<div class='empty-state'>" + t().formErr + "</div>"; }
 }
 
 function renderAll(){
   renderLangSelector(); renderStaticText();
   renderGrid("catGrid", TOP_CATEGORIES, openTopCategory);
-  if(currentView === "subHub"){
-    document.getElementById("subHubTitle").textContent = catLabel(currentParent);
-    document.getElementById("subHubNote").textContent = catNote(currentParent);
-    renderGrid("subHubGrid", SUBMENUS[currentParent], openSubCategory);
-  }
-  if(currentView === "detail"){ renderDetail(); }
-  if(currentView === "external") renderExternal();
-  if(currentView === "info") renderInfo();
-  if(currentView === "tipForm") renderTipForm();
-  if(currentView === "tipList") renderTipList();
+  renderCurrentView();
 }
-document.getElementById("backBtn").addEventListener("click", ()=> goBack());
-document.querySelectorAll("[data-back]").forEach(btn=> btn.addEventListener("click", (e)=>{ e.preventDefault(); goBack(btn.dataset.back); }));
+document.getElementById("backBtn").addEventListener("click", ()=> history.back());
+document.querySelectorAll("[data-back]").forEach(btn=> btn.addEventListener("click", (e)=>{ e.preventDefault(); history.back(); }));
 document.querySelectorAll("[data-open]").forEach(btn=> btn.addEventListener("click", (e)=>{ e.preventDefault(); openTopCategory(btn.dataset.open); }));
 
+history.replaceState({view:"hub"}, "");
 renderAll();
 </script>
 </body>
