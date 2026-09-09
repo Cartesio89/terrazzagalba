@@ -23,14 +23,14 @@ header{
   background:linear-gradient(180deg, rgba(20,40,52,.75) 0%, rgba(20,40,52,.55) 40%, rgba(30,66,88,.92) 100%),
     url('images/dji_fly_20240728_124530_901_1722164597533_photo.jpg') center 30%/cover no-repeat;
 }
-.header-top{display:flex;justify-content:space-between;align-items:flex-start;max-width:960px;margin:0 auto;position:relative;z-index:2;}
+.brand-block{text-align:center;max-width:960px;margin:14px auto 0;position:relative;z-index:2;}
 .brand{font-size:1.5rem;font-weight:600;letter-spacing:.02em;text-shadow:0 2px 10px rgba(0,0,0,.35);}
 .subtitle{font-size:.9rem;opacity:.92;margin-top:2px;font-weight:400;text-shadow:0 1px 6px rgba(0,0,0,.3);}
-.lang-select{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:220px;}
-.lang-btn{border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.1);backdrop-filter:blur(4px);color:#fff;font-size:.7rem;font-weight:600;padding:5px 8px;border-radius:999px;cursor:pointer;transition:.15s;}
+.lang-select{display:flex;gap:5px;flex-wrap:nowrap;justify-content:center;max-width:960px;margin:0 auto;position:relative;z-index:2;overflow-x:auto;padding-bottom:2px;}
+.lang-btn{border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.1);backdrop-filter:blur(4px);color:#fff;font-size:.62rem;font-weight:600;padding:4px 6px;border-radius:999px;cursor:pointer;transition:.15s;flex-shrink:0;white-space:nowrap;}
 .lang-btn:hover{background:rgba(255,255,255,.25);}
 .lang-btn.active{background:#fff;color:var(--primary);border-color:#fff;}
-.header-links{max-width:960px;margin:26px auto 0;position:relative;z-index:2;display:flex;gap:10px;flex-wrap:wrap;}
+.header-links{max-width:960px;margin:22px auto 0;position:relative;z-index:2;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
 .header-link-btn{border:1.5px solid rgba(255,255,255,.55);background:rgba(255,255,255,.12);backdrop-filter:blur(4px);color:#fff;font-size:.82rem;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
 .header-link-btn:hover{background:rgba(255,255,255,.24);}
 main{max-width:960px;margin:0 auto;padding:28px 18px 60px;}
@@ -107,12 +107,10 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
 <body>
 
 <header>
-  <div class="header-top">
-    <div>
-      <div class="brand">Terrazza Galba</div>
-      <div class="subtitle" data-i18n="subtitle">Guida per gli ospiti</div>
-    </div>
-    <div class="lang-select" id="langSelect"></div>
+  <div class="lang-select" id="langSelect"></div>
+  <div class="brand-block">
+    <div class="brand">Terrazza Galba</div>
+    <div class="subtitle" data-i18n="subtitle">Guida per gli ospiti</div>
   </div>
   <div class="header-links">
     <a href="#" class="header-link-btn" data-open="come-arrivare">📍 <span data-i18n="comeArrivareShort">Come arrivare</span></a>
@@ -239,7 +237,8 @@ const DESC = {
   kursaal:{it:"Pizzetta fritta, la storia di Terracina, ottima per un pranzo al mare, rigorosamente su ordinazione.",en:"Fried mini pizza, a piece of Terracina's history, great for a beach lunch, order ahead.",fr:"Petite pizza frite, un morceau d'histoire de Terracina, parfait pour un déjeuner à la plage, sur commande uniquement.",es:"Pizzeta frita, un trozo de la historia de Terracina, ideal para un almuerzo en la playa, solo por encargo.",de:"Frittierte Mini-Pizza, ein Stück Terracina-Geschichte, perfekt für ein Strand-Mittagessen, nur auf Vorbestellung.",no:"Frityrstekt minipizza, et stykke Terracina-historie, perfekt til lunsj på stranden, kun etter forhåndsbestilling."},
   leda:{it:"Pizza rossa al taglio, storica.",en:"Historic red pizza by the slice.",fr:"Pizza rouge à la coupe, historique.",es:"Pizza roja al corte, histórica.",de:"Historische rote Pizza vom Blech.",no:"Historisk rød pizza i skiver."},
   fiumetta:{it:"Raggiungibile in macchina o scooter, fiume gelato che sfocia in mare, acqua pulita, bel panorama, posti all'ombra.",en:"Reachable by car or scooter, an ice-cold stream flowing into the sea, clean water, great views, shaded spots.",fr:"Accessible en voiture ou scooter, un ruisseau glacé qui se jette dans la mer, eau propre, belle vue, coins ombragés.",es:"Se llega en coche o scooter, un arroyo helado que desemboca en el mar, agua limpia, buenas vistas, zonas con sombra.",de:"Mit Auto oder Roller erreichbar, ein eiskalter Bach, der ins Meer mündet, sauberes Wasser, schöne Aussicht, schattige Plätze.",no:"Nås med bil eller scooter, en iskald bekk som renner ut i havet, rent vann, fin utsikt, skyggefulle plasser."},
-  avenafranca:{it:"A pochi passi da casa, appena dopo la Piazza del centro storico.",en:"Just steps from home, right after the main square of the old town.",fr:"À quelques pas de la maison, juste après la place du centre historique.",es:"A pocos pasos de casa, justo después de la plaza del centro histórico.",de:"Nur wenige Schritte von zu Hause entfernt, gleich hinter dem Platz der Altstadt.",no:"Bare noen skritt hjemmefra, rett etter plassen i den historiske bydelen."}
+  avenafranca:{it:"A pochi passi da casa, appena dopo la Piazza del centro storico.",en:"Just steps from home, right after the main square of the old town.",fr:"À quelques pas de la maison, juste après la place du centre historique.",es:"A pocos pasos de casa, justo después de la plaza del centro histórico.",de:"Nur wenige Schritte von zu Hause entfernt, gleich hinter dem Platz der Altstadt.",no:"Bare noen skritt hjemmefra, rett etter plassen i den historiske bydelen."},
+  acquamagnesia:{it:"Acqua gelata e mare cristallino.",en:"Ice-cold water and crystal-clear sea.",fr:"Eau glacée et mer cristalline.",es:"Agua helada y mar cristalino.",de:"Eiskaltes Wasser und kristallklares Meer.",no:"Iskaldt vann og krystallklart hav."}
 };
 
 const VENUES = {
@@ -266,6 +265,7 @@ const VENUES = {
   spiagge: [
     {name:"Fiumetta Beach", address:"Foce del Fiumetta", phone:null, placeId:"ChIJ9yfC5zclJRMRDvd7EXCs3sA", desc:DESC.fiumetta, tip:true},
     {name:"Spiaggia libera", address:"Zona Piazzale Aldo Moro", phone:null, placeId:"ChIJz_V4RWwjJRMRT_B_7_k15sg"},
+    {name:"Acqua Magnesia", address:"Via Appia, 7 — antica sorgente romana", phone:null, placeId:"ChIJjdqwJE4jJRMRyFlhWnm417E", desc:DESC.acquamagnesia},
     {name:"Stabilimento Balneare Orsa Maggiore", address:"Viale Circe, 9", phone:"+39 0773 725915", placeId:"ChIJMQRz8GwjJRMRdUugdfXKFo0"},
     {name:"Sirenella", address:"Viale Circe, 1", phone:"+39 0773 727666", placeId:"ChIJjU247G4jJRMR4q6rFaEXvIg"},
     {name:"Stabilimento Balneare Kursaal", address:"Viale Circe", phone:"+39 0773 725560", placeId:"ChIJi_nV424jJRMR9ICNxDamE_w", desc:DESC.kursaal, tip:true},
@@ -333,7 +333,8 @@ const VENUES = {
     {name:"Bar Milano", address:"Piazzale Lido, 20", phone:"+39 0773 288870", placeId:"ChIJm7h8Q2wjJRMRDYWC_lBga9I"},
     {name:"Creme Caramel", address:"Via Tripoli, 1/9", phone:"+39 0773 702895", placeId:"ChIJ6chRFmYjJRMR1Ydm3nWrCDQ"},
     {name:"Pasticceria Somma", address:"Via Ponte Rosso, km 101,500", phone:null, placeId:"ChIJaRqmGkAjJRMRZONKzLI4UBc"},
-    {name:"Pasticceria Buttafoco", address:"Via Adriano Olivetti, 18/20", phone:"+39 0773 149 4411", placeId:"ChIJwb22xrkjJRMRbByVbqHyew8"}
+    {name:"Pasticceria Buttafoco", address:"Via Adriano Olivetti, 18/20", phone:"+39 0773 149 4411", placeId:"ChIJwb22xrkjJRMRbByVbqHyew8"},
+    {name:"L'Angolo del Goloso", address:"Via Bachelet, 32", phone:"+39 327 442 6669", placeId:"ChIJFw3eb5sjJRMRYkVVu89VBD8"}
   ],
   nightlife: [
     {name:"Domitilla Bottega", address:"Via Annunziata, 17", phone:"+39 388 565 0105", placeId:"ChIJnY4iBUIjJRMRyT_Olf-O-48", desc:DESC.domitilla},
@@ -365,6 +366,7 @@ const VENUES = {
     {name:"Distributore Esso", address:"SS148 Pontina, Km 106,190", phone:"+39 0773 731152", placeId:"ChIJJeWSou8iJRMRdlZke5HicJ0"}
   ],
   chiese: [
+    {name:"Duomo di San Cesareo (Cattedrale)", address:"Piazza Municipio, 19", phone:"+39 0773 429845", placeId:"ChIJs-Kf8UEjJRMRTegf2vz24k8"},
     {name:"Chiesa del Santissimo Salvatore", address:"Via Roma, 119", phone:"+39 0773 879445", placeId:"ChIJXQOtCmojJRMR3_0s8hsv-lk"},
     {name:"Chiesa San Domenico Savio", address:"Piazza Alfredo Fiorini", phone:"+39 0773 724545", placeId:"ChIJ79GRWBQjJRMRBQ4etJXto4s"}
   ],
@@ -384,15 +386,15 @@ const VENUES = {
 
 const DINTORNI = {
   it: [
-    {id:"tempio-giove", title:"Il Tempio di Giove Anxur", preview:"Il monumento più iconico di Terracina, arroccato a 227 metri sul Monte Sant'Angelo, da cui domina la città, la costa e il mare fino al Circeo e alle Isole Pontine.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
     {id:"ponza", title:"Ponza", preview:"Un'isola che conquista subito: colori vividi, mare trasparente e un centro storico affacciato sul porto. Grotte di Pilato, Piscine Naturali, Chiaia di Luna.", bookingText:"Prenota un traghetto", bookingUrl:"https://www.traghetti.com/traghetti-per-ponza"},
+    {id:"tempio-giove", title:"Il Tempio di Giove Anxur", preview:"Il monumento più iconico di Terracina, arroccato a 227 metri sul Monte Sant'Angelo, da cui domina la città, la costa e il mare fino al Circeo e alle Isole Pontine.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
     {id:"circeo", title:"Il Monte Circeo", preview:"Da millenni associato alla maga Circe dell'Odissea. Oggi simbolo del Parco Nazionale del Circeo, con trekking panoramico e spiagge protette dalle dune.", placeId:"ChIJj62IvYQQJRMRpJrocFn5TV0", placeName:"Parco Nazionale del Circeo"},
     {id:"appia-francigena", title:"Appia Antica e Via Francigena", preview:"Terracina è uno dei pochi luoghi in Italia dove due vie storiche straordinarie si incrociano: l'Appia Antica, la \"Regina Viarum\", e la Via Francigena del Sud."},
     {id:"abbazia-fossanova", title:"Abbazia di Fossanova", preview:"Nel territorio di Priverno, a pochi minuti da Terracina, uno dei più straordinari esempi di architettura cistercense in Italia.", placeId:"ChIJw8cFRMo_JRMRujicGH4ep0E", placeName:"Abbazia di Fossanova"}
   ],
   en: [
-    {id:"tempio-giove", title:"The Temple of Jupiter Anxur", preview:"Terracina's most iconic landmark, perched 227 metres up on Monte Sant'Angelo, overlooking the city, the coast and the sea as far as Circeo and the Pontine Islands.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
     {id:"ponza", title:"Ponza", preview:"An island that wins you over instantly: vivid colours, crystal-clear water and a historic centre facing the harbour. Pilato's Caves, the Natural Pools, Chiaia di Luna.", bookingText:"Book a ferry", bookingUrl:"https://www.traghetti.com/traghetti-per-ponza"},
+    {id:"tempio-giove", title:"The Temple of Jupiter Anxur", preview:"Terracina's most iconic landmark, perched 227 metres up on Monte Sant'Angelo, overlooking the city, the coast and the sea as far as Circeo and the Pontine Islands.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
     {id:"circeo", title:"Monte Circeo", preview:"For millennia linked to Circe from the Odyssey. Today the symbol of the Circeo National Park, with scenic trekking and dune-protected beaches.", placeId:"ChIJj62IvYQQJRMRpJrocFn5TV0", placeName:"Circeo National Park"},
     {id:"appia-francigena", title:"Via Appia Antica and Via Francigena", preview:"Terracina is one of the few places in Italy where two extraordinary historic routes meet: the Appia Antica, the \"Regina Viarum\", and the southern Via Francigena."},
     {id:"abbazia-fossanova", title:"Fossanova Abbey", preview:"In the Priverno area, a few minutes from Terracina, one of the most remarkable examples of Cistercian architecture in Italy.", placeId:"ChIJw8cFRMo_JRMRujicGH4ep0E", placeName:"Abbazia di Fossanova"}
@@ -401,10 +403,10 @@ const DINTORNI = {
 const DINTORNI_PINS = [
   {name:"Duomo di San Cesareo", address:"Piazza Municipio, 19", phone:"+39 0773 429845", placeId:"ChIJs-Kf8UEjJRMRTegf2vz24k8"},
   {name:"Capitolium di Terracina", address:"Corso Anita Garibaldi, 93", phone:null, placeId:"ChIJq-7_kkEjJRMRg8e46DxZuI4"},
+  {name:"Chiesa del Purgatorio", address:"Corso Anita Garibaldi, 40", phone:null, placeId:"ChIJ0W1UqUEjJRMR1WFs1YKKKNY"},
   {name:"Teatro Romano di Terracina", address:"Piazza Municipio", phone:null, placeId:"ChIJD3AH-HQjJRMRuSx6wQxxwFc"},
   {name:"Terrazza Piazzale Aldo Moro", address:"Piazzale Lido, 20", phone:null, placeId:"ChIJz_V4RWwjJRMRT_B_7_k15sg"},
   {name:"Camminamento delle antiche mura cittadine", address:"Via Porta Nuova, 6", phone:null, placeId:"ChIJNxwQiEEjJRMRnJC3IFF8BD0"},
-  {name:"Chiesa del Purgatorio", address:"Corso Anita Garibaldi, 40", phone:null, placeId:"ChIJ0W1UqUEjJRMR1WFs1YKKKNY"},
   {name:"Acqua Magnesia", address:"Via Appia, 7 — antica sorgente romana", phone:null, placeId:"ChIJjdqwJE4jJRMRyFlhWnm417E"}
 ];
 
@@ -428,7 +430,7 @@ const RACCOLTA_HTML = {
 
 const I18N = {
   it:{ flag:"🇮🇹", label:"IT",
-    subtitle:"Guida per gli ospiti", hubTitle:"Tutto quello che ti serve durante il soggiorno a Terracina.",
+    subtitle:"Guida per gli ospiti", hubTitle:"Tutto quello che occorre per un piacevole soggiorno a Terracina.",
     back:"Torna al menu", call:"Chiama", maps:"Apri in Maps", open:"Apri sito",
     comeArrivareShort:"Come arrivare", guidaCasaShort:"Guida di casa",
     footer:"Dati verificati a settembre 2026 · orari e contatti possono variare",
