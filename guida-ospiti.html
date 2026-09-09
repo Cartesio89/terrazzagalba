@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terrazza Galba — Guida per gli ospiti</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#1E4258; --primary-light:#2C5F7F; --primary-tint:#E7EEF1;
+  --accent:#C86A3F; --accent-tint:#F7E6DC;
+  --green:#2F9E5C; --green-tint:#E3F3EA;
+  --ink:#20303A; --ink-soft:#5B6D76; --paper:#FAF7F2; --card:#FFFFFF; --line:#E3DFD6; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Work Sans',sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,.brand{font-family:'Fraunces',serif;}
+header{
+  position:relative;color:#fff;padding:20px 20px 40px;
+  background:linear-gradient(180deg, rgba(20,40,52,.75) 0%, rgba(20,40,52,.55) 40%, rgba(30,66,88,.92) 100%),
+    url('images/dji_fly_20240728_124530_901_1722164597533_photo.jpg') center 30%/cover no-repeat;
+}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;max-width:960px;margin:0 auto;position:relative;z-index:2;}
+.brand{font-size:1.5rem;font-weight:600;letter-spacing:.02em;text-shadow:0 2px 10px rgba(0,0,0,.35);}
+.subtitle{font-size:.9rem;opacity:.92;margin-top:2px;font-weight:400;text-shadow:0 1px 6px rgba(0,0,0,.3);}
+.lang-select{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:220px;}
+.lang-btn{border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.1);backdrop-filter:blur(4px);color:#fff;font-size:.7rem;font-weight:600;padding:5px 8px;border-radius:999px;cursor:pointer;transition:.15s;}
+.lang-btn:hover{background:rgba(255,255,255,.25);}
+.lang-btn.active{background:#fff;color:var(--primary);border-color:#fff;}
+.header-links{max-width:960px;margin:26px auto 0;position:relative;z-index:2;display:flex;gap:10px;flex-wrap:wrap;}
+.header-link-btn{border:1.5px solid rgba(255,255,255,.55);background:rgba(255,255,255,.12);backdrop-filter:blur(4px);color:#fff;font-size:.82rem;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
+.header-link-btn:hover{background:rgba(255,255,255,.24);}
+main{max-width:960px;margin:0 auto;padding:28px 18px 60px;}
+.hub-title{font-size:1.05rem;color:var(--ink-soft);margin-bottom:18px;text-align:center;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:640px){.grid{grid-template-columns:repeat(3,1fr);gap:8px;}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr);}}
+.cat-btn{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 8px 14px;text-align:center;cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.cat-btn:hover{border-color:var(--primary-light);transform:translateY(-2px);box-shadow:0 10px 22px rgba(30,66,88,.12);}
+.cat-icon{width:42px;height:42px;border-radius:50%;background:var(--primary-tint);display:flex;align-items:center;justify-content:center;color:var(--primary);}
+.cat-btn.emergenza .cat-icon{background:var(--accent-tint);color:var(--accent);}
+.cat-btn.farmacie .cat-icon{background:var(--green-tint);color:var(--green);}
+.cat-label{font-size:.76rem;font-weight:600;line-height:1.2;}
+.view{display:none;}
+.view.active{display:block;}
+.back-btn{background:none;border:none;color:var(--primary);font-weight:600;font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:16px;padding:6px 0;}
+.detail-title{font-size:1.4rem;margin-bottom:4px;}
+.detail-note{font-size:.85rem;color:var(--ink-soft);margin-bottom:20px;}
+.section-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin:22px 0 10px;}
+.section-label:first-of-type{margin-top:0;}
+.venue-list{display:flex;flex-direction:column;gap:12px;}
+.venue-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+.venue-name-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.venue-name{font-weight:600;font-size:1rem;}
+.tip-badge{font-size:.62rem;font-weight:700;color:var(--accent);background:var(--accent-tint);padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;}
+.venue-address{font-size:.85rem;color:var(--ink-soft);margin:2px 0 8px;}
+.venue-desc{font-size:.85rem;color:var(--ink);margin:4px 0 10px;font-style:italic;}
+.venue-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.venue-actions a{font-size:.8rem;font-weight:600;padding:8px 14px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-maps{background:var(--primary);color:#fff;}
+.btn-maps:hover{background:var(--primary-light);}
+.btn-call{background:var(--primary-tint);color:var(--primary);}
+.btn-call:hover{background:#dce9ef;}
+.btn-link{background:var(--accent-tint);color:var(--accent);}
+.btn-link:hover{background:#f1d5c2;}
+.empty-state{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:28px 18px;text-align:center;color:var(--ink-soft);font-size:.9rem;}
+.emergency-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px;}
+@media(min-width:520px){.emergency-grid{grid-template-columns:repeat(4,1fr);}}
+.emergency-num{background:var(--accent-tint);border-radius:var(--radius);padding:14px 10px;text-align:center;}
+.emergency-num a{font-size:1.5rem;font-weight:700;color:var(--accent);text-decoration:none;display:block;}
+.emergency-num span{font-size:.72rem;color:var(--ink-soft);display:block;margin-top:2px;}
+.article-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;}
+.article-title{font-weight:600;font-size:1.05rem;margin-bottom:6px;color:var(--primary);}
+.article-preview{font-size:.88rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.5;}
+.article-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.article-actions a{font-size:.8rem;font-weight:600;padding:8px 14px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-read{background:var(--primary-tint);color:var(--primary);}
+.external-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 24px;text-align:center;}
+.external-box p{color:var(--ink-soft);font-size:.9rem;margin-bottom:20px;}
+.big-btn{background:var(--primary);color:#fff;border:none;font-size:.95rem;font-weight:600;padding:13px 26px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.big-btn:hover{background:var(--primary-light);}
+.info-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;line-height:1.6;font-size:.92rem;}
+.info-box h4{color:var(--primary);margin:16px 0 4px;font-size:.95rem;}
+.info-box h4:first-child{margin-top:0;}
+.wifi-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
+.wifi-row:last-child{border-bottom:none;}
+.wifi-label{font-size:.8rem;color:var(--ink-soft);}
+.wifi-value{font-weight:700;font-size:1.05rem;letter-spacing:.02em;}
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;max-width:480px;margin:0 auto;}
+.form-field{margin-bottom:16px;text-align:left;}
+.form-field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.form-field input, .form-field select, .form-field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:.9rem;}
+.form-field textarea{resize:vertical;min-height:90px;}
+.char-count{font-size:.72rem;color:var(--ink-soft);text-align:right;margin-top:3px;}
+.form-msg{font-size:.85rem;margin-top:12px;display:none;padding:10px;border-radius:10px;}
+.form-msg.ok{display:block;background:var(--green-tint);color:var(--green);}
+.form-msg.err{display:block;background:var(--accent-tint);color:var(--accent);}
+.tip-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:10px;}
+.tip-meta{font-size:.72rem;color:var(--ink-soft);margin-bottom:6px;font-weight:600;}
+.tip-text{font-size:.9rem;}
+footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="brand">Terrazza Galba</div>
+      <div class="subtitle" data-i18n="subtitle">Guida per gli ospiti</div>
+    </div>
+    <div class="lang-select" id="langSelect"></div>
+  </div>
+  <div class="header-links">
+    <a href="#" class="header-link-btn" data-open="come-arrivare">📍 <span data-i18n="comeArrivareShort">Come arrivare</span></a>
+    <a href="#" class="header-link-btn" data-open="guida-casa">📖 <span data-i18n="guidaCasaShort">Guida di casa</span></a>
+    <a href="https://www.instagram.com/terracinacasavacanze/" target="_blank" rel="noopener" class="header-link-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> <span data-i18n="seguiciIG">Seguici su IG</span></a>
+  </div>
+</header>
+
+<main>
+  <section id="hub" class="view active">
+    <p class="hub-title" data-i18n="hubTitle">Tutto quello che ti serve durante il soggiorno a Terracina.</p>
+    <div class="grid" id="catGrid"></div>
+  </section>
+
+  <section id="subHub" class="view">
+    <button class="back-btn" data-back="hub">← <span data-i18n="back">Torna al menu</span></button>
+    <h2 class="detail-title" id="subHubTitle"></h2>
+    <p class="detail-note" id="subHubNote"></p>
+    <div class="grid" id="subHubGrid"></div>
+  </section>
+
+  <section id="detailView" class="view">
+    <button class="back-btn" id="backBtn">← <span id="backLabel"></span></button>
+    <h2 class="detail-title" id="detailTitle"></h2>
+    <p class="detail-note" id="detailNote"></p>
+    <div id="emergencyNumbers"></div>
+    <div id="articleList"></div>
+    <div id="pinsLabel" class="section-label" style="display:none;"></div>
+    <div class="venue-list" id="venueList"></div>
+  </section>
+
+  <section id="externalView" class="view">
+    <button class="back-btn" data-back="hub">← <span data-i18n="back">Torna al menu</span></button>
+    <h2 class="detail-title" id="externalTitle"></h2>
+    <div class="external-box" id="externalBox"></div>
+  </section>
+
+  <section id="infoView" class="view">
+    <button class="back-btn" data-back="hub">← <span data-i18n="back">Torna al menu</span></button>
+    <h2 class="detail-title" id="infoTitle"></h2>
+    <div class="info-box" id="infoBox"></div>
+  </section>
+
+  <section id="tipFormView" class="view">
+    <button class="back-btn" data-back="consigliHub">← <span data-i18n="back">Torna al menu</span></button>
+    <h2 class="detail-title" id="tipFormTitle"></h2>
+    <div class="form-card" id="tipFormCard"></div>
+  </section>
+
+  <section id="tipListView" class="view">
+    <button class="back-btn" data-back="consigliHub">← <span data-i18n="back">Torna al menu</span></button>
+    <h2 class="detail-title" id="tipListTitle"></h2>
+    <div id="tipListBox"></div>
+  </section>
+</main>
+
+<footer data-i18n="footer">Dati verificati a settembre 2026 · orari e contatti possono variare</footer>
+
+<script>
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
+
+const TOP_CATEGORIES = ["wifi","raccolta","serviziutili","mangiare","supermercati","spiagge","shopping","trasporti","dintorni","checkout","farmacie","emergenza","eventi","consigli","recensione"];
+const SUBMENUS = {
+  mangiare: ["ristoranti","fishchips","pizza","barpasticceria","nightlife"],
+  serviziutili: ["gommoni","bici","banche","poste","benzinai","chiese"],
+  eventi: ["seiditerracina","fondazione","proloco"],
+  consigli: ["lascia","leggi"]
+};
+const INFO_TYPES = ["wifi","raccolta","checkout"];
+
+const ICONS = {
+  wifi:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M12 20h.01"/></svg>',
+  raccolta:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10l1 13H6zM9 7V5a3 3 0 0 1 6 0v2M10 11v6M14 11v6"/></svg>',
+  serviziutili:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>',
+  checkout:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
+  mangiare:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2M7 2v20M17 2v7a2 2 0 0 0 2 2h1M18 11v11"/></svg>',
+  supermercati:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+  farmacie:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="6" stroke="currentColor" stroke-width="2"/><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  spiagge:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 21c4-2 6-2 10 0s6 2 10 0M12 3v8M8 7l4 4 4-4"/></svg>',
+  shopping:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
+  trasporti:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm14 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM3 17V9l2-5h12l4 5v8"/></svg>',
+  dintorni:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg>',
+  emergenza:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>',
+  servizi:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  consigli:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  ristoranti:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2M7 2v20M17 2v7a2 2 0 0 0 2 2h1M18 11v11"/></svg>',
+  fishchips:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="16" cy="12" r="1"/></svg>',
+  pizza:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 20h20L12 2z"/><circle cx="12" cy="13" r="1"/><circle cx="9" cy="16" r="1"/></svg>',
+  barpasticceria:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h14l-1.5 12a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 3z"/><path d="M12 16.8V22M8 22h8"/></svg>',
+  nightlife:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>',
+  eventi:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  fondazione:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  proloco:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3v18M4 4h13l-2 4 2 4H4"/></svg>',
+  seiditerracina:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+  banche:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>',
+  poste:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>',
+  benzinai:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 22h10M14 9h2a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V8l-3-3"/></svg>',
+  chiese:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M9 5h6M6 22V12L12 8l6 4v10M10 22v-6h4v6"/></svg>',
+  recensione:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>',
+  gommoni:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20l-2 3H4zM4 18V9a8 8 0 0 1 16 0v9"/></svg>',
+  bici:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17 10 7h4l4 10M10 7l3 5h5"/></svg>',
+  lascia:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+  leggi:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>'
+};
+
+function mapsUrl(name, placeId){ return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name) + "&query_place_id=" + placeId; }
+function telUrl(phone){ return "tel:" + phone.replace(/\s+/g,""); }
+function d(descObj){ return descObj ? (descObj[currentLang] || descObj.it) : null; }
+
+const DESC = {
+  domitilla:{it:"Aperitivi, cena e spettacoli dal vivo.",en:"Aperitifs, dinner and live shows.",fr:"Apéritifs, dîner et spectacles en direct.",es:"Aperitivos, cena y espectáculos en vivo.",de:"Aperitifs, Abendessen und Live-Shows.",no:"Aperitiff, middag og liveshow."},
+  arcoromano:{it:"Pesce fresco, ottima qualità.",en:"Fresh fish, excellent quality.",fr:"Poisson frais, excellente qualité.",es:"Pescado fresco, excelente calidad.",de:"Frischer Fisch, hervorragende Qualität.",no:"Fersk fisk, utmerket kvalitet."},
+  granchio:{it:"Top a Terracina per qualità e panorama, prezzi premium.",en:"Terracina's best for quality and view, premium prices.",fr:"Le meilleur de Terracina pour la qualité et la vue, prix premium.",es:"Lo mejor de Terracina en calidad y vistas, precios premium.",de:"Das Beste in Terracina für Qualität und Aussicht, Premium-Preise.",no:"Terracinas beste for kvalitet og utsikt, premiumpriser."},
+  bottegasarra:{it:"Top a Terracina per qualità e panorama, prezzi premium.",en:"Terracina's best for quality and view, premium prices.",fr:"Le meilleur de Terracina pour la qualité et la vue, prix premium.",es:"Lo mejor de Terracina en calidad y vistas, precios premium.",de:"Das Beste in Terracina für Qualität und Aussicht, Premium-Preise.",no:"Terracinas beste for kvalitet og utsikt, premiumpriser."},
+  algiardino:{it:"Pesce di qualità, panorama incredibile.",en:"Quality seafood, incredible view.",fr:"Poisson de qualité, vue incroyable.",es:"Pescado de calidad, vistas increíbles.",de:"Hochwertiger Fisch, unglaubliche Aussicht.",no:"Kvalitetsfisk, utrolig utsikt."},
+  muraccia:{it:"Carne prelibata, ottimi primi.",en:"Exquisite meat, great first courses.",fr:"Viande exquise, excellents premiers plats.",es:"Carne exquisita, excelentes primeros platos.",de:"Exquisites Fleisch, hervorragende erste Gänge.",no:"Utsøkt kjøtt, flotte forretter."},
+  campodeifiori:{it:"Carne prelibata, ottimi primi.",en:"Exquisite meat, great first courses.",fr:"Viande exquise, excellents premiers plats.",es:"Carne exquisita, excelentes primeros platos.",de:"Exquisites Fleisch, hervorragende erste Gänge.",no:"Utsøkt kjøtt, flotte forretter."},
+  sunrise:{it:"Carne prelibata, ottimi primi.",en:"Exquisite meat, great first courses.",fr:"Viande exquise, excellents premiers plats.",es:"Carne exquisita, excelentes primeros platos.",de:"Exquisites Fleisch, hervorragende erste Gänge.",no:"Utsøkt kjøtt, flotte forretter."},
+  spasella:{it:"Pesce, qualità top, vivi la parte bassa della città.",en:"Seafood, top quality, experience the old lower town.",fr:"Poisson, qualité top, vivez la vieille ville basse.",es:"Pescado, calidad top, vive la parte baja de la ciudad.",de:"Fisch, Top-Qualität, erlebe die historische Unterstadt.",no:"Fisk, toppkvalitet, opplev den gamle nedre bydelen."},
+  altobelli:{it:"Piatti tipici rivisitati, il mio preferito.",en:"Reinvented local dishes, my favourite.",fr:"Plats typiques revisités, mon préféré.",es:"Platos típicos reinventados, mi favorito.",de:"Neu interpretierte lokale Gerichte, mein Favorit.",no:"Gjenoppfunnet lokale retter, min favoritt."},
+  sillana:{it:"Taglieri, ottimi aperitivi e vino.",en:"Cold cuts boards, great aperitifs and wine.",fr:"Planches de charcuterie, excellents apéritifs et vins.",es:"Tablas de fiambres, excelentes aperitivos y vinos.",de:"Aufschnittplatten, tolle Aperitifs und Weine.",no:"Skjærefjøler, gode aperitiffer og vin."},
+  ostematto:{it:"Qualità e cordialità.",en:"Quality and warmth.",fr:"Qualité et convivialité.",es:"Calidad y cordialidad.",de:"Qualität und Herzlichkeit.",no:"Kvalitet og hjertevarme."},
+  kursaal:{it:"Pizzetta fritta, la storia di Terracina, ottima per un pranzo al mare, rigorosamente su ordinazione.",en:"Fried mini pizza, a piece of Terracina's history, great for a beach lunch, order ahead.",fr:"Petite pizza frite, un morceau d'histoire de Terracina, parfait pour un déjeuner à la plage, sur commande uniquement.",es:"Pizzeta frita, un trozo de la historia de Terracina, ideal para un almuerzo en la playa, solo por encargo.",de:"Frittierte Mini-Pizza, ein Stück Terracina-Geschichte, perfekt für ein Strand-Mittagessen, nur auf Vorbestellung.",no:"Frityrstekt minipizza, et stykke Terracina-historie, perfekt til lunsj på stranden, kun etter forhåndsbestilling."},
+  leda:{it:"Pizza rossa al taglio, storica.",en:"Historic red pizza by the slice.",fr:"Pizza rouge à la coupe, historique.",es:"Pizza roja al corte, histórica.",de:"Historische rote Pizza vom Blech.",no:"Historisk rød pizza i skiver."},
+  fiumetta:{it:"Raggiungibile in macchina o scooter, fiume gelato che sfocia in mare, acqua pulita, bel panorama, posti all'ombra.",en:"Reachable by car or scooter, an ice-cold stream flowing into the sea, clean water, great views, shaded spots.",fr:"Accessible en voiture ou scooter, un ruisseau glacé qui se jette dans la mer, eau propre, belle vue, coins ombragés.",es:"Se llega en coche o scooter, un arroyo helado que desemboca en el mar, agua limpia, buenas vistas, zonas con sombra.",de:"Mit Auto oder Roller erreichbar, ein eiskalter Bach, der ins Meer mündet, sauberes Wasser, schöne Aussicht, schattige Plätze.",no:"Nås med bil eller scooter, en iskald bekk som renner ut i havet, rent vann, fin utsikt, skyggefulle plasser."}
+};
+
+const VENUES = {
+  supermercati: [
+    {name:"Conad Superstore", address:"Via Badino, SNC — aperto 24h", phone:"+39 0773 731045", placeId:"ChIJMVLgtR0jJRMRtARFID5TNDM"},
+    {name:"Todis", address:"Via Appia, Km 100", phone:"+39 0773 701271", placeId:"ChIJEyZ3JGcjJRMRWc4s97vWXmc"},
+    {name:"Eurospin", address:"Via Pontina", phone:"+39 045 786 2000", placeId:"ChIJ46SzPxIjJRMR95ZaRDs7w6M"},
+    {name:"Conad", address:"Via Pontina, Km 103,3", phone:"+39 0773 142 0005", placeId:"ChIJQ890cAIZJRMRgtez6pROMfU"},
+    {name:"Lidl", address:"Viale Europa, snc", phone:"+39 800 480 048", placeId:"ChIJuYOCezwjJRMRTeRjCrOpIIw"},
+    {name:"MD", address:"SS148", phone:"+39 0773 363968", placeId:"ChIJSdL4se8iJRMRpUNcLE51Yc0"},
+    {name:"Supermercato Primavera", address:"Via Sarti, 21", phone:"+39 0773 709375", placeId:"ChIJ-dql-GgjJRMRbEWjOyCoFzY"},
+    {name:"Market Bottasso", address:"Via Antonio Bottasso, 21", phone:"+39 351 473 7108", placeId:"ChIJW-C-jGsjJRMRFf54Vgyf0CE"},
+    {name:"Conad City", address:"Via Antonio Bottasso, 83", phone:"+39 0773 368549", placeId:"ChIJdTWNMcwjJRMRxo1rUzuOtiI"},
+    {name:"Conad City", address:"Via Tripoli, snc", phone:"+39 0773 142 0011", placeId:"ChIJrbZacVwjJRMRU9eEAl3qPqM"},
+    {name:"Alimentari Avena Franca", address:"Corso Anita Garibaldi, 110", phone:"+39 0773 709732", placeId:"ChIJNZIbjUEjJRMRvV6I_2xhc-0"}
+  ],
+  farmacie: [
+    {name:"Farmacia Centrale di Terracina", address:"Via Badino, 135 — anche la domenica", phone:"+39 0773 726080", placeId:"ChIJW63xZwAjJRMRS6xkfvVu_5o"},
+    {name:"Parafarmacia di Lodi Emanuela", address:"Corso Anita Garibaldi, 57", phone:"+39 0773 701004", placeId:"ChIJr4Aio0EjJRMRZK1xZnjoDw4"},
+    {name:"Farmacia Zizzi", address:"Via la Neve", phone:"+39 0773 439300", placeId:"ChIJy9mym0AjJRMRqwGdZ8Tl2js"},
+    {name:"Farmacia Santa Rita", address:"Via Badino, 50", phone:"+39 0773 727118", placeId:"ChIJe76cb2ojJRMRl6Uqyz8TV-o"},
+    {name:"Farmacia Sant'Elena", address:"Via Roma, 105", phone:"+39 0773 700050", placeId:"ChIJ0dxIymkjJRMRDP5Nu1RTcJk"}
+  ],
+  spiagge: [
+    {name:"Fiumetta Beach", address:"Foce del Fiumetta", phone:null, placeId:"ChIJ9yfC5zclJRMRDvd7EXCs3sA", desc:DESC.fiumetta, tip:true},
+    {name:"Spiaggia libera", address:"Zona Piazzale Aldo Moro", phone:null, placeId:"ChIJz_V4RWwjJRMRT_B_7_k15sg"},
+    {name:"Stabilimento Balneare Orsa Maggiore", address:"Viale Circe, 9", phone:"+39 0773 725915", placeId:"ChIJMQRz8GwjJRMRdUugdfXKFo0"},
+    {name:"Sirenella", address:"Viale Circe, 1", phone:"+39 0773 727666", placeId:"ChIJjU247G4jJRMR4q6rFaEXvIg"},
+    {name:"Stabilimento Balneare Kursaal", address:"Viale Circe", phone:"+39 0773 725560", placeId:"ChIJi_nV424jJRMR9ICNxDamE_w", desc:DESC.kursaal, tip:true},
+    {name:"Sun Beach", address:"Viale Circe", phone:null, placeId:"ChIJEdsffiYjJRMRwS7aLrr4X44"},
+    {name:"Rive di Traiano", address:"Lungomare Matteotti, 4", phone:"+39 0773 703193", placeId:"ChIJY9OhcmYjJRMRurMW91iz9s8"}
+  ],
+  shopping: [
+    {name:"Carmen Boutique", address:"Via Roma, 134/136", phone:"+39 0773 705057", placeId:"ChIJiRywemgjJRMRHu76Flp-rGM"},
+    {name:"Pellino Store", address:"Via Badino, 227", phone:"+39 0773 731670", placeId:"ChIJlQkwx2kjJRMRzw5Y4gi_hH4"},
+    {name:"Sbaraglia", address:"Via Roma, 112", phone:"+39 0773 709592", placeId:"ChIJESXAS2gjJRMRVpe0RpSRRyA"},
+    {name:"Megastore", address:"Via Pontina", phone:"+39 333 058 2451", placeId:"ChIJtz2p5IUiJRMRRMTkT4O3KxE"},
+    {name:"Tezenis", address:"Viale della Vittoria, 116", phone:"+39 0773 724797", placeId:"ChIJ8ws7J1EjJRMRswhBq4jR2kA"},
+    {name:"Uni.chic", address:"Via del Porto, 36", phone:"+39 0773 701458", placeId:"ChIJRVO4mmgjJRMR1tMS-67N5ZQ"},
+    {name:"Tally Weijl", address:"Via Roma, 99", phone:"+39 0773 705915", placeId:"ChIJvaiNyGkjJRMRq-S-WI76is0"}
+  ],
+  trasporti: [
+    {name:"Taxi Terracina NCC — Francesco Tedesco", address:"Via della Croce, 1 — attivo 24h", phone:"+39 324 883 1914", placeId:"ChIJr4niBoQjJRMRG4xUJoV_yw4"},
+    {name:"Cotral — orari autobus", link:"https://cotralspa.it/", isLink:true},
+    {name:"Trenitalia — orari treni", link:"https://www.trenitalia.com/it.html", isLink:true}
+  ],
+  emergenza: [
+    {name:"Ospedale Fiorini di Terracina", address:"Via Firenze, 1 — Pronto Soccorso 24h", phone:"+39 0773 7081", placeId:"ChIJ8xG6fjwjJRMRdjT5g64FkxQ"},
+    {name:"Farmacia Centrale", address:"Via Badino, 135", phone:"+39 0773 726080", placeId:"ChIJW63xZwAjJRMRS6xkfvVu_5o"},
+    {name:"Commissariato di Polizia", address:"Via Francesco Petrarca", phone:"+39 0773 72281", placeId:"ChIJX4GkjggjJRMRe57yHqx2-Kk"},
+    {name:"Guardia Medica", address:"Servizio notturno / festivo", phone:"+39 0773 520888", placeId:"ChIJB_I5NzsjJRMRwgf-cRca-xg"}
+  ],
+  ristoranti: [
+    {name:"Il Granchio", address:"Via S. Francesco Nuovo, 80", phone:"+39 0773 709696", placeId:"ChIJlSWMMHi2Z0ARFp8uDxetODw", desc:DESC.granchio},
+    {name:"Bottega Sarra 1932", address:"Via S. Francesco Nuovo, 54", phone:"+39 0773 702045", placeId:"ChIJVcCudkIjJRMRNm-_tLWGIRQ", desc:DESC.bottegasarra},
+    {name:"Arco Romano", address:"Vicolo Pertinace, snc", phone:"+39 351 669 7621", placeId:"ChIJYx4MEfgjJRMRpiGYs_TRerg", desc:DESC.arcoromano},
+    {name:"Locanda Altobelli", address:"Via Annunziata, 121", phone:"+39 346 825 6622", placeId:"ChIJP8uGhEAjJRMRg30-TytB27k", desc:DESC.altobelli},
+    {name:"Al Giardino", address:"Via dei Sanniti, 13", phone:"+39 388 935 0463", placeId:"ChIJP-29UWYjJRMR20CRwwE-mq0", desc:DESC.algiardino},
+    {name:"Casa Sillana", address:"Via dei Sanniti, 18", phone:"+39 320 348 9542", placeId:"ChIJiwoo2Y0jJRMROT8VaWFGAjc", desc:DESC.sillana},
+    {name:"Hosteria Le Muraccia", address:"Terracina Alta", phone:"+39 0773 705153", placeId:"ChIJkfsSlkEjJRMRCdPkVn_9Ktw", desc:DESC.muraccia},
+    {name:"Hostaria La Spasella 2.0", address:"Via Lungolinea Pio VI", phone:"+39 0773 359126", placeId:"ChIJaRXdcOMjJRMRhR5UOm7o-eY", desc:DESC.spasella},
+    {name:"Osteria Campo Dei Fiori", address:"Via Campo dei Fiori, 36", phone:"+39 327 380 7782", placeId:"ChIJ0bTxvkEjJRMR2n7MAMLQeBQ", desc:DESC.campodeifiori},
+    {name:"L'Oste Matto", address:"Corso Anita Garibaldi, 98-100", phone:"+39 348 350 0910", placeId:"ChIJwR7ULCMjJRMR7jz8CEqT7ow", desc:DESC.ostematto},
+    {name:"Sunrise Wine & Food Bisteccheria", address:"Via Santissima Annunziata, 33", phone:"+39 392 154 3367", placeId:"ChIJTyTuC0IjJRMROgviTkFg4GI", desc:DESC.sunrise},
+    {name:"Hostaria del Vicoletto", address:"Via del Quartiere, 9", phone:"+39 0773 703781", placeId:"ChIJP-XAJmYjJRMRN0v8oo_Q6Xo"},
+    {name:"La Taverna di Bafio", address:"Piazza Giuseppe Garibaldi, 17", phone:"+39 328 264 0913", placeId:"ChIJIztqeQAjJRMReqB94hSSTeQ"},
+    {name:"Locanda Ruggieri", address:"Via del Rio, 10", phone:"+39 333 475 8507", placeId:"ChIJvzHoYqkjJRMREei34h1kvcs"},
+    {name:"Antica Cisterna Romana", address:"Via S. Giovanni, 6", phone:"+39 348 716 6167", placeId:"ChIJoUUJMBojJRMR-b4Zww2PqNY"},
+    {name:"Domitilla Bottega", address:"Via Annunziata, 17", phone:"+39 388 565 0105", placeId:"ChIJnY4iBUIjJRMRyT_Olf-O-48", desc:DESC.domitilla}
+  ],
+  fishchips: [
+    {name:"Centro Ittico da Ernesto", address:"Piazzale Lido", phone:"+39 0773 723043", placeId:"ChIJcZdUWmwjJRMRXtHuNptUSaQ"},
+    {name:"Centro di ristorazione dei Pescatori", address:"Via Lungolinea Pio VI, 1", phone:"+39 0773 725905", placeId:"ChIJ3R9CwGgjJRMRGzOyw69NZzU"}
+  ],
+  pizza: [
+    {name:"Fortuna Madre", address:"Viale Circe, 228", phone:"+39 0773 281678", placeId:"ChIJL8Fvn2EjJRMRNWGlB1cc9Kc"},
+    {name:"Fortuna Madre", address:"Via Ponte Rosso, 9/11", phone:"+39 0773 702188", placeId:"ChIJdWSH7dwjJRMRKP25jiHY-Ao"},
+    {name:"Pizzeria Giù Giù", address:"Via Antonio Bottasso, 30", phone:"+39 320 177 5163", placeId:"ChIJCZmySZwjJRMR3zzF8XOoFLA"},
+    {name:"L'Officina Del Lievito", address:"Via Cristoforo Colombo, 4", phone:"+39 0773 284063", placeId:"ChIJY3mHJ0MjJRMRtpSQhllxKC4"},
+    {name:"Pizzeria Serafina", address:"Via Anxur, 95", phone:"+39 0773 369011", placeId:"ChIJv-K11JojJRMRKXFc9i7UYDg"},
+    {name:"Bar Leda Pizza", address:"Via Lungolinea Pio VI, 30", phone:"+39 347 775 6892", placeId:"ChIJx1bz_GgjJRMRYlAB2Y9QYLM", desc:DESC.leda, tip:true},
+    {name:"Stabilimento Balneare Kursaal", address:"Viale Circe", phone:"+39 0773 725560", placeId:"ChIJi_nV424jJRMR9ICNxDamE_w", desc:DESC.kursaal, tip:true}
+  ],
+  barpasticceria: [
+    {name:"Caffè del Duomo", address:"Piazza Municipio, 17", phone:"+39 0773 709528", placeId:"ChIJXR5B8UEjJRMR-Sw8RC19GSs"},
+    {name:"Gelartica", address:"Viale della Vittoria, 15/17", phone:"+39 0773 149 9246", placeId:"ChIJcfjXeWkjJRMR7uz8Rg1vyUA"},
+    {name:"Bar Pupo", address:"Via C. B. Conte di Cavour, 16", phone:"+39 0773 703863", placeId:"ChIJtzmhzGcjJRMRPh2Tau8pPAk"},
+    {name:"Imma Gelateria Lillio dal 1960", address:"Via Tripoli, 12", phone:"+39 333 475 0281", placeId:"ChIJE2Uh7hojJRMR8PIo8hw9xsY"},
+    {name:"Bar Sul Mare", address:"Viale Circe, 94-98", phone:"+39 0773 136 1466", placeId:"ChIJDcXweBEjJRMRhgFYnCTYX8Q"},
+    {name:"L'Opposto", address:"Via della Stazione", phone:"+39 0773 359750", placeId:"ChIJMxrXaeMjJRMRaBd4sv6OyY8"},
+    {name:"Bar Milano", address:"Piazzale Lido, 20", phone:"+39 0773 288870", placeId:"ChIJm7h8Q2wjJRMRDYWC_lBga9I"},
+    {name:"Creme Caramel", address:"Via Tripoli, 1/9", phone:"+39 0773 702895", placeId:"ChIJ6chRFmYjJRMR1Ydm3nWrCDQ"},
+    {name:"Pasticceria Somma", address:"Via Ponte Rosso, km 101,500", phone:null, placeId:"ChIJaRqmGkAjJRMRZONKzLI4UBc"},
+    {name:"Pasticceria Buttafoco", address:"Via Adriano Olivetti, 18/20", phone:"+39 0773 149 4411", placeId:"ChIJwb22xrkjJRMRbByVbqHyew8"}
+  ],
+  nightlife: [
+    {name:"Domitilla Bottega", address:"Via Annunziata, 17", phone:"+39 388 565 0105", placeId:"ChIJnY4iBUIjJRMRyT_Olf-O-48", desc:DESC.domitilla},
+    {name:"Bar Milano", address:"Piazzale Lido, 20", phone:"+39 0773 288870", placeId:"ChIJm7h8Q2wjJRMRDYWC_lBga9I"},
+    {name:"Stritt - Cousins", address:"Corso Anita Garibaldi, 71", phone:"+39 329 098 6178", placeId:"ChIJ8Uv0hMwjJRMRrULaZvH3STs"},
+    {name:"Groovy Pub", address:"Piazza della Repubblica, 40", phone:"+39 0773 702352", placeId:"ChIJQcMwK2YjJRMRdE2_SgI7ZCM"}
+  ],
+  fondazione: [
+    {name:"Fondazione Terracina", links:[{label:"Sito web", url:"https://www.fondazioneterracina.it/"},{label:"Facebook", url:"https://www.facebook.com/fondazionecittaterracina/?locale=it_IT"}]}
+  ],
+  proloco: [
+    {name:"Proloco Terracina", links:[{label:"Sito web", url:"https://www.prolocoterracina.it/"},{label:"Instagram", url:"https://www.instagram.com/prolocoditerracina/"}]}
+  ],
+  seiditerracina: [
+    {name:"Sei di Terracina se...", links:[{label:"Facebook", url:"https://www.facebook.com/SeidiTerracinase?locale=it_IT"}]}
+  ],
+  banche: [
+    {name:"Banca Popolare Di Fondi", address:"Piazza della Repubblica, 34", phone:"+39 0773 705909", placeId:"ChIJvaIJ2WcjJRMRp5sXpL-h2-Q"},
+    {name:"Intesa Sanpaolo", address:"Via Roma, 32/38", phone:"+39 0773 798411", placeId:"ChIJQxDH6WkjJRMR-hNEFxM9A4U"},
+    {name:"Banca Di Credito Cooperativo Del Circeo", address:"Via Olmata, 72", phone:"+39 0773 703593", placeId:"ChIJw7Hgej8jJRMRV3zZ7uzSaPQ"}
+  ],
+  poste: [
+    {name:"Ufficio Postale", address:"Via Roma, 31", phone:"+39 0773 798911", placeId:"ChIJPcBpAmojJRMRrgWeDHNehWU"},
+    {name:"Ufficio Postale", address:"Viale Europa, 166", phone:"+39 0773 723734", placeId:"ChIJ7cvg7xMjJRMR_wBijl06Ez8"}
+  ],
+  benzinai: [
+    {name:"Eni Station", address:"Via Pontina, Km 103", phone:"+39 800 101 290", placeId:"ChIJO8_MTIEiJRMR_CwHdk2-fJE"},
+    {name:"Q8 Easy", address:"Via Pontina, Km 104,685", phone:"+39 800 010 808", placeId:"ChIJQRISRo8iJRMRbEDnDLRqNTo"},
+    {name:"Distributore Esso", address:"SS148 Pontina, Km 106,190", phone:"+39 0773 731152", placeId:"ChIJJeWSou8iJRMRdlZke5HicJ0"}
+  ],
+  chiese: [
+    {name:"Chiesa del Santissimo Salvatore", address:"Via Roma, 119", phone:"+39 0773 879445", placeId:"ChIJXQOtCmojJRMR3_0s8hsv-lk"},
+    {name:"Chiesa San Domenico Savio", address:"Piazza Alfredo Fiorini", phone:"+39 0773 724545", placeId:"ChIJ79GRWBQjJRMRBQ4etJXto4s"}
+  ],
+  gommoni: [
+    {name:"Effegi Charter", address:"Porto Badino", phone:"+39 329 106 5738", placeId:"ChIJo95CgsENJRMRqBnSoD4u4Nk"},
+    {name:"BackOnBoat", address:"Via Mortacino, 62", phone:"+39 392 430 1206", placeId:"ChIJs2l4JAAjJRMR9Iw_eJ7ThbM"},
+    {name:"Blue Destination", address:"Via Mortacino, snc", phone:"+39 327 709 1169", placeId:"ChIJjXfepBEjJRMRiXhw44SnQJU"},
+    {name:"Noleggio Barche Terracina", address:"Via del Molo, 40", phone:"+39 371 571 4320", placeId:"ChIJ4X0xh6EjJRMRIDAq6HmkixA"},
+    {name:"Noleggio barche e gommoni", address:"Via Pontina, 5", phone:"+39 327 690 4734", placeId:"ChIJxbgxo-8iJRMR68uVNqqfH60"}
+  ],
+  bici: [
+    {name:"Mary Rent Bike — bici e risciò", address:"Piazzale Aldo Moro", phone:"+39 328 722 6355", placeId:"ChIJ568vI2wjJRMRERbgdetWToU"},
+    {name:"Dodogo — tour in e-bike", address:"Viale Circe, 262", phone:"+39 352 040 4076", placeId:"ChIJofgE5HlzGUgRQJVheiDKw3U"},
+    {name:"Bici & Scooter Pantaleone", address:"Via Mediana Vecchia, 88", phone:"+39 0773 755040", placeId:"ChIJw83vJjMZJRMRgrr2mg5yaWo"}
+  ]
+};
+
+const DINTORNI = {
+  it: [
+    {id:"tempio-giove", title:"Il Tempio di Giove Anxur", preview:"Il monumento più iconico di Terracina, arroccato a 227 metri sul Monte Sant'Angelo, da cui domina la città, la costa e il mare fino al Circeo e alle Isole Pontine.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
+    {id:"ponza", title:"Ponza", preview:"Un'isola che conquista subito: colori vividi, mare trasparente e un centro storico affacciato sul porto. Grotte di Pilato, Piscine Naturali, Chiaia di Luna.", bookingText:"Prenota un traghetto", bookingUrl:"https://www.traghetti.com/traghetti-per-ponza"},
+    {id:"circeo", title:"Il Monte Circeo", preview:"Da millenni associato alla maga Circe dell'Odissea. Oggi simbolo del Parco Nazionale del Circeo, con trekking panoramico e spiagge protette dalle dune.", placeId:"ChIJj62IvYQQJRMRpJrocFn5TV0", placeName:"Parco Nazionale del Circeo"},
+    {id:"appia-francigena", title:"Appia Antica e Via Francigena", preview:"Terracina è uno dei pochi luoghi in Italia dove due vie storiche straordinarie si incrociano: l'Appia Antica, la \"Regina Viarum\", e la Via Francigena del Sud."},
+    {id:"abbazia-fossanova", title:"Abbazia di Fossanova", preview:"Nel territorio di Priverno, a pochi minuti da Terracina, uno dei più straordinari esempi di architettura cistercense in Italia.", placeId:"ChIJw8cFRMo_JRMRujicGH4ep0E", placeName:"Abbazia di Fossanova"}
+  ],
+  en: [
+    {id:"tempio-giove", title:"The Temple of Jupiter Anxur", preview:"Terracina's most iconic landmark, perched 227 metres up on Monte Sant'Angelo, overlooking the city, the coast and the sea as far as Circeo and the Pontine Islands.", placeId:"ChIJw4O8OlwjJRMRcDghq5tPCQ8", placeName:"Temple of Jupiter Anxur"},
+    {id:"ponza", title:"Ponza", preview:"An island that wins you over instantly: vivid colours, crystal-clear water and a historic centre facing the harbour. Pilato's Caves, the Natural Pools, Chiaia di Luna.", bookingText:"Book a ferry", bookingUrl:"https://www.traghetti.com/traghetti-per-ponza"},
+    {id:"circeo", title:"Monte Circeo", preview:"For millennia linked to Circe from the Odyssey. Today the symbol of the Circeo National Park, with scenic trekking and dune-protected beaches.", placeId:"ChIJj62IvYQQJRMRpJrocFn5TV0", placeName:"Circeo National Park"},
+    {id:"appia-francigena", title:"Via Appia Antica and Via Francigena", preview:"Terracina is one of the few places in Italy where two extraordinary historic routes meet: the Appia Antica, the \"Regina Viarum\", and the southern Via Francigena."},
+    {id:"abbazia-fossanova", title:"Fossanova Abbey", preview:"In the Priverno area, a few minutes from Terracina, one of the most remarkable examples of Cistercian architecture in Italy.", placeId:"ChIJw8cFRMo_JRMRujicGH4ep0E", placeName:"Abbazia di Fossanova"}
+  ]
+};
+const DINTORNI_PINS = [
+  {name:"Duomo di San Cesareo", address:"Piazza Municipio, 19", phone:"+39 0773 429845", placeId:"ChIJs-Kf8UEjJRMRTegf2vz24k8"},
+  {name:"Capitolium di Terracina", address:"Corso Anita Garibaldi, 93", phone:null, placeId:"ChIJq-7_kkEjJRMRg8e46DxZuI4"},
+  {name:"Teatro Romano di Terracina", address:"Piazza Municipio", phone:null, placeId:"ChIJD3AH-HQjJRMRuSx6wQxxwFc"},
+  {name:"Terrazza Piazzale Aldo Moro", address:"Piazzale Lido, 20", phone:null, placeId:"ChIJz_V4RWwjJRMRT_B_7_k15sg"},
+  {name:"Camminamento delle antiche mura cittadine", address:"Via Porta Nuova, 6", phone:null, placeId:"ChIJNxwQiEEjJRMRnJC3IFF8BD0"},
+  {name:"Chiesa del Purgatorio", address:"Corso Anita Garibaldi, 40", phone:null, placeId:"ChIJ0W1UqUEjJRMR1WFs1YKKKNY"},
+  {name:"Acqua Magnesia", address:"Via Appia, 7 — antica sorgente romana", phone:null, placeId:"ChIJjdqwJE4jJRMRyFlhWnm417E"}
+];
+
+const CHECKOUT_TEXT = {
+  it:"Lasciare le chiavi sul tavolo, non occorre chiudere la porta a chiave. Smaltiremo noi anche eventuale spazzatura ricevuta. Grazie!",
+  en:"Leave the keys on the table, there's no need to lock the door. We'll take care of any leftover rubbish too. Thank you!",
+  fr:"Laissez les clés sur la table, il n'est pas nécessaire de fermer la porte à clé. Nous nous chargerons aussi d'éventuels déchets restants. Merci !",
+  es:"Deja las llaves sobre la mesa, no hace falta cerrar la puerta con llave. También nos encargaremos de la basura que quede. ¡Gracias!",
+  de:"Lass die Schlüssel auf dem Tisch liegen, die Tür muss nicht abgeschlossen werden. Um eventuellen Müll kümmern wir uns ebenfalls. Danke!",
+  no:"Legg igjen nøklene på bordet, du trenger ikke å låse døren. Vi tar oss også av eventuelt søppel. Takk!"
+};
+
+const RACCOLTA_HTML = {
+  it:"<p><u>La raccolta viene svolta in modalità \"porta a porta\": lasciare la spazzatura fuori il portone la sera prima o, al più tardi, entro le 5:00 del mattino.</u></p><h4>Organico</h4><p>SÌ: cibo, alimenti, fazzoletti sporchi, foglie, cenere.<br>NO: assorbenti, pannolini, stracci, spugne, gomme, sigarette.<br><b>Ritiro: lunedì, mercoledì, sabato</b> (entro le 5:00)</p><h4>Carta</h4><p>SÌ: giornali, riviste, cartone, imballaggi, confezioni tetra-pak, fogli.<br>NO: carta plastificata, carta da forno, carta o cartoni sporchi.<br><b>Ritiro: venerdì</b> (entro le 5:00)</p><h4>Plastica e metalli</h4><p>SÌ: bottiglie, flaconi, imballaggi in plastica, piatti e bicchieri monouso, buste, vaschette, pellicole, scatole, lattine, alluminio, tubetti.<br>NO: giocattoli, posate rotte, oggetti in gomma, penne.<br><b>Ritiro: giovedì</b> (a luglio e agosto anche la domenica, entro le 5:00)</p><h4>Secco / indifferenziato</h4><p>SÌ: pannolini, assorbenti, stracci, spugne, spazzolini, gomma, posate sporche, sigarette, lampadine, ceramica.<br><b>Ritiro: martedì</b> (entro le 5:00)</p><h4>Vetro</h4><p>Lascialo in cucina: penseremo noi a smaltirlo al termine del soggiorno. Ci occupiamo senza problemi anche di eventuali altri rifiuti non conferiti in tempo.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>I secchi per uso domestico sono sotto il pianale della cucina; eventuali sacchetti aggiuntivi sotto il lavandino.</p>",
+  en:"<p><u>Collection is door-to-door: leave the rubbish outside the front door the night before or, at the latest, by 5:00 AM.</u></p><h4>Organic waste</h4><p>YES: food, scraps, dirty tissues, leaves, ashes.<br>NO: sanitary pads, diapers, rags, sponges, gum, cigarettes.<br><b>Collection: Monday, Wednesday, Saturday</b> (by 5:00 AM)</p><h4>Paper</h4><p>YES: newspapers, magazines, cardboard, packaging, Tetra Pak, sheets.<br>NO: laminated paper, baking paper, dirty paper or cardboard.<br><b>Collection: Friday</b> (by 5:00 AM)</p><h4>Plastic and metals</h4><p>YES: bottles, flasks, plastic packaging, disposable plates/glasses, bags, trays, films, boxes, cans, aluminium foil, tubes.<br>NO: toys, broken cutlery, rubber items, pens.<br><b>Collection: Thursday</b> (in July/August also Sunday, by 5:00 AM)</p><h4>General waste</h4><p>YES: diapers, sanitary pads, rags, sponges, toothbrushes, gum, dirty cutlery, cigarettes, light bulbs, ceramics.<br><b>Collection: Tuesday</b> (by 5:00 AM)</p><h4>Glass</h4><p>Leave it in the kitchen area — we'll dispose of it at the end of your stay. We'll also handle any other waste not collected for any reason.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>Household bins are under the kitchen counter; extra bags are under the sink.</p>",
+  fr:"<p><u>La collecte se fait en porte-à-porte : laissez les déchets devant la porte la veille au soir ou, au plus tard, avant 5h00 du matin.</u></p><h4>Déchets organiques</h4><p>OUI : aliments, restes, mouchoirs sales, feuilles, cendres.<br>NON : serviettes hygiéniques, couches, chiffons, éponges, chewing-gum, cigarettes.<br><b>Collecte : lundi, mercredi, samedi</b> (avant 5h)</p><h4>Papier</h4><p>OUI : journaux, magazines, carton, emballages, Tetra Pak, feuilles.<br>NON : papier plastifié, papier sulfurisé, papier/carton sale.<br><b>Collecte : vendredi</b> (avant 5h)</p><h4>Plastique et métaux</h4><p>OUI : bouteilles, flacons, emballages plastique, vaisselle jetable, sacs, barquettes, films, boîtes, canettes, aluminium, tubes.<br>NON : jouets, couverts cassés, objets en caoutchouc, stylos.<br><b>Collecte : jeudi</b> (juillet/août aussi dimanche, avant 5h)</p><h4>Déchets résiduels</h4><p>OUI : couches, serviettes hygiéniques, chiffons, éponges, brosses à dents, chewing-gum, couverts sales, cigarettes, ampoules, céramique.<br><b>Collecte : mardi</b> (avant 5h)</p><h4>Verre</h4><p>Laissez-le dans la cuisine, nous nous en chargerons à la fin du séjour. Nous gérons aussi tout autre déchet non collecté.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>Poubelles sous le plan de travail ; sacs supplémentaires sous l'évier.</p>",
+  es:"<p><u>La recogida es puerta a puerta: deja la basura fuera la noche anterior o, como máximo, antes de las 5:00 de la mañana.</u></p><h4>Residuos orgánicos</h4><p>SÍ: comida, restos, pañuelos sucios, hojas, cenizas.<br>NO: toallas sanitarias, pañales, trapos, esponjas, chicles, cigarrillos.<br><b>Recogida: lunes, miércoles, sábado</b> (antes de las 5:00)</p><h4>Papel</h4><p>SÍ: periódicos, revistas, cartón, embalajes, Tetra Pak, hojas.<br>NO: papel plastificado, papel de horno, papel/cartón sucio.<br><b>Recogida: viernes</b> (antes de las 5:00)</p><h4>Plástico y metales</h4><p>SÍ: botellas, frascos, embalajes de plástico, vajilla desechable, bolsas, bandejas, láminas, cajas, latas, aluminio, tubos.<br>NO: juguetes, cubiertos rotos, objetos de goma, bolígrafos.<br><b>Recogida: jueves</b> (julio/agosto también domingo, antes de las 5:00)</p><h4>Resto</h4><p>SÍ: pañales, toallas sanitarias, trapos, esponjas, cepillos, chicles, cubiertos sucios, cigarrillos, bombillas, cerámica.<br><b>Recogida: martes</b> (antes de las 5:00)</p><h4>Vidrio</h4><p>Déjalo en la cocina, nos encargamos al final de la estancia. También gestionamos cualquier otro residuo no recogido.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>Cubos bajo la encimera; bolsas extra bajo el fregadero.</p>",
+  de:"<p><u>Die Abholung erfolgt als Haustürsammlung: Müll am Vorabend oder spätestens bis 5:00 Uhr vor die Tür stellen.</u></p><h4>Organische Abfälle</h4><p>JA: Essensreste, schmutzige Taschentücher, Blätter, Asche.<br>NEIN: Damenbinden, Windeln, Lumpen, Schwämme, Kaugummi, Zigaretten.<br><b>Abholung: Montag, Mittwoch, Samstag</b> (bis 5:00 Uhr)</p><h4>Papier</h4><p>JA: Zeitungen, Zeitschriften, Karton, Verpackungen, Tetra Pak, Blätter.<br>NEIN: laminiertes Papier, Backpapier, verschmutztes Papier/Karton.<br><b>Abholung: Freitag</b> (bis 5:00 Uhr)</p><h4>Kunststoffe und Metalle</h4><p>JA: Flaschen, Kunststoffbehälter, Einweggeschirr, Taschen, Tabletts, Folien, Kisten, Dosen, Alufolie, Tuben.<br>NEIN: Spielzeug, kaputtes Besteck, Gummiartikel, Stifte.<br><b>Abholung: Donnerstag</b> (Juli/August auch Sonntag, bis 5:00 Uhr)</p><h4>Restmüll</h4><p>JA: Windeln, Damenbinden, Lumpen, Schwämme, Zahnbürsten, Kaugummi, schmutziges Besteck, Zigaretten, Glühbirnen, Keramik.<br><b>Abholung: Dienstag</b> (bis 5:00 Uhr)</p><h4>Glas</h4><p>In der Küche lassen, wir entsorgen es am Ende des Aufenthalts. Auch anderer nicht abgeholter Müll wird von uns übernommen.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>Mülltonnen unter der Küchenarbeitsplatte; zusätzliche Beutel unter der Spüle.</p>",
+  no:"<p><u>Innsamlingen skjer dør-til-dør: sett søppelet utenfor porten kvelden før eller senest innen kl. 05:00.</u></p><h4>Organisk</h4><p>JA: mat, matvarer, skitne lommetørklær, blader, aske.<br>NEI: bind, bleier, filler, svamper, gummi, sigaretter.<br><b>Henting: mandag, onsdag, lørdag</b> (før kl. 5:00)</p><h4>Papir</h4><p>JA: aviser, magasiner, papp, emballasje, tetra-pak, ark.<br>NEI: laminert papir, bakepapir, skittent papir/papp.<br><b>Henting: fredag</b> (før kl. 5:00)</p><h4>Plast og metaller</h4><p>JA: flasker, plastemballasje, engangsservise, poser, skuffer, folier, bokser, aluminium, rør.<br>NEI: leker, ødelagt bestikk, gummigjenstander, penner.<br><b>Henting: torsdag</b> (juli/august også søndag, før kl. 5:00)</p><h4>Restavfall</h4><p>JA: bleier, bind, filler, svamper, tannbørster, gummi, skittent bestikk, sigaretter, pærer, keramikk.<br><b>Henting: tirsdag</b> (før kl. 5:00)</p><h4>Glass</h4><p>La det stå på kjøkkenet, vi tar hånd om det ved oppholdets slutt. Vi håndterer også annet avfall som ikke ble hentet.</p><p style='margin-top:16px;color:var(--ink-soft);font-size:.85rem;'>Søppelbøtter under kjøkkenbenken; ekstra poser under vasken.</p>"
+};
+
+const I18N = {
+  it:{ flag:"🇮🇹", label:"IT",
+    subtitle:"Guida per gli ospiti", hubTitle:"Tutto quello che ti serve durante il soggiorno a Terracina.",
+    back:"Torna al menu", call:"Chiama", maps:"Apri in Maps", open:"Apri sito",
+    comeArrivareShort:"Come arrivare", guidaCasaShort:"Guida di casa",
+    footer:"Dati verificati a settembre 2026 · orari e contatti possono variare",
+    cat:{wifi:"Wi-Fi",raccolta:"Raccolta differenziata",serviziutili:"Servizi utili",checkout:"Check-out",
+         mangiare:"Mangiare",supermercati:"Supermercati",farmacie:"Farmacie",spiagge:"Spiagge",shopping:"Shopping",trasporti:"Trasporti",dintorni:"I Dintorni",emergenza:"Emergenza",consigli:"Consigli dagli ospiti",recensione:"Recensioni",
+         ristoranti:"Ristoranti",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bar e Pasticcerie",nightlife:"Nightlife",
+         eventi:"Eventi",seiditerracina:"Sei di Terracina se...",gommoni:"Noleggio gommoni",bici:"Noleggio bici",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Banche",poste:"Uffici Postali",benzinai:"Distributori",chiese:"Chiese",
+         lascia:"Lascia un consiglio",leggi:"Leggi i consigli"},
+    note:{supermercati:"I supermercati e minimarket più vicini all'appartamento.",farmacie:"Farmacie e parafarmacie in zona. Per la farmacia di turno notturna, verifica in loco.",
+          spiagge:"Stabilimenti balneari e spiagge lungo il litorale di Terracina.",shopping:"Negozi nel centro di Terracina.",
+          trasporti:"Taxi e orari di autobus/treni.",emergenza:"Numeri utili e presidi sanitari/sicurezza.",
+          dintorni:"Storia e luoghi da vedere a Terracina e nei dintorni.",
+          consigli:"Idee lasciate dagli ospiti che sono stati qui prima di te.",
+          mangiare:"Scegli cosa cerchi.",serviziutili:"Banche, poste, benzinai, chiese e noleggi.",
+          ristoranti:"Una selezione di ristoranti consigliati.",fishchips:"Pesce fritto e da asporto.",pizza:"Pizzerie consigliate.",
+          barpasticceria:"Per un caffè, un dolce o un gelato.",nightlife:"Per la serata.",
+          eventi:"Cosa succede in città.",seiditerracina:"Uno sguardo alla Terracina più autentica, sui social.",
+          gommoni:"Per un giro in mare in autonomia.",bici:"Per muoversi in città su due ruote.",
+          lascia:"Racconta agli ospiti futuri qualcosa da fare o da vedere.",leggi:"I consigli lasciati da chi è stato qui prima di te."},
+    sectionRead:"Da leggere", sectionSee:"Da vedere",
+    secBanche:"Banche", secPoste:"Uffici postali", secBenzinai:"Distributori di benzina", secChiese:"Chiese",
+    emptyState:"Contenuti in arrivo — presto qui trovi qualcosa di buono.",
+    tip:"Tips",
+    num112:"Emergenza unica europea",num118:"Ambulanza",num113:"Polizia di Stato",num115:"Vigili del Fuoco",
+    readMore:"Leggi tutto", comeArrivareTitle:"Come arrivare", comeArrivareDesc:"Indicazioni passo passo per raggiungere l'appartamento, con foto.",
+    comeArrivareBtn:"Apri le indicazioni (PDF)",
+    guidaCasaTitle:"Guida di casa", guidaCasaDesc:"Tutte le istruzioni per il tuo soggiorno.", guidaCasaBtn:"Apri la guida (PDF)",
+    wifiNetwork:"Rete", wifiPassword:"Password",
+    seguiciIG:"Seguici su IG", reviewDesc:"Se ti sei trovato bene, una recensione ci aiuta molto.", reviewBtn:"Lascia una recensione su Google",
+    formNome:"Nome (facoltativo)", formMese:"Mese del soggiorno", formSuggerimento:"Il tuo consiglio",
+    formInvia:"Invia consiglio", formOk:"Grazie! Il tuo consiglio è stato salvato.", formErr:"Non è stato possibile salvare — riprova più tardi.",
+    formNotConfigured:"Questa funzione non è ancora attiva.", formSceglimese:"Scegli...",
+    anonimo:"Ospite anonimo", nessunConsiglio:"Nessun consiglio ancora — sii il primo!",
+    months:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"]
+  },
+  en:{ flag:"🇬🇧", label:"EN",
+    subtitle:"Guest Guide", hubTitle:"Everything you need during your stay in Terracina.",
+    back:"Back to menu", call:"Call", maps:"Open in Maps", open:"Open site",
+    comeArrivareShort:"How to arrive", guidaCasaShort:"House guide",
+    footer:"Data verified September 2026 · hours and contacts may vary",
+    cat:{wifi:"Wi-Fi",raccolta:"Waste sorting",serviziutili:"Useful services",checkout:"Check-out",
+         mangiare:"Eating",supermercati:"Supermarkets",farmacie:"Pharmacies",spiagge:"Beaches",shopping:"Shopping",trasporti:"Transport",dintorni:"Nearby",emergenza:"Emergency",consigli:"Guest tips",recensione:"Reviews",
+         ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars & Pastry shops",nightlife:"Nightlife",
+         eventi:"Events",seiditerracina:"Sei di Terracina se...",gommoni:"Dinghy rental",bici:"Bike rental",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Banks",poste:"Post Offices",benzinai:"Gas Stations",chiese:"Churches",
+         lascia:"Leave a tip",leggi:"Read tips"},
+    note:{supermercati:"Supermarkets and minimarkets closest to the apartment.",farmacie:"Local pharmacies. For the night pharmacy on duty, please check locally.",
+          spiagge:"Beach clubs and beaches along the Terracina coastline.",shopping:"Shops in central Terracina.",
+          trasporti:"Taxis and bus/train schedules.",emergenza:"Useful numbers and health/safety services.",
+          dintorni:"History and places to see in and around Terracina.",
+          consigli:"Ideas left by guests who stayed here before you.",
+          mangiare:"Choose what you're after.",serviziutili:"Banks, post offices, gas stations, churches and rentals.",
+          ristoranti:"A selection of recommended restaurants.",fishchips:"Fried fish and takeaway.",pizza:"Recommended pizzerias.",
+          barpasticceria:"For a coffee, a pastry or an ice cream.",nightlife:"For the evening.",
+          eventi:"What's on in town.",seiditerracina:"A look at authentic Terracina, on social media.",
+          gommoni:"For a self-drive day at sea.",bici:"To get around town on two wheels.",
+          lascia:"Tell future guests about something to do or see.",leggi:"Tips left by guests who stayed here before you."},
+    sectionRead:"To read", sectionSee:"To see",
+    secBanche:"Banks", secPoste:"Post offices", secBenzinai:"Gas stations", secChiese:"Churches",
+    emptyState:"Coming soon — check back for good picks.",
+    tip:"Tips",
+    num112:"EU-wide emergency number",num118:"Ambulance",num113:"Police",num115:"Fire Department",
+    readMore:"Read more", comeArrivareTitle:"How to arrive", comeArrivareDesc:"Step-by-step directions to the apartment, with photos.",
+    comeArrivareBtn:"Open directions (PDF)",
+    guidaCasaTitle:"House guide", guidaCasaDesc:"All the instructions for your stay.", guidaCasaBtn:"Open the guide (PDF)",
+    wifiNetwork:"Network", wifiPassword:"Password",
+    seguiciIG:"Follow us on IG", reviewDesc:"If you enjoyed your stay, a review helps us a lot.", reviewBtn:"Leave a Google review",
+    formNome:"Name (optional)", formMese:"Month of your stay", formSuggerimento:"Your tip",
+    formInvia:"Submit tip", formOk:"Thank you! Your tip has been saved.", formErr:"Couldn't save it — please try again later.",
+    formNotConfigured:"This feature isn't active yet.", formSceglimese:"Choose...",
+    anonimo:"Anonymous guest", nessunConsiglio:"No tips yet — be the first!",
+    months:["January","February","March","April","May","June","July","August","September","October","November","December"]
+  },
+  fr:{ flag:"🇫🇷", label:"FR",
+    subtitle:"Guide des hôtes", hubTitle:"Tout ce dont vous avez besoin pendant votre séjour à Terracina.",
+    back:"Retour au menu", call:"Appeler", maps:"Ouvrir dans Maps", open:"Ouvrir le site",
+    comeArrivareShort:"Comment arriver", guidaCasaShort:"Guide de la maison",
+    footer:"Données vérifiées en septembre 2026 · horaires et contacts peuvent varier",
+    cat:{wifi:"Wi-Fi",raccolta:"Tri sélectif",serviziutili:"Services utiles",checkout:"Départ",
+         mangiare:"Manger",supermercati:"Supermarchés",farmacie:"Pharmacies",spiagge:"Plages",shopping:"Shopping",trasporti:"Transports",dintorni:"Les environs",emergenza:"Urgences",consigli:"Conseils des hôtes",recensione:"Avis",
+         ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars et Pâtisseries",nightlife:"Vie nocturne",
+         eventi:"Événements",seiditerracina:"Sei di Terracina se...",gommoni:"Location de bateaux",bici:"Location de vélos",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Banques",poste:"Bureaux de poste",benzinai:"Stations-service",chiese:"Églises",
+         lascia:"Laisser un conseil",leggi:"Lire les conseils"},
+    note:{supermercati:"Supermarchés et supérettes les plus proches de l'appartement.",farmacie:"Pharmacies locales. Pour la pharmacie de garde de nuit, vérifiez sur place.",
+          spiagge:"Établissements balnéaires et plages le long du littoral de Terracina.",shopping:"Boutiques dans le centre de Terracina.",
+          trasporti:"Taxis et horaires bus/train.",emergenza:"Numéros utiles et services de santé/sécurité.",
+          dintorni:"Histoire et lieux à voir à Terracina et aux alentours.",
+          consigli:"Des idées laissées par les hôtes précédents.",
+          mangiare:"Choisissez ce que vous cherchez.",serviziutili:"Banques, bureaux de poste, stations-service, églises et locations.",
+          ristoranti:"Une sélection de restaurants recommandés.",fishchips:"Poisson frit et à emporter.",pizza:"Pizzerias recommandées.",
+          barpasticceria:"Pour un café, une pâtisserie ou une glace.",nightlife:"Pour la soirée.",
+          eventi:"Ce qui se passe en ville.",seiditerracina:"Un aperçu de la Terracina authentique, sur les réseaux sociaux.",
+          gommoni:"Pour une journée en mer en toute autonomie.",bici:"Pour se déplacer en ville à deux roues.",
+          lascia:"Racontez aux futurs hôtes quelque chose à faire ou à voir.",leggi:"Conseils laissés par les hôtes précédents."},
+    sectionRead:"À lire", sectionSee:"À voir",
+    secBanche:"Banques", secPoste:"Bureaux de poste", secBenzinai:"Stations-service", secChiese:"Églises",
+    emptyState:"Bientôt disponible.",
+    tip:"Astuce",
+    num112:"Numéro d'urgence européen",num118:"Ambulance",num113:"Police",num115:"Pompiers",
+    readMore:"Lire la suite (EN)", comeArrivareTitle:"Comment arriver", comeArrivareDesc:"Itinéraire détaillé vers l'appartement, avec photos.",
+    comeArrivareBtn:"Ouvrir les indications (PDF)",
+    guidaCasaTitle:"Guide de la maison", guidaCasaDesc:"Toutes les instructions pour votre séjour.", guidaCasaBtn:"Ouvrir le guide (PDF)",
+    wifiNetwork:"Réseau", wifiPassword:"Mot de passe",
+    seguiciIG:"Suivez-nous sur IG", reviewDesc:"Si vous avez apprécié votre séjour, un avis nous aide beaucoup.", reviewBtn:"Laisser un avis Google",
+    formNome:"Nom (facultatif)", formMese:"Mois du séjour", formSuggerimento:"Votre conseil",
+    formInvia:"Envoyer", formOk:"Merci ! Votre conseil a été enregistré.", formErr:"Impossible d'enregistrer — réessayez plus tard.",
+    formNotConfigured:"Cette fonction n'est pas encore active.", formSceglimese:"Choisir...",
+    anonimo:"Hôte anonyme", nessunConsiglio:"Aucun conseil pour l'instant — soyez le premier !",
+    months:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
+  },
+  es:{ flag:"🇪🇸", label:"ES",
+    subtitle:"Guía para huéspedes", hubTitle:"Todo lo que necesitas durante tu estancia en Terracina.",
+    back:"Volver al menú", call:"Llamar", maps:"Abrir en Maps", open:"Abrir sitio",
+    comeArrivareShort:"Cómo llegar", guidaCasaShort:"Guía de la casa",
+    footer:"Datos verificados en septiembre de 2026 · horarios y contactos pueden variar",
+    cat:{wifi:"Wi-Fi",raccolta:"Reciclaje selectivo",serviziutili:"Servicios útiles",checkout:"Salida",
+         mangiare:"Comer",supermercati:"Supermercados",farmacie:"Farmacias",spiagge:"Playas",shopping:"Compras",trasporti:"Transporte",dintorni:"Alrededores",emergenza:"Emergencias",consigli:"Consejos de huéspedes",recensione:"Reseñas",
+         ristoranti:"Restaurantes",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bares y Pastelerías",nightlife:"Vida nocturna",
+         eventi:"Eventos",seiditerracina:"Sei di Terracina se...",gommoni:"Alquiler de botes",bici:"Alquiler de bicis",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Bancos",poste:"Oficinas de correos",benzinai:"Gasolineras",chiese:"Iglesias",
+         lascia:"Dejar un consejo",leggi:"Leer consejos"},
+    note:{supermercati:"Supermercados y minimarkets más cercanos al apartamento.",farmacie:"Farmacias locales. Para la farmacia de guardia nocturna, verifica in situ.",
+          spiagge:"Establecimientos de playa y playas a lo largo de la costa de Terracina.",shopping:"Tiendas en el centro de Terracina.",
+          trasporti:"Taxis y horarios de autobús/tren.",emergenza:"Números útiles y servicios sanitarios/seguridad.",
+          dintorni:"Historia y lugares que ver en Terracina y sus alrededores.",
+          consigli:"Ideas dejadas por huéspedes anteriores.",
+          mangiare:"Elige lo que buscas.",serviziutili:"Bancos, oficinas de correos, gasolineras, iglesias y alquileres.",
+          ristoranti:"Una selección de restaurantes recomendados.",fishchips:"Pescado frito y para llevar.",pizza:"Pizzerías recomendadas.",
+          barpasticceria:"Para un café, un dulce o un helado.",nightlife:"Para la noche.",
+          eventi:"Qué pasa en la ciudad.",seiditerracina:"Un vistazo a la Terracina más auténtica, en redes sociales.",
+          gommoni:"Para un día en el mar por tu cuenta.",bici:"Para moverte por la ciudad en dos ruedas.",
+          lascia:"Cuenta a futuros huéspedes algo que hacer o ver.",leggi:"Consejos dejados por huéspedes anteriores."},
+    sectionRead:"Para leer", sectionSee:"Para ver",
+    secBanche:"Bancos", secPoste:"Oficinas de correos", secBenzinai:"Gasolineras", secChiese:"Iglesias",
+    emptyState:"Próximamente.",
+    tip:"Consejo",
+    num112:"Número de emergencia europeo",num118:"Ambulancia",num113:"Policía",num115:"Bomberos",
+    readMore:"Leer más (EN)", comeArrivareTitle:"Cómo llegar", comeArrivareDesc:"Indicaciones paso a paso para llegar al apartamento, con fotos.",
+    comeArrivareBtn:"Abrir indicaciones (PDF)",
+    guidaCasaTitle:"Guía de la casa", guidaCasaDesc:"Todas las instrucciones para tu estancia.", guidaCasaBtn:"Abrir la guía (PDF)",
+    wifiNetwork:"Red", wifiPassword:"Contraseña",
+    seguiciIG:"Síguenos en IG", reviewDesc:"Si te ha gustado tu estancia, una reseña nos ayuda mucho.", reviewBtn:"Deja una reseña en Google",
+    formNome:"Nombre (opcional)", formMese:"Mes de la estancia", formSuggerimento:"Tu consejo",
+    formInvia:"Enviar consejo", formOk:"¡Gracias! Tu consejo se ha guardado.", formErr:"No se pudo guardar — inténtalo más tarde.",
+    formNotConfigured:"Esta función aún no está activa.", formSceglimese:"Elegir...",
+    anonimo:"Huésped anónimo", nessunConsiglio:"Aún no hay consejos — ¡sé el primero!",
+    months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+  },
+  de:{ flag:"🇩🇪", label:"DE",
+    subtitle:"Gästeführer", hubTitle:"Alles, was du während deines Aufenthalts in Terracina brauchst.",
+    back:"Zurück zum Menü", call:"Anrufen", maps:"In Maps öffnen", open:"Website öffnen",
+    comeArrivareShort:"Anreise", guidaCasaShort:"Hausanleitung",
+    footer:"Daten Stand September 2026 · Öffnungszeiten und Kontakte können abweichen",
+    cat:{wifi:"WLAN",raccolta:"Mülltrennung",serviziutili:"Nützliche Dienste",checkout:"Check-out",
+         mangiare:"Essen",supermercati:"Supermärkte",farmacie:"Apotheken",spiagge:"Strände",shopping:"Shopping",trasporti:"Transport",dintorni:"Umgebung",emergenza:"Notfall",consigli:"Tipps von Gästen",recensione:"Bewertungen",
+         ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars & Konditoreien",nightlife:"Nightlife",
+         eventi:"Veranstaltungen",seiditerracina:"Sei di Terracina se...",gommoni:"Bootsverleih",bici:"Fahrradverleih",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Banken",poste:"Postämter",benzinai:"Tankstellen",chiese:"Kirchen",
+         lascia:"Tipp hinterlassen",leggi:"Tipps lesen"},
+    note:{supermercati:"Supermärkte und Minimärkte in der Nähe der Wohnung.",farmacie:"Örtliche Apotheken. Für die Nachtapotheke bitte vor Ort nachfragen.",
+          spiagge:"Strandbäder und Strände entlang der Küste von Terracina.",shopping:"Geschäfte im Zentrum von Terracina.",
+          trasporti:"Taxis und Bus-/Zugfahrpläne.",emergenza:"Nützliche Nummern und Gesundheits-/Sicherheitsdienste.",
+          dintorni:"Geschichte und Orte in und um Terracina.",
+          consigli:"Ideen von früheren Gästen.",
+          mangiare:"Wähle, wonach du suchst.",serviziutili:"Banken, Postämter, Tankstellen, Kirchen und Vermietungen.",
+          ristoranti:"Eine Auswahl empfohlener Restaurants.",fishchips:"Frittierter Fisch zum Mitnehmen.",pizza:"Empfohlene Pizzerien.",
+          barpasticceria:"Für einen Kaffee, ein Gebäck oder ein Eis.",nightlife:"Für den Abend.",
+          eventi:"Was in der Stadt los ist.",seiditerracina:"Ein Blick auf das echte Terracina, in sozialen Medien.",
+          gommoni:"Für einen Tag selbst auf dem Meer.",bici:"Um die Stadt auf zwei Rädern zu erkunden.",
+          lascia:"Erzähle zukünftigen Gästen von etwas, das man tun oder sehen sollte.",leggi:"Tipps von früheren Gästen."},
+    sectionRead:"Zum Lesen", sectionSee:"Zum Ansehen",
+    secBanche:"Banken", secPoste:"Postämter", secBenzinai:"Tankstellen", secChiese:"Kirchen",
+    emptyState:"Demnächst verfügbar.",
+    tip:"Tipp",
+    num112:"Europäischer Notruf",num118:"Krankenwagen",num113:"Polizei",num115:"Feuerwehr",
+    readMore:"Weiterlesen (EN)", comeArrivareTitle:"Anreise", comeArrivareDesc:"Schritt-für-Schritt-Wegbeschreibung zur Wohnung, mit Fotos.",
+    comeArrivareBtn:"Wegbeschreibung öffnen (PDF)",
+    guidaCasaTitle:"Hausanleitung", guidaCasaDesc:"Alle Anweisungen für deinen Aufenthalt.", guidaCasaBtn:"Anleitung öffnen (PDF)",
+    wifiNetwork:"Netzwerk", wifiPassword:"Passwort",
+    seguiciIG:"Folge uns auf IG", reviewDesc:"Wenn dir dein Aufenthalt gefallen hat, hilft uns eine Bewertung sehr.", reviewBtn:"Google-Bewertung hinterlassen",
+    formNome:"Name (optional)", formMese:"Monat des Aufenthalts", formSuggerimento:"Dein Tipp",
+    formInvia:"Tipp senden", formOk:"Danke! Dein Tipp wurde gespeichert.", formErr:"Konnte nicht gespeichert werden — bitte später erneut versuchen.",
+    formNotConfigured:"Diese Funktion ist noch nicht aktiv.", formSceglimese:"Wählen...",
+    anonimo:"Anonymer Gast", nessunConsiglio:"Noch keine Tipps — sei der Erste!",
+    months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"]
+  },
+  no:{ flag:"🇳🇴", label:"NO",
+    subtitle:"Gjestehåndbok", hubTitle:"Alt du trenger under oppholdet ditt i Terracina.",
+    back:"Tilbake til menyen", call:"Ring", maps:"Åpne i Maps", open:"Åpne nettsted",
+    comeArrivareShort:"Hvordan komme frem", guidaCasaShort:"Husguide",
+    footer:"Data bekreftet september 2026 · åpningstider og kontakter kan variere",
+    cat:{wifi:"Wi-Fi",raccolta:"Kildesortering",serviziutili:"Nyttige tjenester",checkout:"Utsjekk",
+         mangiare:"Spise",supermercati:"Supermarkeder",farmacie:"Apotek",spiagge:"Strender",shopping:"Shopping",trasporti:"Transport",dintorni:"I nærheten",emergenza:"Nødsituasjon",consigli:"Tips fra gjester",recensione:"Anmeldelser",
+         ristoranti:"Restauranter",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Barer & Konditorier",nightlife:"Nattliv",
+         eventi:"Arrangementer",seiditerracina:"Sei di Terracina se...",gommoni:"Båtutleie",bici:"Sykkelutleie",
+         fondazione:"Fondazione Terracina",proloco:"Proloco Terracina",banche:"Banker",poste:"Postkontor",benzinai:"Bensinstasjoner",chiese:"Kirker",
+         lascia:"Legg igjen et tips",leggi:"Les tips"},
+    note:{supermercati:"Supermarkeder og minimarkeder nærmest leiligheten.",farmacie:"Lokale apotek. For nattapotek, sjekk lokalt.",
+          spiagge:"Strandklubber og strender langs kysten av Terracina.",shopping:"Butikker i sentrum av Terracina.",
+          trasporti:"Taxi og buss-/togtider.",emergenza:"Nyttige numre og helse-/sikkerhetstjenester.",
+          dintorni:"Historie og steder å se i og rundt Terracina.",
+          consigli:"Ideer fra tidligere gjester.",
+          mangiare:"Velg det du leter etter.",serviziutili:"Banker, postkontor, bensinstasjoner, kirker og utleie.",
+          ristoranti:"Et utvalg anbefalte restauranter.",fishchips:"Frityrstekt fisk og take-away.",pizza:"Anbefalte pizzeriaer.",
+          barpasticceria:"For en kaffe, et bakverk eller en is.",nightlife:"For kvelden.",
+          eventi:"Hva som skjer i byen.",seiditerracina:"Et blikk på det ekte Terracina, på sosiale medier.",
+          gommoni:"For en dag på sjøen på egen hånd.",bici:"For å bevege seg rundt i byen på to hjul.",
+          lascia:"Fortell fremtidige gjester om noe å gjøre eller se.",leggi:"Tips fra tidligere gjester."},
+    sectionRead:"Å lese", sectionSee:"Å se",
+    secBanche:"Banker", secPoste:"Postkontor", secBenzinai:"Bensinstasjoner", secChiese:"Kirker",
+    emptyState:"Kommer snart.",
+    tip:"Tips",
+    num112:"Europeisk nødnummer",num118:"Ambulanse",num113:"Politi",num115:"Brannvesen",
+    readMore:"Les mer (EN)", comeArrivareTitle:"Hvordan komme frem", comeArrivareDesc:"Trinnvise veibeskrivelser til leiligheten, med bilder.",
+    comeArrivareBtn:"Åpne veibeskrivelsen (PDF)",
+    guidaCasaTitle:"Husguide", guidaCasaDesc:"Alle instruksjoner for oppholdet ditt.", guidaCasaBtn:"Åpne guiden (PDF)",
+    wifiNetwork:"Nettverk", wifiPassword:"Passord",
+    seguiciIG:"Følg oss på IG", reviewDesc:"Hvis du likte oppholdet, hjelper en anmeldelse oss mye.", reviewBtn:"Legg igjen en Google-anmeldelse",
+    formNome:"Navn (valgfritt)", formMese:"Måned for oppholdet", formSuggerimento:"Ditt tips",
+    formInvia:"Send inn", formOk:"Takk! Tipset ditt er lagret.", formErr:"Kunne ikke lagre — prøv igjen senere.",
+    formNotConfigured:"Denne funksjonen er ikke aktiv ennå.", formSceglimese:"Velg...",
+    anonimo:"Anonym gjest", nessunConsiglio:"Ingen tips ennå — vær den første!",
+    months:["Januar","Februar","Mars","April","Mai","Juni","Juli","August","September","Oktober","November","Desember"]
+  }
+};
+
+const EMERGENCY_NUMBERS = [{num:"112", key:"num112"},{num:"118", key:"num118"},{num:"113", key:"num113"},{num:"115", key:"num115"}];
+
+let currentLang = "it";
+let currentView = "hub";
+let currentCat = null;
+let currentParent = null;
+
+function t(){ return I18N[currentLang]; }
+function renderLangSelector(){
+  const el = document.getElementById("langSelect");
+  el.innerHTML = Object.keys(I18N).map(code =>
+    "<button class='lang-btn " + (code===currentLang?'active':'') + "' data-lang='" + code + "'>" + I18N[code].flag + " " + I18N[code].label + "</button>").join("");
+  el.querySelectorAll(".lang-btn").forEach(btn=> btn.addEventListener("click", ()=>{ currentLang = btn.dataset.lang; renderAll(); }));
+}
+function renderStaticText(){
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll("[data-i18n]").forEach(elm=>{
+    const key = elm.getAttribute("data-i18n");
+    if(t()[key]) elm.textContent = t()[key];
+  });
+}
+function catIcon(id){ return ICONS[id] || ICONS.servizi; }
+function catLabel(id){ return t().cat[id] || id; }
+function catNote(id){ return t().note[id] || ""; }
+
+function renderGrid(containerId, ids, onOpen){
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = ids.map(id =>
+    "<button class='cat-btn " + (id==='emergenza'?'emergenza':'') + " " + (id==='farmacie'?'farmacie':'') + "' data-cat='" + id + "'>" +
+    "<span class='cat-icon'>" + catIcon(id) + "</span><span class='cat-label'>" + catLabel(id) + "</span></button>").join("");
+  grid.querySelectorAll(".cat-btn").forEach(btn=> btn.addEventListener("click", ()=> onOpen(btn.dataset.cat)));
+}
+function showView(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function openTopCategory(id){
+  if(INFO_TYPES.includes(id)){ openInfo(id); return; }
+  if(SUBMENUS[id]){
+    currentView = "subHub"; currentParent = id;
+    showView("subHub");
+    document.getElementById("subHubTitle").textContent = catLabel(id);
+    document.getElementById("subHubNote").textContent = catNote(id);
+    renderGrid("subHubGrid", SUBMENUS[id], openSubCategory);
+    return;
+  }
+  if(id === "come-arrivare" || id === "guida-casa" || id === "recensione"){ openExternal(id); return; }
+  currentParent = "hub"; currentCat = id; currentView = "detail";
+  showView("detailView"); renderDetail();
+}
+
+function openSubCategory(id){
+  if(currentParent === "consigli"){
+    if(id === "lascia"){ currentCat = id; currentView="tipForm"; showView("tipFormView"); renderTipForm(); }
+    if(id === "leggi"){ currentCat = id; currentView="tipList"; showView("tipListView"); renderTipList(); }
+    return;
+  }
+  currentCat = id; currentView = "detail";
+  showView("detailView"); renderDetail();
+}
+
+function goBack(targetId){
+  if(targetId === "consigliHub"){
+    currentView = "subHub"; currentParent = "consigli"; showView("subHub");
+    document.getElementById("subHubTitle").textContent = catLabel("consigli");
+    document.getElementById("subHubNote").textContent = catNote("consigli");
+    renderGrid("subHubGrid", SUBMENUS.consigli, openSubCategory);
+    return;
+  }
+  if(currentView === "detail" && currentParent && currentParent !== "hub"){
+    currentView = "subHub"; showView("subHub");
+    document.getElementById("subHubTitle").textContent = catLabel(currentParent);
+    document.getElementById("subHubNote").textContent = catNote(currentParent);
+    renderGrid("subHubGrid", SUBMENUS[currentParent], openSubCategory);
+  } else {
+    currentView = "hub"; currentCat = null; currentParent = null; showView("hub");
+  }
+}
+
+function renderVenueCard(v){
+  if(v.isLink){
+    return "<div class='venue-card'><div class='venue-name'>" + v.name + "</div><div class='venue-actions'><a class='btn-link' href='" + v.link + "' target='_blank' rel='noopener'>" + t().open + " ↗</a></div></div>";
+  }
+  if(v.links){
+    return "<div class='venue-card'><div class='venue-name'>" + v.name + "</div><div class='venue-actions'>" +
+      v.links.map(l=>"<a class='btn-link' href='" + l.url + "' target='_blank' rel='noopener'>" + l.label + " ↗</a>").join("") + "</div></div>";
+  }
+  const descText = d(v.desc);
+  return "<div class='venue-card'>" +
+      "<div class='venue-name-row'><span class='venue-name'>" + v.name + "</span>" + (v.tip? "<span class='tip-badge'>"+t().tip+"</span>" : "") + "</div>" +
+      (v.address ? "<div class='venue-address'>" + v.address + "</div>" : "") +
+      (descText ? "<div class='venue-desc'>" + descText + "</div>" : "") +
+      "<div class='venue-actions'>" +
+        (v.placeId ? "<a class='btn-maps' href='" + mapsUrl(v.name, v.placeId) + "' target='_blank' rel='noopener'>" + t().maps + " ↗</a>" : "") +
+        (v.phone ? "<a class='btn-call' href='" + telUrl(v.phone) + "'>" + t().call + "</a>" : "") +
+      "</div></div>";
+}
+
+function renderDetail(){
+  if(!currentCat) return;
+  document.getElementById("backLabel").textContent = t().back;
+  document.getElementById("detailTitle").textContent = catLabel(currentCat);
+  document.getElementById("detailNote").textContent = catNote(currentCat);
+
+  const emBox = document.getElementById("emergencyNumbers");
+  const venueList = document.getElementById("venueList");
+  const articleList = document.getElementById("articleList");
+  const pinsLabel = document.getElementById("pinsLabel");
+  articleList.innerHTML = ""; venueList.innerHTML = ""; emBox.innerHTML = ""; pinsLabel.style.display = "none";
+
+  if(currentCat === "dintorni"){
+    const arts = DINTORNI[currentLang] || DINTORNI.en;
+    articleList.innerHTML = "<div class='section-label'>" + t().sectionRead + "</div>" + arts.map(a =>
+      "<div class='article-card'><div class='article-title'>" + a.title + "</div><div class='article-preview'>" + a.preview + "</div><div class='article-actions'>" +
+      (a.placeId ? "<a class='btn-maps' href='" + mapsUrl(a.placeName || a.title, a.placeId) + "' target='_blank' rel='noopener'>" + t().maps + " ↗</a>" : "") +
+      (a.bookingUrl ? "<a class='btn-link' href='" + a.bookingUrl + "' target='_blank' rel='noopener'>" + a.bookingText + " ↗</a>" : "") +
+      "<a class='btn-read' href='guida-citta.html#" + a.id + "' target='_blank' rel='noopener'>" + t().readMore + " ↗</a>" +
+      "</div></div>").join("");
+    pinsLabel.style.display = "block"; pinsLabel.textContent = t().sectionSee;
+    venueList.innerHTML = DINTORNI_PINS.map(renderVenueCard).join("");
+    return;
+  }
+  if(currentCat === "emergenza"){
+    emBox.innerHTML = "<div class='emergency-grid'>" + EMERGENCY_NUMBERS.map(n=>
+      "<div class='emergency-num'><a href='tel:" + n.num + "'>" + n.num + "</a><span>" + t()[n.key] + "</span></div>").join("") + "</div>";
+  }
+  const items = VENUES[currentCat] || [];
+  if(items.length === 0){ venueList.innerHTML = "<div class='empty-state'>" + t().emptyState + "</div>"; return; }
+  venueList.innerHTML = items.map(renderVenueCard).join("");
+}
+
+function openExternal(id){ currentView = "external"; currentCat = id; showView("externalView"); renderExternal(); }
+function renderExternal(){
+  const box = document.getElementById("externalBox");
+  if(currentCat === "come-arrivare"){
+    document.getElementById("externalTitle").textContent = t().comeArrivareTitle;
+    box.innerHTML = "<p>" + t().comeArrivareDesc + "</p><a class='big-btn' href='assets/indicazioni-arrivo.pdf' target='_blank' rel='noopener'>📄 " + t().comeArrivareBtn + "</a>";
+  } else if(currentCat === "guida-casa"){
+    document.getElementById("externalTitle").textContent = t().guidaCasaTitle;
+    box.innerHTML = "<p>" + t().guidaCasaDesc + "</p><a class='big-btn' href='assets/guida-casa.pdf' target='_blank' rel='noopener'>📖 " + t().guidaCasaBtn + "</a>";
+  } else if(currentCat === "recensione"){
+    document.getElementById("externalTitle").textContent = catLabel("recensione");
+    box.innerHTML = "<p>" + t().reviewDesc + "</p><a class='big-btn' href='https://g.page/r/CeuiU_Xp7nDbEBM/review' target='_blank' rel='noopener'>⭐ " + t().reviewBtn + "</a>";
+  }
+}
+
+function openInfo(id){ currentView = "info"; currentCat = id; showView("infoView"); renderInfo(); }
+function renderInfo(){
+  document.getElementById("infoTitle").textContent = catLabel(currentCat);
+  const box = document.getElementById("infoBox");
+  if(currentCat === "checkout"){
+    box.innerHTML = "<p>" + (CHECKOUT_TEXT[currentLang] || CHECKOUT_TEXT.it) + "</p>";
+  } else if(currentCat === "wifi"){
+    box.innerHTML =
+      "<div class='wifi-row'><span class='wifi-label'>" + t().wifiNetwork + "</span><span class='wifi-value'>Appartamento_terrazza_galba</span></div>" +
+      "<div class='wifi-row'><span class='wifi-label'>" + t().wifiPassword + "</span><span class='wifi-value'>Galba25</span></div>";
+  } else if(currentCat === "raccolta"){
+    box.innerHTML = RACCOLTA_HTML[currentLang] || RACCOLTA_HTML.it;
+  }
+}
+
+function renderTipForm(){
+  document.getElementById("tipFormTitle").textContent = catLabel("lascia");
+  const monthOptions = t().months.map(m=>"<option value='" + m + "'>" + m + "</option>").join("");
+  document.getElementById("tipFormCard").innerHTML =
+    "<div class='form-field'><label>" + t().formNome + "</label><input type='text' id='tipNome' maxlength='20'></div>" +
+    "<div class='form-field'><label>" + t().formMese + "</label><select id='tipMese'><option value=''>" + t().formSceglimese + "</option>" + monthOptions + "</select></div>" +
+    "<div class='form-field'><label>" + t().formSuggerimento + "</label><textarea id='tipTesto' maxlength='300'></textarea><div class='char-count'><span id='tipCharCount'>0</span>/300</div></div>" +
+    "<button class='big-btn' id='tipSubmitBtn' style='width:100%;justify-content:center;'>" + t().formInvia + "</button>" +
+    "<div class='form-msg' id='tipFormMsg'></div>";
+  document.getElementById("tipTesto").addEventListener("input", (e)=>{
+    document.getElementById("tipCharCount").textContent = e.target.value.length;
+  });
+  document.getElementById("tipSubmitBtn").addEventListener("click", submitTip);
+}
+async function submitTip(){
+  const msg = document.getElementById("tipFormMsg");
+  msg.className = "form-msg"; msg.style.display = "none";
+  if(!SUPABASE_URL || !SUPABASE_ANON_KEY){
+    msg.textContent = t().formNotConfigured; msg.className = "form-msg err"; return;
+  }
+  const nome = document.getElementById("tipNome").value.slice(0,20);
+  const mese = document.getElementById("tipMese").value;
+  const testo = document.getElementById("tipTesto").value.slice(0,300).trim();
+  if(!testo){ return; }
+  try{
+    const res = await fetch(SUPABASE_URL + "/rest/v1/consigli", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY, "Prefer": "return=minimal" },
+      body: JSON.stringify({ nome: nome || null, mese: mese || null, testo: testo })
+    });
+    if(res.ok){
+      msg.textContent = t().formOk; msg.className = "form-msg ok";
+      document.getElementById("tipNome").value = ""; document.getElementById("tipMese").value = "";
+      document.getElementById("tipTesto").value = ""; document.getElementById("tipCharCount").textContent = "0";
+    } else { msg.textContent = t().formErr; msg.className = "form-msg err"; }
+  } catch(e){ msg.textContent = t().formErr; msg.className = "form-msg err"; }
+}
+async function renderTipList(){
+  document.getElementById("tipListTitle").textContent = catLabel("leggi");
+  const box = document.getElementById("tipListBox");
+  if(!SUPABASE_URL || !SUPABASE_ANON_KEY){
+    box.innerHTML = "<div class='empty-state'>" + t().formNotConfigured + "</div>"; return;
+  }
+  box.innerHTML = "<div class='empty-state'>" + t().emptyState + "</div>";
+  try{
+    const res = await fetch(SUPABASE_URL + "/rest/v1/consigli?select=nome,mese,testo,created_at&order=created_at.desc&limit=50", {
+      headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY }
+    });
+    if(!res.ok) throw new Error("fetch failed");
+    const rows = await res.json();
+    if(rows.length === 0){ box.innerHTML = "<div class='empty-state'>" + t().nessunConsiglio + "</div>"; return; }
+    box.innerHTML = rows.map(r =>
+      "<div class='tip-card'><div class='tip-meta'>" + (r.nome || t().anonimo) + (r.mese ? " · " + r.mese : "") + "</div><div class='tip-text'>" + r.testo + "</div></div>").join("");
+  } catch(e){ box.innerHTML = "<div class='empty-state'>" + t().formErr + "</div>"; }
+}
+
+function renderAll(){
+  renderLangSelector(); renderStaticText();
+  renderGrid("catGrid", TOP_CATEGORIES, openTopCategory);
+  if(currentView === "subHub"){
+    document.getElementById("subHubTitle").textContent = catLabel(currentParent);
+    document.getElementById("subHubNote").textContent = catNote(currentParent);
+    renderGrid("subHubGrid", SUBMENUS[currentParent], openSubCategory);
+  }
+  if(currentView === "detail"){ renderDetail(); }
+  if(currentView === "external") renderExternal();
+  if(currentView === "info") renderInfo();
+  if(currentView === "tipForm") renderTipForm();
+  if(currentView === "tipList") renderTipList();
+}
+document.getElementById("backBtn").addEventListener("click", ()=> goBack());
+document.querySelectorAll("[data-back]").forEach(btn=> btn.addEventListener("click", (e)=>{ e.preventDefault(); goBack(btn.dataset.back); }));
+document.querySelectorAll("[data-open]").forEach(btn=> btn.addEventListener("click", (e)=>{ e.preventDefault(); openTopCategory(btn.dataset.open); }));
+
+renderAll();
+</script>
+</body>
+</html>
