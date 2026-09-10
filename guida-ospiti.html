@@ -56,6 +56,7 @@ main{max-width:960px;margin:0 auto;padding:28px 18px 60px;}
 .venue-name-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .venue-name{font-weight:600;font-size:1rem;}
 .tip-badge{font-size:.62rem;font-weight:700;color:var(--accent);background:var(--accent-tint);padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;}
+.shop-tag{font-size:.72rem;color:var(--primary);font-weight:600;margin-bottom:4px;}
 .venue-address{font-size:.85rem;color:var(--ink-soft);margin:2px 0 8px;}
 .venue-desc{font-size:.85rem;color:var(--ink);margin:4px 0 10px;font-style:italic;}
 .venue-actions{display:flex;gap:10px;flex-wrap:wrap;}
@@ -114,8 +115,8 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
   </div>
   <div class="header-links">
     <a href="#" class="header-link-btn" data-open="come-arrivare">📍 <span data-i18n="comeArrivareShort">Come arrivare</span></a>
-    <a href="#" class="header-link-btn" data-open="guida-casa">📖 <span data-i18n="guidaCasaShort">Guida di casa</span></a>
     <a href="https://www.instagram.com/terracinacasavacanze/" target="_blank" rel="noopener" class="header-link-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> <span data-i18n="seguiciIG">Seguici su IG</span></a>
+    <a href="https://www.google.com/maps/d/viewer?mid=1ExKFxQnY9OUTv03vfl7Flw9wfAG18eY" target="_blank" rel="noopener" class="header-link-btn">🗺️ <span data-i18n="mymapsShort">Mappa personalizzata</span></a>
   </div>
 </header>
 
@@ -173,11 +174,15 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
 const SUPABASE_URL = "https://tafdebnpuoefsvnawtjh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_sncfiZjtF13gudClpFvE-Q_yFNAYUEO";
 
-const TOP_CATEGORIES = ["wifi","raccolta","serviziutili","mangiare","supermercati","spiagge","shopping","eventi","consigli","dintorni","farmacie","trasporti","checkout","recensione","emergenza"];
+const TOP_CATEGORIES = ["casa","mangiare","supermercati","spiaggeisole","serviziutili","eventi","dintorni","consigli","recensione","emergenza"];
 const SUBMENUS = {
+  casa: ["wifi","raccolta","checkout","guida-casa"],
   mangiare: ["ristoranti","fishchips","pizza","barpasticceria","nightlife"],
-  serviziutili: ["gommoni","bici","banche","poste","benzinai","chiese"],
-  eventi: ["seiditerracina","fondazione","proloco"],
+  spiaggeisole: ["spiagge","isole"],
+  isole: ["gommoni","traghettoponza","gommonitour"],
+  serviziutili: ["farmacie","trasporti","benzinai","banche","poste","chiese","bici","gommoni","shopping"],
+  eventi: ["proloco","fondazione","seiditerracina"],
+  dintorni: ["davisitare","daleggere"],
   consigli: ["lascia","leggi"]
 };
 const INFO_TYPES = ["wifi","raccolta","checkout"];
@@ -214,7 +219,15 @@ const ICONS = {
   gommoni:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20l-2 3H4zM4 18V9a8 8 0 0 1 16 0v9"/></svg>',
   bici:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17 10 7h4l4 10M10 7l3 5h5"/></svg>',
   lascia:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
-  leggi:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>'
+  leggi:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>',
+  casa:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 2l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>',
+  "guida-casa":'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>',
+  spiaggeisole:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 21c4-2 6-2 10 0s6 2 10 0M12 3v8M8 7l4 4 4-4"/></svg>',
+  isole:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20c4-2 6-2 10 0s6 2 10 0"/><circle cx="12" cy="9" r="4"/></svg>',
+  traghettoponza:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20l-2 3H4zM4 18l1-7h14l1 7M12 11V4M9 4h6"/></svg>',
+  gommonitour:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20l-2 3H4zM4 18V9a8 8 0 0 1 16 0v9"/></svg>',
+  davisitare:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 20h20L12 2z"/><path d="M12 10v4M12 17h.01"/></svg>',
+  daleggere:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>'
 };
 
 function mapsUrl(name, placeId){ return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name) + "&query_place_id=" + placeId; }
@@ -238,7 +251,32 @@ const DESC = {
   leda:{it:"Pizza rossa al taglio, storica.",en:"Historic red pizza by the slice.",fr:"Pizza rouge à la coupe, historique.",es:"Pizza roja al corte, histórica.",de:"Historische rote Pizza vom Blech.",no:"Historisk rød pizza i skiver."},
   fiumetta:{it:"Raggiungibile in macchina o scooter, fiume gelato che sfocia in mare, acqua pulita, bel panorama, posti all'ombra.",en:"Reachable by car or scooter, an ice-cold stream flowing into the sea, clean water, great views, shaded spots.",fr:"Accessible en voiture ou scooter, un ruisseau glacé qui se jette dans la mer, eau propre, belle vue, coins ombragés.",es:"Se llega en coche o scooter, un arroyo helado que desemboca en el mar, agua limpia, buenas vistas, zonas con sombra.",de:"Mit Auto oder Roller erreichbar, ein eiskalter Bach, der ins Meer mündet, sauberes Wasser, schöne Aussicht, schattige Plätze.",no:"Nås med bil eller scooter, en iskald bekk som renner ut i havet, rent vann, fin utsikt, skyggefulle plasser."},
   avenafranca:{it:"A pochi passi da casa, appena dopo la Piazza del centro storico.",en:"Just steps from home, right after the main square of the old town.",fr:"À quelques pas de la maison, juste après la place du centre historique.",es:"A pocos pasos de casa, justo después de la plaza del centro histórico.",de:"Nur wenige Schritte von zu Hause entfernt, gleich hinter dem Platz der Altstadt.",no:"Bare noen skritt hjemmefra, rett etter plassen i den historiske bydelen."},
-  acquamagnesia:{it:"Acqua gelata e mare cristallino.",en:"Ice-cold water and crystal-clear sea.",fr:"Eau glacée et mer cristalline.",es:"Agua helada y mar cristalino.",de:"Eiskaltes Wasser und kristallklares Meer.",no:"Iskaldt vann og krystallklart hav."}
+  acquamagnesia:{it:"Acqua gelata e mare cristallino.",en:"Ice-cold water and crystal-clear sea.",fr:"Eau glacée et mer cristalline.",es:"Agua helada y mar cristalino.",de:"Eiskaltes Wasser und kristallklares Meer.",no:"Iskaldt vann og krystallklart hav."},
+  assassino:{it:"Burger gourmet, pizza e piatti a 2 passi dalla riviera di levante.",en:"Gourmet burgers, pizza and dishes just steps from the eastern seafront.",fr:"Burgers gourmets, pizza et plats à deux pas du front de mer est.",es:"Hamburguesas gourmet, pizza y platos a dos pasos del paseo marítimo de levante.",de:"Gourmet-Burger, Pizza und Gerichte nur wenige Schritte von der östlichen Strandpromenade.",no:"Gourmetburgere, pizza og retter et steinkast fra østre strandpromenade."},
+  bomba:{it:"Qui puoi gustare la tipica \"Bomba\" di Terracina, veramente spettacolare.",en:"Here you can try Terracina's typical \"Bomba\" pastry — truly spectacular.",fr:"Ici vous pouvez goûter la fameuse « Bomba » de Terracina, vraiment spectaculaire.",es:"Aquí puedes probar la típica \"Bomba\" de Terracina, realmente espectacular.",de:"Hier kannst du die typische Terracina-„Bomba\" probieren, wirklich spektakulär.",no:"Her kan du smake den typiske «Bomba» fra Terracina, virkelig spektakulær."},
+  annacatena:{it:"Gioielli bellissimi fatti a mano, a due passi da casa.",en:"Beautiful handmade jewellery, just steps from home.",fr:"De magnifiques bijoux faits main, à deux pas de la maison.",es:"Preciosas joyas hechas a mano, a dos pasos de casa.",de:"Wunderschöner handgefertigter Schmuck, nur wenige Schritte von zu Hause.",no:"Vakre håndlagde smykker, et steinkast hjemmefra."}
+};
+
+const TAGS = {
+  moda:{it:"Moda e abbigliamento",en:"Fashion & clothing",fr:"Mode et vêtements",es:"Moda y ropa",de:"Mode & Bekleidung",no:"Mote og klær"},
+  sartoriale:{it:"Abbigliamento e abiti sartoriali",en:"Clothing & tailored suits",fr:"Vêtements et costumes sur mesure",es:"Ropa y trajes a medida",de:"Bekleidung & Maßanzüge",no:"Klær og skreddersydde dresser"},
+  casadesign:{it:"Casa, design, abbigliamento, giocattoli",en:"Home, design, clothing, toys",fr:"Maison, design, vêtements, jouets",es:"Hogar, diseño, ropa, juguetes",de:"Wohnen, Design, Mode, Spielzeug",no:"Hjem, design, klær, leker"},
+  profumeria:{it:"Profumeria",en:"Perfumery",fr:"Parfumerie",es:"Perfumería",de:"Parfümerie",no:"Parfymeri"},
+  intimo:{it:"Intimo",en:"Lingerie",fr:"Lingerie",es:"Ropa interior",de:"Wäsche",no:"Undertøy"},
+  abbFemminile:{it:"Abbigliamento femminile",en:"Women's clothing",fr:"Vêtements pour femmes",es:"Ropa de mujer",de:"Damenbekleidung",no:"Dameklær"},
+  gioielleria:{it:"Gioielleria e pietre preziose",en:"Jewellery & gemstones",fr:"Bijouterie et pierres précieuses",es:"Joyería y piedras preciosas",de:"Schmuck & Edelsteine",no:"Smykker og edelstener"},
+  arte:{it:"Quadri e arte",en:"Paintings & art",fr:"Tableaux et art",es:"Cuadros y arte",de:"Gemälde und Kunst",no:"Malerier og kunst"},
+  gioielleriaArt:{it:"Gioielleria artigianale",en:"Handmade jewellery",fr:"Bijoux artisanaux",es:"Joyería artesanal",de:"Handgefertigter Schmuck",no:"Håndlaget smykker"},
+  grandeMagazzino:{it:"Come un grande magazzino",en:"Like a department store",fr:"Comme un grand magasin",es:"Como unos grandes almacenes",de:"Wie ein Kaufhaus",no:"Som et varehus"}
+};
+
+const PARENS = {
+  it:{gommoni:"gommoni",gommonitour:"gommoni e tour",gite:"gite",tour:"tour"},
+  en:{gommoni:"dinghies",gommonitour:"dinghies & tours",gite:"excursions",tour:"tour"},
+  fr:{gommoni:"bateaux pneumatiques",gommonitour:"bateaux et excursions",gite:"excursions",tour:"excursion"},
+  es:{gommoni:"botes",gommonitour:"botes y excursiones",gite:"excursiones",tour:"excursión"},
+  de:{gommoni:"Schlauchboote",gommonitour:"Boote & Touren",gite:"Ausflüge",tour:"Tour"},
+  no:{gommoni:"gummibåter",gommonitour:"båter og turer",gite:"utflukter",tour:"tur"}
 };
 
 const VENUES = {
@@ -273,13 +311,17 @@ const VENUES = {
     {name:"Rive di Traiano", address:"Lungomare Matteotti, 4", phone:"+39 0773 703193", placeId:"ChIJY9OhcmYjJRMRurMW91iz9s8"}
   ],
   shopping: [
-    {name:"Carmen Boutique", address:"Via Roma, 134/136", phone:"+39 0773 705057", placeId:"ChIJiRywemgjJRMRHu76Flp-rGM"},
-    {name:"Pellino Store", address:"Via Badino, 227", phone:"+39 0773 731670", placeId:"ChIJlQkwx2kjJRMRzw5Y4gi_hH4"},
-    {name:"Sbaraglia", address:"Via Roma, 112", phone:"+39 0773 709592", placeId:"ChIJESXAS2gjJRMRVpe0RpSRRyA"},
-    {name:"Megastore", address:"Via Pontina", phone:"+39 333 058 2451", placeId:"ChIJtz2p5IUiJRMRRMTkT4O3KxE"},
-    {name:"Tezenis", address:"Viale della Vittoria, 116", phone:"+39 0773 724797", placeId:"ChIJ8ws7J1EjJRMRswhBq4jR2kA"},
-    {name:"Uni.chic", address:"Via del Porto, 36", phone:"+39 0773 701458", placeId:"ChIJRVO4mmgjJRMR1tMS-67N5ZQ"},
-    {name:"Tally Weijl", address:"Via Roma, 99", phone:"+39 0773 705915", placeId:"ChIJvaiNyGkjJRMRq-S-WI76is0"}
+    {name:"BUM Store", address:"Viale della Vittoria, 3", phone:"+39 0773 726212", placeId:"ChIJ3RkwmmkjJRMRnG2bGq-d_-0", tag:TAGS.casadesign},
+    {name:"D'Auria Gioielli", address:"Via Roma, 26", phone:"+39 0773 700559", placeId:"ChIJBbYd6WkjJRMRLGaCB6uQXwI", tag:TAGS.gioielleria},
+    {name:"Anna Catena Restauro", address:"Corso Anita Garibaldi, 93", phone:"+39 348 446 4687", placeId:"ChIJ2Wqxk0EjJRMRx3_TvsNjBjA", tag:TAGS.gioielleriaArt, desc:DESC.annacatena},
+    {name:"Armando Sodano (Effetti D'Arte)", address:"Corso Anita Garibaldi, 79", phone:"+39 347 277 1454", placeId:"ChIJVZgnlEEjJRMRBkg6c07gmc4", tag:TAGS.arte},
+    {name:"Carmen Boutique", address:"Via Roma, 134/136", phone:"+39 0773 705057", placeId:"ChIJiRywemgjJRMRHu76Flp-rGM", tag:TAGS.moda},
+    {name:"Pellino Store", address:"Via Badino, 227", phone:"+39 0773 731670", placeId:"ChIJlQkwx2kjJRMRzw5Y4gi_hH4", tag:TAGS.sartoriale},
+    {name:"Sbaraglia", address:"Via Roma, 112", phone:"+39 0773 709592", placeId:"ChIJESXAS2gjJRMRVpe0RpSRRyA", tag:TAGS.sartoriale},
+    {name:"Uni.chic", address:"Via del Porto, 36", phone:"+39 0773 701458", placeId:"ChIJRVO4mmgjJRMR1tMS-67N5ZQ", tag:TAGS.abbFemminile},
+    {name:"Profumeria Bizzarri", address:"Via Roma, 46", phone:"+39 0773 700594", placeId:"ChIJ70PlwmkjJRMRpO7kRu5iqic", tag:TAGS.profumeria},
+    {name:"Tezenis", address:"Viale della Vittoria, 116", phone:"+39 0773 724797", placeId:"ChIJ8ws7J1EjJRMRswhBq4jR2kA", tag:TAGS.intimo},
+    {name:"Megastore", address:"Via Pontina", phone:"+39 333 058 2451", placeId:"ChIJtz2p5IUiJRMRRMTkT4O3KxE", tag:TAGS.grandeMagazzino}
   ],
   trasporti: [
     {name:"Taxi Terracina NCC — Francesco Tedesco", address:"Via della Croce, 1 — attivo 24h", phone:"+39 324 883 1914", placeId:"ChIJr4niBoQjJRMRG4xUJoV_yw4"},
@@ -308,7 +350,9 @@ const VENUES = {
     {name:"La Taverna di Bafio", address:"Piazza Giuseppe Garibaldi, 17", phone:"+39 328 264 0913", placeId:"ChIJIztqeQAjJRMReqB94hSSTeQ"},
     {name:"Locanda Ruggieri", address:"Via del Rio, 10", phone:"+39 333 475 8507", placeId:"ChIJvzHoYqkjJRMREei34h1kvcs"},
     {name:"Antica Cisterna Romana", address:"Via S. Giovanni, 6", phone:"+39 348 716 6167", placeId:"ChIJoUUJMBojJRMR-b4Zww2PqNY"},
-    {name:"Domitilla Bottega", address:"Via Annunziata, 17", phone:"+39 388 565 0105", placeId:"ChIJnY4iBUIjJRMRyT_Olf-O-48", desc:DESC.domitilla}
+    {name:"Domitilla Bottega", address:"Via Annunziata, 17", phone:"+39 388 565 0105", placeId:"ChIJnY4iBUIjJRMRyT_Olf-O-48", desc:DESC.domitilla},
+    {name:"Santi Quattro Bistrot", address:"Corso Anita Garibaldi, 89", phone:"+39 0773 806801", placeId:"ChIJg0eBVrEjJRMRUOHmbV1sMsw"},
+    {name:"Assassino - Paninari a Sangue Caldo", address:"Viale della Vittoria, 45", phone:null, placeId:"ChIJ3XMwFmYjJRMRzHZmrHhmIMs", desc:DESC.assassino}
   ],
   fishchips: [
     {name:"Centro Ittico da Ernesto", address:"Piazzale Lido", phone:"+39 0773 723043", placeId:"ChIJcZdUWmwjJRMRXtHuNptUSaQ"},
@@ -331,9 +375,9 @@ const VENUES = {
     {name:"Bar Sul Mare", address:"Viale Circe, 94-98", phone:"+39 0773 136 1466", placeId:"ChIJDcXweBEjJRMRhgFYnCTYX8Q"},
     {name:"L'Opposto", address:"Via della Stazione", phone:"+39 0773 359750", placeId:"ChIJMxrXaeMjJRMRaBd4sv6OyY8"},
     {name:"Bar Milano", address:"Piazzale Lido, 20", phone:"+39 0773 288870", placeId:"ChIJm7h8Q2wjJRMRDYWC_lBga9I"},
-    {name:"Creme Caramel", address:"Via Tripoli, 1/9", phone:"+39 0773 702895", placeId:"ChIJ6chRFmYjJRMR1Ydm3nWrCDQ"},
+    {name:"Creme Caramel", address:"Via Tripoli, 1/9", phone:"+39 0773 702895", placeId:"ChIJ6chRFmYjJRMR1Ydm3nWrCDQ", desc:DESC.bomba, tip:true},
     {name:"Pasticceria Somma", address:"Via Ponte Rosso, km 101,500", phone:null, placeId:"ChIJaRqmGkAjJRMRZONKzLI4UBc"},
-    {name:"Pasticceria Buttafoco", address:"Via Adriano Olivetti, 18/20", phone:"+39 0773 149 4411", placeId:"ChIJwb22xrkjJRMRbByVbqHyew8"},
+    {name:"Pasticceria Buttafoco", address:"Via Adriano Olivetti, 18/20", phone:"+39 0773 149 4411", placeId:"ChIJwb22xrkjJRMRbByVbqHyew8", desc:DESC.bomba, tip:true},
     {name:"L'Angolo del Goloso", address:"Via Bachelet, 32", phone:"+39 327 442 6669", placeId:"ChIJFw3eb5sjJRMRYkVVu89VBD8"}
   ],
   nightlife: [
@@ -381,6 +425,18 @@ const VENUES = {
     {name:"Mary Rent Bike — bici e risciò", address:"Piazzale Aldo Moro", phone:"+39 328 722 6355", placeId:"ChIJ568vI2wjJRMRERbgdetWToU"},
     {name:"Dodogo — tour in e-bike", address:"Viale Circe, 262", phone:"+39 352 040 4076", placeId:"ChIJofgE5HlzGUgRQJVheiDKw3U"},
     {name:"Bici & Scooter Pantaleone", address:"Via Mediana Vecchia, 88", phone:"+39 0773 755040", placeId:"ChIJw83vJjMZJRMRgrr2mg5yaWo"}
+  ],
+  traghettoponza: [
+    {name:"Prenota un traghetto per Ponza", link:"https://www.traghetti.com/traghetti-per-ponza", isLink:true}
+  ],
+  gommonitour: [
+    {name:"Gommoni e Tour", links:[
+      {label:"Diva Luna", url:"https://www.divaluna.com/", parenKey:"gommoni"},
+      {label:"Barcaioli Ponza", url:"https://barcaioliponza.it/", parenKey:"gommonitour"},
+      {label:"Ponza Si Per Scelta", url:"https://gite.ponzesiperscelta.it/", parenKey:"gite"},
+      {label:"Vivi Ponza", url:"https://viviponza.com/in-barca/gite-in-barca/", parenKey:"gommonitour"},
+      {label:"Freedome", url:"https://freedome.it/attivita/tour-giornaliero-motonave-ponza-palmarola-pranzo/", parenKey:"tour"}
+    ]}
   ]
 };
 
@@ -432,9 +488,11 @@ const I18N = {
   it:{ flag:"🇮🇹", label:"IT",
     subtitle:"Guida per gli ospiti", hubTitle:"Tutto quello che occorre per un piacevole soggiorno a Terracina.",
     back:"Torna al menu", call:"Chiama", maps:"Apri in Maps", open:"Apri sito",
-    comeArrivareShort:"Come arrivare", guidaCasaShort:"Guida di casa",
+    comeArrivareShort:"Come arrivare", guidaCasaShort:"Guida di casa", mymapsShort:"Mappa personalizzata",
     footer:"Dati verificati a settembre 2026 · orari e contatti possono variare",
-    cat:{wifi:"Wi-Fi",raccolta:"Raccolta differenziata",serviziutili:"Servizi utili",checkout:"Check-out",
+    cat:{wifi:"Wi-Fi",raccolta:"Raccolta differenziata",serviziutili:"Servizi Utili e Trasporti",checkout:"Check-out",
+         casa:"Casa","guida-casa":"Guida di casa completa",isole:"Isole",spiaggeisole:"Spiagge e Isole",
+         davisitare:"Da visitare",daleggere:"Da leggere",traghettoponza:"Traghetto per Ponza",gommonitour:"Ponza - Gommoni e Tour",
          mangiare:"Mangiare",supermercati:"Supermercati",farmacie:"Farmacie",spiagge:"Spiagge",shopping:"Shopping",trasporti:"Trasporti",dintorni:"I Dintorni",emergenza:"Emergenza",consigli:"Consigli dagli ospiti",recensione:"Recensioni",
          ristoranti:"Ristoranti",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bar e Pasticcerie",nightlife:"Nightlife",
          eventi:"Eventi",seiditerracina:"Sei di Terracina se...",gommoni:"Noleggio gommoni",bici:"Noleggio bici",
@@ -445,7 +503,9 @@ const I18N = {
           trasporti:"Taxi e orari di autobus/treni.",emergenza:"Numeri utili e presidi sanitari/sicurezza.",
           dintorni:"Storia e luoghi da vedere a Terracina e nei dintorni.",
           consigli:"Idee lasciate dagli ospiti che sono stati qui prima di te.",
-          mangiare:"Scegli cosa cerchi.",serviziutili:"Banche, poste, benzinai, chiese e noleggi.",
+          mangiare:"Scegli cosa cerchi.",serviziutili:"Farmacie, trasporti, distributori, banche, poste, chiese, noleggi e shopping.",
+          casa:"Tutto quello che ti serve per la casa durante il soggiorno.",isole:"Come raggiungere Ponza e muoverti in mare.",
+          spiaggeisole:"Il litorale di Terracina e le isole a un passo.",davisitare:"Luoghi e gite da fare di persona.",daleggere:"Storia e curiosità su Terracina.",
           ristoranti:"Una selezione di ristoranti consigliati.",fishchips:"Pesce fritto e da asporto.",pizza:"Pizzerie consigliate.",
           barpasticceria:"Per un caffè, un dolce o un gelato.",nightlife:"Per la serata.",
           eventi:"Cosa succede in città.",seiditerracina:"Uno sguardo alla Terracina più autentica, sui social.",
@@ -470,9 +530,11 @@ const I18N = {
   en:{ flag:"🇬🇧", label:"EN",
     subtitle:"Guest Guide", hubTitle:"Everything you need during your stay in Terracina.",
     back:"Back to menu", call:"Call", maps:"Open in Maps", open:"Open site",
-    comeArrivareShort:"How to arrive", guidaCasaShort:"House guide",
+    comeArrivareShort:"How to arrive", guidaCasaShort:"House guide", mymapsShort:"Custom map",
     footer:"Data verified September 2026 · hours and contacts may vary",
-    cat:{wifi:"Wi-Fi",raccolta:"Waste sorting",serviziutili:"Useful services",checkout:"Check-out",
+    cat:{wifi:"Wi-Fi",raccolta:"Waste sorting",serviziutili:"Useful Services & Transport",checkout:"Check-out",
+         casa:"Home","guida-casa":"Full house guide",isole:"Islands",spiaggeisole:"Beaches & Islands",
+         davisitare:"To visit",daleggere:"To read",traghettoponza:"Ferry to Ponza",gommonitour:"Ponza - Boats & Tours",
          mangiare:"Eating",supermercati:"Supermarkets",farmacie:"Pharmacies",spiagge:"Beaches",shopping:"Shopping",trasporti:"Transport",dintorni:"Nearby",emergenza:"Emergency",consigli:"Guest tips",recensione:"Reviews",
          ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars & Pastry shops",nightlife:"Nightlife",
          eventi:"Events",seiditerracina:"Sei di Terracina se...",gommoni:"Dinghy rental",bici:"Bike rental",
@@ -483,7 +545,9 @@ const I18N = {
           trasporti:"Taxis and bus/train schedules.",emergenza:"Useful numbers and health/safety services.",
           dintorni:"History and places to see in and around Terracina.",
           consigli:"Ideas left by guests who stayed here before you.",
-          mangiare:"Choose what you're after.",serviziutili:"Banks, post offices, gas stations, churches and rentals.",
+          mangiare:"Choose what you're after.",serviziutili:"Pharmacies, transport, gas stations, banks, post offices, churches, rentals and shopping.",
+          casa:"Everything you need for the house during your stay.",isole:"How to reach Ponza and get around by sea.",
+          spiaggeisole:"Terracina's coastline and the islands nearby.",davisitare:"Places and trips to experience in person.",daleggere:"History and curiosities about Terracina.",
           ristoranti:"A selection of recommended restaurants.",fishchips:"Fried fish and takeaway.",pizza:"Recommended pizzerias.",
           barpasticceria:"For a coffee, a pastry or an ice cream.",nightlife:"For the evening.",
           eventi:"What's on in town.",seiditerracina:"A look at authentic Terracina, on social media.",
@@ -508,9 +572,11 @@ const I18N = {
   fr:{ flag:"🇫🇷", label:"FR",
     subtitle:"Guide des hôtes", hubTitle:"Tout ce dont vous avez besoin pendant votre séjour à Terracina.",
     back:"Retour au menu", call:"Appeler", maps:"Ouvrir dans Maps", open:"Ouvrir le site",
-    comeArrivareShort:"Comment arriver", guidaCasaShort:"Guide de la maison",
+    comeArrivareShort:"Comment arriver", guidaCasaShort:"Guide de la maison", mymapsShort:"Carte personnalisée",
     footer:"Données vérifiées en septembre 2026 · horaires et contacts peuvent varier",
-    cat:{wifi:"Wi-Fi",raccolta:"Tri sélectif",serviziutili:"Services utiles",checkout:"Départ",
+    cat:{wifi:"Wi-Fi",raccolta:"Tri sélectif",serviziutili:"Services Utiles et Transports",checkout:"Départ",
+         casa:"Maison","guida-casa":"Guide complet de la maison",isole:"Îles",spiaggeisole:"Plages et Îles",
+         davisitare:"À visiter",daleggere:"À lire",traghettoponza:"Ferry pour Ponza",gommonitour:"Ponza - Bateaux et Excursions",
          mangiare:"Manger",supermercati:"Supermarchés",farmacie:"Pharmacies",spiagge:"Plages",shopping:"Shopping",trasporti:"Transports",dintorni:"Les environs",emergenza:"Urgences",consigli:"Conseils des hôtes",recensione:"Avis",
          ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars et Pâtisseries",nightlife:"Vie nocturne",
          eventi:"Événements",seiditerracina:"Sei di Terracina se...",gommoni:"Location de bateaux",bici:"Location de vélos",
@@ -521,7 +587,9 @@ const I18N = {
           trasporti:"Taxis et horaires bus/train.",emergenza:"Numéros utiles et services de santé/sécurité.",
           dintorni:"Histoire et lieux à voir à Terracina et aux alentours.",
           consigli:"Des idées laissées par les hôtes précédents.",
-          mangiare:"Choisissez ce que vous cherchez.",serviziutili:"Banques, bureaux de poste, stations-service, églises et locations.",
+          mangiare:"Choisissez ce que vous cherchez.",serviziutili:"Pharmacies, transports, stations-service, banques, bureaux de poste, églises, locations et shopping.",
+          casa:"Tout ce qu'il vous faut pour la maison pendant le séjour.",isole:"Comment rejoindre Ponza et se déplacer en mer.",
+          spiaggeisole:"Le littoral de Terracina et les îles à proximité.",davisitare:"Lieux et excursions à vivre en personne.",daleggere:"Histoire et curiosités sur Terracina.",
           ristoranti:"Une sélection de restaurants recommandés.",fishchips:"Poisson frit et à emporter.",pizza:"Pizzerias recommandées.",
           barpasticceria:"Pour un café, une pâtisserie ou une glace.",nightlife:"Pour la soirée.",
           eventi:"Ce qui se passe en ville.",seiditerracina:"Un aperçu de la Terracina authentique, sur les réseaux sociaux.",
@@ -546,9 +614,11 @@ const I18N = {
   es:{ flag:"🇪🇸", label:"ES",
     subtitle:"Guía para huéspedes", hubTitle:"Todo lo que necesitas durante tu estancia en Terracina.",
     back:"Volver al menú", call:"Llamar", maps:"Abrir en Maps", open:"Abrir sitio",
-    comeArrivareShort:"Cómo llegar", guidaCasaShort:"Guía de la casa",
+    comeArrivareShort:"Cómo llegar", guidaCasaShort:"Guía de la casa", mymapsShort:"Mapa personalizado",
     footer:"Datos verificados en septiembre de 2026 · horarios y contactos pueden variar",
-    cat:{wifi:"Wi-Fi",raccolta:"Reciclaje selectivo",serviziutili:"Servicios útiles",checkout:"Salida",
+    cat:{wifi:"Wi-Fi",raccolta:"Reciclaje selectivo",serviziutili:"Servicios Útiles y Transporte",checkout:"Salida",
+         casa:"Casa","guida-casa":"Guía completa de la casa",isole:"Islas",spiaggeisole:"Playas e Islas",
+         davisitare:"Para visitar",daleggere:"Para leer",traghettoponza:"Ferry a Ponza",gommonitour:"Ponza - Botes y Excursiones",
          mangiare:"Comer",supermercati:"Supermercados",farmacie:"Farmacias",spiagge:"Playas",shopping:"Compras",trasporti:"Transporte",dintorni:"Alrededores",emergenza:"Emergencias",consigli:"Consejos de huéspedes",recensione:"Reseñas",
          ristoranti:"Restaurantes",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bares y Pastelerías",nightlife:"Vida nocturna",
          eventi:"Eventos",seiditerracina:"Sei di Terracina se...",gommoni:"Alquiler de botes",bici:"Alquiler de bicis",
@@ -559,7 +629,9 @@ const I18N = {
           trasporti:"Taxis y horarios de autobús/tren.",emergenza:"Números útiles y servicios sanitarios/seguridad.",
           dintorni:"Historia y lugares que ver en Terracina y sus alrededores.",
           consigli:"Ideas dejadas por huéspedes anteriores.",
-          mangiare:"Elige lo que buscas.",serviziutili:"Bancos, oficinas de correos, gasolineras, iglesias y alquileres.",
+          mangiare:"Elige lo que buscas.",serviziutili:"Farmacias, transporte, gasolineras, bancos, oficinas de correos, iglesias, alquileres y compras.",
+          casa:"Todo lo que necesitas para la casa durante la estancia.",isole:"Cómo llegar a Ponza y moverte por mar.",
+          spiaggeisole:"El litoral de Terracina y las islas cercanas.",davisitare:"Lugares y excursiones para vivir en persona.",daleggere:"Historia y curiosidades sobre Terracina.",
           ristoranti:"Una selección de restaurantes recomendados.",fishchips:"Pescado frito y para llevar.",pizza:"Pizzerías recomendadas.",
           barpasticceria:"Para un café, un dulce o un helado.",nightlife:"Para la noche.",
           eventi:"Qué pasa en la ciudad.",seiditerracina:"Un vistazo a la Terracina más auténtica, en redes sociales.",
@@ -584,9 +656,11 @@ const I18N = {
   de:{ flag:"🇩🇪", label:"DE",
     subtitle:"Gästeführer", hubTitle:"Alles, was du während deines Aufenthalts in Terracina brauchst.",
     back:"Zurück zum Menü", call:"Anrufen", maps:"In Maps öffnen", open:"Website öffnen",
-    comeArrivareShort:"Anreise", guidaCasaShort:"Hausanleitung",
+    comeArrivareShort:"Anreise", guidaCasaShort:"Hausanleitung", mymapsShort:"Eigene Karte",
     footer:"Daten Stand September 2026 · Öffnungszeiten und Kontakte können abweichen",
-    cat:{wifi:"WLAN",raccolta:"Mülltrennung",serviziutili:"Nützliche Dienste",checkout:"Check-out",
+    cat:{wifi:"WLAN",raccolta:"Mülltrennung",serviziutili:"Nützliche Dienste & Transport",checkout:"Check-out",
+         casa:"Zuhause","guida-casa":"Vollständige Hausanleitung",isole:"Inseln",spiaggeisole:"Strände & Inseln",
+         davisitare:"Zum Besuchen",daleggere:"Zum Lesen",traghettoponza:"Fähre nach Ponza",gommonitour:"Ponza - Boote & Touren",
          mangiare:"Essen",supermercati:"Supermärkte",farmacie:"Apotheken",spiagge:"Strände",shopping:"Shopping",trasporti:"Transport",dintorni:"Umgebung",emergenza:"Notfall",consigli:"Tipps von Gästen",recensione:"Bewertungen",
          ristoranti:"Restaurants",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Bars & Konditoreien",nightlife:"Nightlife",
          eventi:"Veranstaltungen",seiditerracina:"Sei di Terracina se...",gommoni:"Bootsverleih",bici:"Fahrradverleih",
@@ -597,7 +671,9 @@ const I18N = {
           trasporti:"Taxis und Bus-/Zugfahrpläne.",emergenza:"Nützliche Nummern und Gesundheits-/Sicherheitsdienste.",
           dintorni:"Geschichte und Orte in und um Terracina.",
           consigli:"Ideen von früheren Gästen.",
-          mangiare:"Wähle, wonach du suchst.",serviziutili:"Banken, Postämter, Tankstellen, Kirchen und Vermietungen.",
+          mangiare:"Wähle, wonach du suchst.",serviziutili:"Apotheken, Transport, Tankstellen, Banken, Postämter, Kirchen, Vermietungen und Shopping.",
+          casa:"Alles, was du für die Wohnung während des Aufenthalts brauchst.",isole:"Wie man nach Ponza kommt und sich auf dem Meer bewegt.",
+          spiaggeisole:"Die Küste von Terracina und die nahegelegenen Inseln.",davisitare:"Orte und Ausflüge zum Selbsterleben.",daleggere:"Geschichte und Wissenswertes über Terracina.",
           ristoranti:"Eine Auswahl empfohlener Restaurants.",fishchips:"Frittierter Fisch zum Mitnehmen.",pizza:"Empfohlene Pizzerien.",
           barpasticceria:"Für einen Kaffee, ein Gebäck oder ein Eis.",nightlife:"Für den Abend.",
           eventi:"Was in der Stadt los ist.",seiditerracina:"Ein Blick auf das echte Terracina, in sozialen Medien.",
@@ -622,9 +698,11 @@ const I18N = {
   no:{ flag:"🇳🇴", label:"NO",
     subtitle:"Gjestehåndbok", hubTitle:"Alt du trenger under oppholdet ditt i Terracina.",
     back:"Tilbake til menyen", call:"Ring", maps:"Åpne i Maps", open:"Åpne nettsted",
-    comeArrivareShort:"Hvordan komme frem", guidaCasaShort:"Husguide",
+    comeArrivareShort:"Hvordan komme frem", guidaCasaShort:"Husguide", mymapsShort:"Tilpasset kart",
     footer:"Data bekreftet september 2026 · åpningstider og kontakter kan variere",
-    cat:{wifi:"Wi-Fi",raccolta:"Kildesortering",serviziutili:"Nyttige tjenester",checkout:"Utsjekk",
+    cat:{wifi:"Wi-Fi",raccolta:"Kildesortering",serviziutili:"Nyttige Tjenester og Transport",checkout:"Utsjekk",
+         casa:"Hjem","guida-casa":"Fullstendig husguide",isole:"Øyer",spiaggeisole:"Strender og Øyer",
+         davisitare:"Å besøke",daleggere:"Å lese",traghettoponza:"Ferje til Ponza",gommonitour:"Ponza - Båter og Turer",
          mangiare:"Spise",supermercati:"Supermarkeder",farmacie:"Apotek",spiagge:"Strender",shopping:"Shopping",trasporti:"Transport",dintorni:"I nærheten",emergenza:"Nødsituasjon",consigli:"Tips fra gjester",recensione:"Anmeldelser",
          ristoranti:"Restauranter",fishchips:"Fish & Chips",pizza:"Pizza",barpasticceria:"Barer & Konditorier",nightlife:"Nattliv",
          eventi:"Arrangementer",seiditerracina:"Sei di Terracina se...",gommoni:"Båtutleie",bici:"Sykkelutleie",
@@ -635,7 +713,9 @@ const I18N = {
           trasporti:"Taxi og buss-/togtider.",emergenza:"Nyttige numre og helse-/sikkerhetstjenester.",
           dintorni:"Historie og steder å se i og rundt Terracina.",
           consigli:"Ideer fra tidligere gjester.",
-          mangiare:"Velg det du leter etter.",serviziutili:"Banker, postkontor, bensinstasjoner, kirker og utleie.",
+          mangiare:"Velg det du leter etter.",serviziutili:"Apotek, transport, bensinstasjoner, banker, postkontor, kirker, utleie og shopping.",
+          casa:"Alt du trenger for hjemmet under oppholdet.",isole:"Hvordan komme til Ponza og bevege seg på sjøen.",
+          spiaggeisole:"Kysten av Terracina og øyene like ved.",davisitare:"Steder og turer å oppleve personlig.",daleggere:"Historie og kuriositeter om Terracina.",
           ristoranti:"Et utvalg anbefalte restauranter.",fishchips:"Frityrstekt fisk og take-away.",pizza:"Anbefalte pizzeriaer.",
           barpasticceria:"For en kaffe, et bakverk eller en is.",nightlife:"For kvelden.",
           eventi:"Hva som skjer i byen.",seiditerracina:"Et blikk på det ekte Terracina, på sosiale medier.",
@@ -723,12 +803,14 @@ function navigate(state){
 }
 window.addEventListener("popstate", (e)=>{ applyState(e.state); });
 
-function openTopCategory(id){
-  if(INFO_TYPES.includes(id)){ navigate({view:"info", cat:id}); return; }
+function enterCategory(id, parent){
+  if(INFO_TYPES.includes(id)){ navigate({view:"info", parent, cat:id}); return; }
+  if(id === "come-arrivare" || id === "guida-casa" || id === "recensione"){ navigate({view:"external", parent, cat:id}); return; }
   if(SUBMENUS[id]){ navigate({view:"subHub", parent:id}); return; }
-  if(id === "come-arrivare" || id === "guida-casa" || id === "recensione"){ navigate({view:"external", cat:id}); return; }
-  navigate({view:"detail", parent:"hub", cat:id});
+  navigate({view:"detail", parent, cat:id});
 }
+
+function openTopCategory(id){ enterCategory(id, "hub"); }
 
 function openSubCategory(id){
   if(currentParent === "consigli"){
@@ -736,20 +818,32 @@ function openSubCategory(id){
     if(id === "leggi"){ navigate({view:"tipList", parent:"consigli", cat:id}); }
     return;
   }
-  navigate({view:"detail", parent:currentParent, cat:id});
+  enterCategory(id, currentParent);
 }
 
+function renderArticleCard(a){
+  return "<div class='article-card'><div class='article-title'>" + a.title + "</div><div class='article-preview'>" + a.preview + "</div><div class='article-actions'>" +
+    (a.placeId ? "<a class='btn-maps' href='" + mapsUrl(a.placeName || a.title, a.placeId) + "' target='_blank' rel='noopener'>" + t().maps + " ↗</a>" : "") +
+    (a.bookingUrl ? "<a class='btn-link' href='" + a.bookingUrl + "' target='_blank' rel='noopener'>" + a.bookingText + " ↗</a>" : "") +
+    "<a class='btn-read' href='guida-citta.html#" + a.id + "' target='_blank' rel='noopener'>" + t().readMore + " ↗</a>" +
+    "</div></div>";
+}
 function renderVenueCard(v){
   if(v.isLink){
     return "<div class='venue-card'><div class='venue-name'>" + v.name + "</div><div class='venue-actions'><a class='btn-link' href='" + v.link + "' target='_blank' rel='noopener'>" + t().open + " ↗</a></div></div>";
   }
   if(v.links){
     return "<div class='venue-card'><div class='venue-name'>" + v.name + "</div><div class='venue-actions'>" +
-      v.links.map(l=>"<a class='btn-link' href='" + l.url + "' target='_blank' rel='noopener'>" + l.label + " ↗</a>").join("") + "</div></div>";
+      v.links.map(l=>{
+        const paren = l.parenKey ? " (" + (PARENS[currentLang] && PARENS[currentLang][l.parenKey] || PARENS.it[l.parenKey]) + ")" : "";
+        return "<a class='btn-link' href='" + l.url + "' target='_blank' rel='noopener'>" + l.label + paren + " ↗</a>";
+      }).join("") + "</div></div>";
   }
   const descText = d(v.desc);
+  const tagText = v.tag ? d(v.tag) : null;
   return "<div class='venue-card'>" +
       "<div class='venue-name-row'><span class='venue-name'>" + v.name + "</span>" + (v.tip? "<span class='tip-badge'>"+t().tip+"</span>" : "") + "</div>" +
+      (tagText ? "<div class='shop-tag'>" + tagText + "</div>" : "") +
       (v.address ? "<div class='venue-address'>" + v.address + "</div>" : "") +
       (descText ? "<div class='venue-desc'>" + descText + "</div>" : "") +
       "<div class='venue-actions'>" +
@@ -770,15 +864,14 @@ function renderDetail(){
   const pinsLabel = document.getElementById("pinsLabel");
   articleList.innerHTML = ""; venueList.innerHTML = ""; emBox.innerHTML = ""; pinsLabel.style.display = "none";
 
-  if(currentCat === "dintorni"){
-    const arts = DINTORNI[currentLang] || DINTORNI.en;
-    articleList.innerHTML = "<div class='section-label'>" + t().sectionRead + "</div>" + arts.map(a =>
-      "<div class='article-card'><div class='article-title'>" + a.title + "</div><div class='article-preview'>" + a.preview + "</div><div class='article-actions'>" +
-      (a.placeId ? "<a class='btn-maps' href='" + mapsUrl(a.placeName || a.title, a.placeId) + "' target='_blank' rel='noopener'>" + t().maps + " ↗</a>" : "") +
-      (a.bookingUrl ? "<a class='btn-link' href='" + a.bookingUrl + "' target='_blank' rel='noopener'>" + a.bookingText + " ↗</a>" : "") +
-      "<a class='btn-read' href='guida-citta.html#" + a.id + "' target='_blank' rel='noopener'>" + t().readMore + " ↗</a>" +
-      "</div></div>").join("");
-    pinsLabel.style.display = "block"; pinsLabel.textContent = t().sectionSee;
+  if(currentCat === "daleggere"){
+    const arts = (DINTORNI[currentLang] || DINTORNI.en).filter(a => a.id !== "ponza");
+    articleList.innerHTML = arts.map(renderArticleCard).join("");
+    return;
+  }
+  if(currentCat === "davisitare"){
+    const ponza = (DINTORNI[currentLang] || DINTORNI.en).find(a => a.id === "ponza");
+    articleList.innerHTML = ponza ? renderArticleCard(ponza) : "";
     venueList.innerHTML = DINTORNI_PINS.map(renderVenueCard).join("");
     return;
   }
