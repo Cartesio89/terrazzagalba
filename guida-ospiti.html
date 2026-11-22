@@ -171,8 +171,8 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-soft);padding:20px;}
 <footer data-i18n="footer">Dati verificati a settembre 2026 · orari e contatti possono variare</footer>
 
 <script>
-const SUPABASE_URL = "https://tafdebnpuoefsvnawtjh.supabase.co";
-const SUPABASE_KEY = "sb_publishable_sncfiZjtF13gudClpFvE-Q_yFNAYUEO";
+const SUPABASE_URL = "https://prmyrmpmfavppkbzdqyg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW";
 
 const TOP_CATEGORIES = ["casa","mangiare","supermercati","spiaggeisole","serviziutili","eventi","dintorni","consigli","recensione","emergenza"];
 const SUBMENUS = {
@@ -926,7 +926,7 @@ function renderTipForm(){
   });
   document.getElementById("tipSubmitBtn").addEventListener("click", submitTip);
 }
-const SUPABASE_FUNCTION_URL = SUPABASE_URL ? (SUPABASE_URL + "/functions/v1/quick-handler") : "";
+const SUPABASE_FUNCTION_URL = SUPABASE_URL ? (SUPABASE_URL + "/functions/v1/galba-translate") : "";
 
 async function submitTip(){
   const msg = document.getElementById("tipFormMsg");
@@ -951,6 +951,7 @@ async function submitTip(){
     } else { msg.textContent = t().formErr; msg.className = "form-msg err"; }
   } catch(e){ msg.textContent = t().formErr; msg.className = "form-msg err"; }
 }
+function escHtml(v){ return String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 async function renderTipList(){
   document.getElementById("tipListTitle").textContent = catLabel("leggi");
   const box = document.getElementById("tipListBox");
@@ -959,7 +960,7 @@ async function renderTipList(){
   }
   box.innerHTML = "<div class='empty-state'>" + t().emptyState + "</div>";
   try{
-    const res = await fetch(SUPABASE_URL + "/rest/v1/consigli?select=nome,mese,testo,created_at&order=created_at.desc&limit=50", {
+    const res = await fetch(SUPABASE_URL + "/rest/v1/galba_consigli?select=nome,mese,testo,created_at&order=created_at.desc&limit=50", {
       headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY }
     });
     if(!res.ok) throw new Error("fetch failed");
@@ -970,7 +971,7 @@ async function renderTipList(){
       if(testoShown && typeof testoShown === "object"){
         testoShown = testoShown[currentLang] || testoShown.it || Object.values(testoShown).find(v=>v) || "";
       }
-      return "<div class='tip-card'><div class='tip-meta'>" + (r.nome || t().anonimo) + (r.mese ? " · " + r.mese : "") + "</div><div class='tip-text'>" + testoShown + "</div></div>";
+      return "<div class='tip-card'><div class='tip-meta'>" + escHtml(r.nome || t().anonimo) + (r.mese ? " · " + escHtml(r.mese) : "") + "</div><div class='tip-text'>" + escHtml(testoShown) + "</div></div>";
     }).join("");
   } catch(e){ box.innerHTML = "<div class='empty-state'>" + t().formErr + "</div>"; }
 }
