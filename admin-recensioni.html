@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Gestione recensioni - Terrazza Galba</title>
+<link rel="stylesheet" href="css/fonts.css?v=20261126">
+<style>
+:root { --blue:#2C5F7F; --blue-dark:#1a3f5c; --tint:#e8f0f5; --red:#c41e3a; --ink:#2b3540; --muted:#5f6b75; --line:#e1e5e9; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Montserrat', system-ui, sans-serif; background: #f5f7f9; color: var(--ink); }
+header { background: var(--blue); color: #fff; padding: 1.1rem 1.25rem; }
+header h1 { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
+header p { font-size: .8rem; opacity: .85; margin-top: .2rem; }
+main { max-width: 760px; margin: 0 auto; padding: 1.25rem; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; }
+h2 { font-size: 1.05rem; color: var(--blue); margin-bottom: .9rem; }
+label { display: block; font-size: .8rem; font-weight: 600; margin: .8rem 0 .3rem; }
+input, select, textarea { width: 100%; font: inherit; font-size: 16px; padding: .7rem .8rem; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); }
+textarea { min-height: 150px; resize: vertical; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+button { font: inherit; font-weight: 600; border: none; border-radius: 999px; padding: .75rem 1.4rem; cursor: pointer; }
+.primary { background: var(--blue); color: #fff; }
+.primary:disabled { opacity: .6; cursor: wait; }
+.ghost { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); padding: .4rem .9rem; font-size: .8rem; }
+.danger { background: #fff; color: var(--red); border: 1.5px solid var(--red); padding: .4rem .9rem; font-size: .8rem; }
+.msg { margin-top: .9rem; font-size: .88rem; font-weight: 500; }
+.ok { color: #1f7a45; } .err { color: var(--red); }
+.hint { font-size: .78rem; color: var(--muted); margin-top: .5rem; line-height: 1.5; }
+.rev { border-top: 1px solid var(--line); padding: .9rem 0; }
+.rev:first-child { border-top: none; padding-top: 0; }
+.rev-head { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+.rev-head strong { font-size: .95rem; }
+.badge { font-size: .7rem; font-weight: 600; padding: .1rem .55rem; border-radius: 999px; background: #fdecef; color: #d4334f; margin-left: .4rem; }
+.badge.google { background: #e8f0fe; color: #1a5fd0; }
+.badge.off { background: #eee; color: #777; }
+.rev p { font-size: .85rem; color: var(--muted); margin: .4rem 0 .6rem; line-height: 1.5; }
+.rev-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.hidden-rev { opacity: .55; }
+#app[hidden], #login[hidden] { display: none; }
+@media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Gestione recensioni</h1>
+  <p>Terrazza Galba · pagina privata, non indicizzata</p>
+</header>
+<main>
+  <section class="card" id="login">
+    <h2>Accedi</h2>
+    <label for="pwd">Password di gestione</label>
+    <input type="password" id="pwd" autocomplete="current-password">
+    <p class="hint">È la password impostata su Supabase nel secret <code>GALBA_ADMIN_PASSWORD</code>.</p>
+    <div style="margin-top:1rem;"><button class="primary" id="loginBtn" type="button">Entra</button></div>
+    <p class="msg" id="loginMsg"></p>
+  </section>
+
+  <div id="app" hidden>
+    <section class="card">
+      <h2>Aggiungi una recensione</h2>
+      <p class="hint">Le recensioni <strong>Google</strong> arrivano da sole sul sito: qui inserisci quelle di <strong>Airbnb</strong>. Incolla il testo nella lingua originale: la traduzione nelle altre lingue è automatica.</p>
+      <div class="row">
+        <div>
+          <label for="autore">Nome dell'ospite</label>
+          <input id="autore" maxlength="60" placeholder="es. Paola">
+        </div>
+        <div>
+          <label for="mese">Mese della recensione</label>
+          <input id="mese" type="month">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="voto">Voto</label>
+          <select id="voto">
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★ (4)</option>
+            <option value="3">★★★ (3)</option>
+            <option value="2">★★ (2)</option>
+            <option value="1">★ (1)</option>
+          </select>
+        </div>
+        <div>
+          <label for="fonte">Fonte</label>
+          <select id="fonte">
+            <option value="airbnb">Airbnb</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+      </div>
+      <label for="testo">Testo della recensione</label>
+      <textarea id="testo" maxlength="3000" placeholder="Incolla qui il testo..."></textarea>
+      <div style="margin-top:1rem;"><button class="primary" id="addBtn" type="button">Pubblica sul sito</button></div>
+      <p class="msg" id="addMsg"></p>
+    </section>
+
+    <section class="card">
+      <h2>Recensioni pubblicate</h2>
+      <div id="list"><p class="hint">Caricamento…</p></div>
+    </section>
+  </div>
+</main>
+
+<script>
+const API = 'https://prmyrmpmfavppkbzdqyg.supabase.co/functions/v1/galba-reviews';
+const KEY = 'sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW';
+let password = '';
+try { password = sessionStorage.getItem('galbaAdmin') || ''; } catch (e) {}
+
+const $ = id => document.getElementById(id);
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function call(body) {
+  const res = await fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: KEY },
+    body: JSON.stringify(Object.assign({ password }, body))
+  });
+  const data = await res.json().catch(() => ({}));
+  return { status: res.status, data };
+}
+
+function setMsg(el, text, ok) { el.textContent = text; el.className = 'msg ' + (ok ? 'ok' : 'err'); }
+
+async function login() {
+  password = $('pwd').value || password;
+  if (!password) return;
+  $('loginBtn').disabled = true;
+  const r = await call({ action: 'list' }).catch(() => ({ status: 0, data: {} }));
+  $('loginBtn').disabled = false;
+  if (r.status === 200) {
+    try { sessionStorage.setItem('galbaAdmin', password); } catch (e) {}
+    $('login').hidden = true; $('app').hidden = false;
+    renderList(r.data.rows || []);
+  } else if (r.status === 401) {
+    setMsg($('loginMsg'), 'Password errata.', false);
+  } else if (r.status === 503) {
+    setMsg($('loginMsg'), 'La password di gestione non è ancora impostata su Supabase.', false);
+  } else {
+    setMsg($('loginMsg'), 'Servizio non raggiungibile. Riprova tra poco.', false);
+  }
+}
+
+function renderList(rows) {
+  if (!rows.length) { $('list').innerHTML = '<p class="hint">Nessuna recensione.</p>'; return; }
+  $('list').innerHTML = rows.map(r => {
+    const t = r.testo || {};
+    const txt = t.it || t.en || Object.values(t)[0] || '';
+    const d = new Date(r.data_recensione + 'T12:00:00').toLocaleDateString('it-IT', { month: 'long', year: 'numeric' });
+    return `<div class="rev ${r.visibile ? '' : 'hidden-rev'}">
+      <div class="rev-head"><div><strong>${esc(r.autore)}</strong>
+        <span class="badge ${r.fonte === 'google' ? 'google' : ''}">${esc(r.fonte)}</span>
+        ${r.visibile ? '' : '<span class="badge off">nascosta</span>'}</div>
+        <span style="font-size:.8rem;color:#5f6b75;">${esc(d)} · ${'★'.repeat(r.voto)}</span></div>
+      <p>${esc(txt.length > 220 ? txt.slice(0, 220) + '…' : txt)}</p>
+      <p class="hint" style="margin-top:-.3rem;">Lingue disponibili: ${esc(Object.keys(t).join(', '))}</p>
+      <div class="rev-actions">
+        <button class="ghost" data-act="${r.visibile ? 'hide' : 'show'}" data-id="${r.id}" type="button">${r.visibile ? 'Nascondi' : 'Mostra di nuovo'}</button>
+        <button class="danger" data-act="delete" data-id="${r.id}" type="button">Elimina</button>
+      </div></div>`;
+  }).join('');
+}
+
+async function refresh() {
+  const r = await call({ action: 'list' });
+  if (r.status === 200) renderList(r.data.rows || []);
+}
+
+$('list').addEventListener('click', async e => {
+  const b = e.target.closest('button[data-act]');
+  if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'delete' && !confirm('Eliminare definitivamente questa recensione dal sito?')) return;
+  b.disabled = true;
+  await call({ action: act, id: Number(b.dataset.id) });
+  refresh();
+});
+
+$('addBtn').addEventListener('click', async () => {
+  const body = {
+    action: 'add',
+    autore: $('autore').value.trim(),
+    mese: $('mese').value,
+    voto: $('voto').value,
+    fonte: $('fonte').value,
+    testo: $('testo').value.trim()
+  };
+  if (!body.autore || !body.mese || !body.testo) { setMsg($('addMsg'), 'Compila nome, mese e testo.', false); return; }
+  $('addBtn').disabled = true;
+  setMsg($('addMsg'), 'Traduzione e pubblicazione in corso… (qualche secondo)', true);
+  const r = await call(body).catch(() => ({ status: 0, data: {} }));
+  $('addBtn').disabled = false;
+  if (r.status === 200) {
+    const n = (r.data.lingue || []).length;
+    setMsg($('addMsg'), n > 1 ? `Pubblicata e tradotta in ${n} lingue.` : 'Pubblicata (traduzione non riuscita: compare nella lingua originale).', true);
+    $('autore').value = ''; $('testo').value = '';
+    refresh();
+  } else {
+    setMsg($('addMsg'), 'Non è stato possibile pubblicarla. Controlla i campi e riprova.', false);
+  }
+});
+
+$('loginBtn').addEventListener('click', login);
+$('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+if (password) login();
+</script>
+</body>
+</html>

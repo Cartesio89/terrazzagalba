@@ -1,6 +1,21 @@
 // Language management
 let currentLang = 'it';
+try {
+    const savedLang = localStorage.getItem('language');
+    if (savedLang === 'it' || savedLang === 'en') currentLang = savedLang;
+} catch (e) { /* storage non disponibile: resta italiano */ }
 let content = {};
+
+// Recensioni: lette da Supabase (Airbnb inserite a mano + Google in tempo reale).
+// Se il servizio non risponde, si usano quelle scritte in content.json.
+const REVIEWS_API = 'https://prmyrmpmfavppkbzdqyg.supabase.co/functions/v1/galba-reviews';
+const REVIEWS_KEY = 'sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW';
+const reviewsCache = {};
+let reviewsExpanded = false;
+
+function escapeHtml(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
 // Load content
 async function loadContent() {
@@ -9,6 +24,7 @@ async function loadContent() {
         content = await response.json();
         updateContent();
         setupGalleryToggle(); // Setup dopo aver caricato content
+        loadReviews();
     } catch (error) {
         console.error('Error loading content:', error);
     }
@@ -85,66 +101,170 @@ function updateContent() {
 }
 
 // Update reviews
+async function loadReviews() {
+    const lang = currentLang;
+    if (reviewsCache[lang]) { updateReviews(); return; }
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 6000);
+        const res = await fetch(REVIEWS_API + '?lang=' + lang, {
+            headers: { apikey: REVIEWS_KEY },
+            signal: controller.signal
+        });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('reviews ' + res.status);
+        const data = await res.json();
+        if (!data || !Array.isArray(data.manual)) throw new Error('reviews format');
+        reviewsCache[lang] = data;
+    } catch (e) {
+        console.warn('Recensioni dal servizio non disponibili, uso content.json', e);
+        reviewsCache[lang] = null;
+    }
+    if (lang === currentLang) updateReviews();
+}
+
+function formatReviewDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
+    if (isNaN(d)) return iso;
+    const txt = d.toLocaleDateString(currentLang === 'it' ? 'it-IT' : 'en-GB', { month: 'long', year: 'numeric' });
+    return txt.charAt(0).toUpperCase() + txt.slice(1);
+}
+
+function makePreview(text) {
+    const LIMIT = 160;
+    if (text.length <= LIMIT + 30) return null;
+    let cut = text.slice(0, LIMIT);
+    const sp = cut.lastIndexOf(' ');
+    if (sp > 80) cut = cut.slice(0, sp);
+    return cut.replace(/[\s,.;:!?-]+$/, '') + '…';
+}
+
+function collectReviews() {
+    const r = content[currentLang] && content[currentLang].reviews;
+    const api = reviewsCache[currentLang];
+    if (api) {
+        const list = api.manual.map(x => Object.assign({}, x));
+        const g = api.google;
+        if (g && Array.isArray(g.reviews)) g.reviews.forEach(x => list.push(Object.assign({}, x)));
+        list.sort((a, b) => String(b.data).localeCompare(String(a.data)));
+        let total = api.manual.length, sum = api.manual.reduce((t, x) => t + (x.voto || 5), 0);
+        if (g && g.count) { total += g.count; sum += (g.rating || 5) * g.count; }
+        return { list, total, avg: total ? sum / total : 5, google: g && g.count ? g : null };
+    }
+    // ripiego: recensioni scritte in content.json
+    const items = (r && r.items) || [];
+    return {
+        list: items.map(it => ({ fonte: 'airbnb', autore: it.name, voto: it.rating, dataLabel: it.date, testo: it.text })),
+        total: items.length,
+        avg: items.length ? items.reduce((t, x) => t + (x.rating || 5), 0) / items.length : 5,
+        google: null
+    };
+}
+
 function updateReviews() {
     const reviewsGrid = document.getElementById('reviewsGrid');
-    if (!reviewsGrid || !content[currentLang].reviews) return;
-    
+    if (!reviewsGrid || !content[currentLang] || !content[currentLang].reviews) return;
+    const t = content[currentLang].reviews;
+    const { list, total, avg, google } = collectReviews();
+
+    // riepilogo in alto
+    const num = document.getElementById('ratingNumber');
+    const stars = document.getElementById('ratingStars');
+    const txt = document.getElementById('ratingText');
+    if (num) num.textContent = (Math.round(avg * 10) / 10).toFixed(1);
+    if (stars) stars.textContent = '★'.repeat(Math.round(avg)) + '☆'.repeat(5 - Math.round(avg));
+    if (txt) {
+        const word = total === 1 ? (t.countOne || 'recensione') : (t.countMany || 'recensioni');
+        txt.textContent = total + ' ' + word + (google ? ' · ' + (t.sources || 'Airbnb e Google') : ' · Airbnb');
+    }
+
+    const readMoreText = t.readMore || 'Leggi tutto';
+    const readLessText = t.readLess || 'Mostra meno';
+    const visibleCount = window.matchMedia('(max-width: 768px)').matches ? 3 : 6;
+
     reviewsGrid.innerHTML = '';
-    content[currentLang].reviews.items.forEach((review, index) => {
+    list.forEach((review, index) => {
+        const text = String(review.testo || '');
+        const preview = makePreview(text);
+        const isGoogle = review.fonte === 'google';
         const reviewCard = document.createElement('div');
-        reviewCard.className = 'review-card';
-        
-        const hasPreview = review.preview && review.preview !== review.text;
-        const readMoreText = content[currentLang].reviews.readMore || 'Leggi tutto';
-        const readLessText = content[currentLang].reviews.readLess || 'Mostra meno';
-        
+        reviewCard.className = 'review-card' + (index >= visibleCount && !reviewsExpanded ? ' review-card-hidden' : '');
+        const nameHtml = isGoogle && review.autoreUrl
+            ? `<a href="${escapeHtml(review.autoreUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(review.autore)}</a>`
+            : escapeHtml(review.autore);
+        const dateLabel = review.dataLabel || formatReviewDate(review.data);
         reviewCard.innerHTML = `
             <div class="review-header">
                 <div class="review-author">
-                    <div class="review-avatar">${review.name.charAt(0)}</div>
+                    <div class="review-avatar" aria-hidden="true">${escapeHtml(String(review.autore || '?').charAt(0).toUpperCase())}</div>
                     <div>
-                        <h3 class="review-name">${review.name}</h3>
-                        <p class="review-date">${review.date}</p>
+                        <h3 class="review-name">${nameHtml}</h3>
+                        <p class="review-date">${escapeHtml(dateLabel)}</p>
                     </div>
                 </div>
-                <div class="review-rating">${'★'.repeat(review.rating)}</div>
+                <div class="review-rating" aria-label="${review.voto}/5">${'★'.repeat(review.voto || 5)}</div>
             </div>
             <div class="review-content">
-                <p class="review-text-preview">${hasPreview ? review.preview : review.text}</p>
-                ${hasPreview ? `
-                    <p class="review-text-full" style="display: none;">${review.text}</p>
-                    <button class="review-toggle" data-review-index="${index}">
-                        <span class="toggle-show">${readMoreText} ▼</span>
-                        <span class="toggle-hide" style="display: none;">${readLessText} ▲</span>
+                <p class="review-text-preview">${escapeHtml(preview || text)}</p>
+                ${preview ? `
+                    <p class="review-text-full" style="display: none;">${escapeHtml(text)}</p>
+                    <button class="review-toggle" type="button">
+                        <span class="toggle-show">${escapeHtml(readMoreText)} ▼</span>
+                        <span class="toggle-hide" style="display: none;">${escapeHtml(readLessText)} ▲</span>
                     </button>
                 ` : ''}
+            </div>
+            <div class="review-footer">
+                <span class="review-source review-source-${isGoogle ? 'google' : escapeHtml(review.fonte || 'airbnb')}">${isGoogle ? 'Google' : (review.fonte === 'altro' ? '' : 'Airbnb')}</span>
+                ${review.tradotto ? `<span class="review-translated">${escapeHtml(t.translated || '')}</span>` : ''}
             </div>
         `;
         reviewsGrid.appendChild(reviewCard);
     });
-    
-    // Add toggle functionality
-    document.querySelectorAll('.review-toggle').forEach(button => {
+
+    // "Leggi tutto" su ogni recensione
+    reviewsGrid.querySelectorAll('.review-toggle').forEach(button => {
         button.addEventListener('click', () => {
             const card = button.closest('.review-card');
             const preview = card.querySelector('.review-text-preview');
             const full = card.querySelector('.review-text-full');
             const showBtn = button.querySelector('.toggle-show');
             const hideBtn = button.querySelector('.toggle-hide');
-            
-            if (full.style.display === 'none') {
-                preview.style.display = 'none';
-                full.style.display = 'block';
-                showBtn.style.display = 'none';
-                hideBtn.style.display = 'inline';
-            } else {
-                preview.style.display = 'block';
-                full.style.display = 'none';
-                showBtn.style.display = 'inline';
-                hideBtn.style.display = 'none';
-            }
+            const open = full.style.display === 'none';
+            preview.style.display = open ? 'none' : 'block';
+            full.style.display = open ? 'block' : 'none';
+            showBtn.style.display = open ? 'none' : 'inline';
+            hideBtn.style.display = open ? 'inline' : 'none';
         });
     });
+
+    // "Mostra tutte le recensioni"
+    const more = document.getElementById('reviewsMore');
+    if (more) {
+        if (list.length > visibleCount) {
+            more.hidden = false;
+            more.textContent = reviewsExpanded ? (t.showFewer || 'Mostra meno recensioni')
+                                               : (t.showAll || 'Mostra tutte le recensioni') + ' (' + list.length + ')';
+            more.onclick = () => {
+                reviewsExpanded = !reviewsExpanded;
+                updateReviews();
+                if (!reviewsExpanded) document.getElementById('reviews').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+        } else {
+            more.hidden = true;
+        }
+    }
+    const gLink = document.getElementById('reviewsGoogleLink');
+    if (gLink) {
+        if (google && google.url) {
+            gLink.hidden = false;
+            gLink.href = google.url;
+            gLink.textContent = (t.allOnGoogle || 'Leggi tutte le recensioni su Google') + ' →';
+        } else {
+            gLink.hidden = true;
+        }
+    }
 }
 
 // Gallery management - NON CLICKABLE
@@ -275,14 +395,21 @@ function setupLanguageSwitcher() {
 
     if (!langOptions.length) return;
 
+    // lingua scelta in precedenza (anche dalla Guida alla città)
+    langOptions.forEach(opt => opt.classList.toggle('active', opt.getAttribute('data-lang') === currentLang));
+    document.documentElement.lang = currentLang;
+
     langOptions.forEach(option => {
         option.addEventListener('click', () => {
             const lang = option.getAttribute('data-lang');
             if (lang !== currentLang) {
                 currentLang = lang;
+                try { localStorage.setItem('language', lang); } catch (e) {}
+                document.documentElement.lang = lang;
                 langOptions.forEach(opt => opt.classList.remove('active'));
                 option.classList.add('active');
                 updateContent();
+                loadReviews();
             }
         });
     });
@@ -312,48 +439,101 @@ function setupTabs() {
 }
 
 // Contact form setup
+// FormSubmit: per gli invii da JavaScript va usato l'indirizzo /ajax/ (quello senza /ajax/
+// mostra una pagina con captcha che da fetch non si può completare, quindi l'email non partiva).
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/terrazzagalba@gmail.com';
+const FORM_CC = 'martino.cicerani@gmail.com';
+
 function setupContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
+    const status = document.getElementById('formStatus');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+    const showStatus = (key, fallback, ok) => {
+        const f = (content[currentLang] && content[currentLang].contact && content[currentLang].contact.form) || {};
+        if (status) {
+            status.textContent = f[key] || fallback;
+            status.className = 'form-status ' + (ok === true ? 'form-status-ok' : ok === false ? 'form-status-err' : 'form-status-wait');
+        }
+    };
 
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message')
-        };
-        
-        // Send email (using FormSubmit)
+        const name = String(formData.get('name') || '').trim();
+        const email = String(formData.get('email') || '').trim();
+        const message = String(formData.get('message') || '').trim();
+        if (!name || !email || !message) return;
+
+        if (submitBtn) submitBtn.disabled = true;
+        showStatus('sending', 'Invio in corso…');
         try {
-            const response = await fetch('https://formsubmit.co/terrazzagalba@gmail.com', {
+            const response = await fetch(FORM_ENDPOINT, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
-                    name: data.name,
-                    email: data.email,
-                    message: data.message,
+                    name: name,
+                    email: email,
+                    message: message,
+                    _replyto: email,
                     _subject: 'Nuova richiesta da Terrazza Galba',
-                    _cc: 'martino.cicerani@gmail.com',
+                    _cc: FORM_CC,
                     _template: 'table'
                 })
             });
-            
-            if (response.ok) {
-                alert(currentLang === 'it' ? 'Messaggio inviato con successo!' : 'Message sent successfully!');
+            const result = await response.json().catch(() => ({}));
+            if (response.ok && String(result.success) !== 'false') {
+                showStatus('ok', 'Messaggio inviato!', true);
                 contactForm.reset();
             } else {
-                throw new Error('Failed to send');
+                console.error('FormSubmit:', response.status, result);
+                showStatus('err', 'Invio non riuscito. Riprova o scrivici su WhatsApp.', false);
             }
         } catch (error) {
-            alert(currentLang === 'it' ? 'Errore nell\'invio del messaggio. Riprova più tardi.' : 'Error sending message. Please try again later.');
+            console.error('FormSubmit:', error);
+            showStatus('err', 'Invio non riuscito. Riprova o scrivici su WhatsApp.', false);
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
         }
     });
+}
+
+// Map: si carica solo quando l'utente lo chiede (Google riceve dati di navigazione)
+function setupMap() {
+    const box = document.getElementById('mapBox');
+    const btn = document.getElementById('mapLoadBtn');
+    if (!box || !btn) return;
+    btn.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = box.getAttribute('data-src');
+        iframe.width = '100%';
+        iframe.height = '300';
+        iframe.style.border = '0';
+        iframe.loading = 'lazy';
+        iframe.allowFullscreen = true;
+        iframe.title = 'Google Maps';
+        box.innerHTML = '';
+        box.classList.remove('map-consent');
+        box.appendChild(iframe);
+    });
+}
+
+// Gallery counter on mobile carousel ("3 / 18")
+function setupGalleryCounter() {
+    const grid = document.getElementById('galleryGrid');
+    const counter = document.getElementById('galleryCounter');
+    if (!grid || !counter) return;
+    const update = () => {
+        const items = grid.children;
+        if (!items.length) return;
+        const w = items[0].getBoundingClientRect().width || 1;
+        const idx = Math.min(items.length, Math.round(grid.scrollLeft / (w + 12)) + 1);
+        counter.textContent = idx + ' / ' + items.length;
+    };
+    grid.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    update();
 }
 
 // House guide PIN setup
@@ -398,4 +578,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupTabs();
     setupContactForm();
     setupHouseGuide();
+    setupMap();
+    setupGalleryCounter();
+    const y = document.getElementById('footerYear');
+    if (y) y.textContent = new Date().getFullYear();
 });

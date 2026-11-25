@@ -1,0 +1,238 @@
+/* ==========================================================
+   REFRESH – novembre 2026
+   Caricato per ultimo: aggiunge e corregge, non sostituisce.
+   ========================================================== */
+
+:root {
+    --tg-blue: #2C5F7F;
+    --tg-blue-dark: #1a3f5c;
+    --tg-blue-tint: #e8f0f5;
+    --tg-red: #c41e3a;
+    --tg-ink: #2b3540;
+    --tg-muted: #5f6b75;
+    --tg-line: #e6e9ec;
+}
+
+html { scroll-padding-top: 70px; }
+html, body { overflow-x: hidden; }
+
+/* ---------- Correzione: su mobile il tasto "Accedi" della Guida Casa usciva dallo schermo ---------- */
+.pin-form { flex-wrap: nowrap; }
+.pin-form input { min-width: 0; width: 100%; }
+.pin-form .btn { flex-shrink: 0; }
+
+/* ---------- Caratteristiche: icone vere, griglia compatta ---------- */
+.features-grid-compact {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+.feature-card-compact {
+    padding: 1.4rem 0.8rem;
+    background: #fff;
+    border: 1px solid var(--tg-line);
+    border-radius: 14px;
+}
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.8rem;
+    border-radius: 50%;
+    background: var(--tg-blue-tint);
+    color: var(--tg-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0; /* nessuna emoji residua */
+}
+.feature-title { font-size: 0.85rem; line-height: 1.3; }
+
+@media (max-width: 900px) {
+    .features-grid-compact { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+    .features-grid-compact { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .feature-card-compact { padding: 1rem 0.3rem; border-radius: 12px; }
+    .feature-icon { width: 46px; height: 46px; margin-bottom: 0.55rem; }
+    .feature-icon svg { width: 24px; height: 24px; }
+    .feature-title { font-size: 0.74rem; }
+    .feature-card-compact:hover { transform: none; }
+}
+
+/* ---------- Galleria ---------- */
+.gallery-swipe-hint { display: none; }
+
+@media (max-width: 768px) {
+    /* su mobile: foto subito visibili, si scorrono di lato (niente "Mostra") */
+    .gallery-toggle { display: none !important; }
+    .gallery-header { justify-content: center; margin-bottom: 1.2rem; }
+    .gallery-grid,
+    .gallery-grid.expanded {
+        display: flex;
+        grid-template-columns: none;
+        gap: 12px;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0 0 6px;
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        scroll-padding-left: 1rem;
+    }
+    .gallery-grid::-webkit-scrollbar { display: none; }
+    .gallery-item {
+        flex: 0 0 86%;
+        padding-bottom: 0;
+        height: 66vw;
+        max-height: 420px;
+        scroll-snap-align: start;
+        border-radius: 12px;
+    }
+    .gallery-item:hover img { transform: none; }
+    .gallery-swipe-hint {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.8rem;
+        font-size: 0.85rem;
+        color: var(--tg-muted);
+    }
+    .gallery-counter { font-weight: 600; color: var(--tg-blue); }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+    .gallery-grid, .gallery-grid.expanded { margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; scroll-padding-left: 2rem; }
+    .gallery-item { flex-basis: 70%; height: 46vw; }
+}
+
+/* ---------- Recensioni ---------- */
+.review-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--tg-line);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 14px;
+}
+.review-card-hidden { display: none; }
+.review-header { align-items: flex-start; gap: 0.8rem; }
+.review-author { display: flex; align-items: center; gap: 0.8rem; min-width: 0; }
+.review-avatar {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--tg-blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+.review-name { font-size: 1rem; margin: 0; line-height: 1.3; color: var(--tg-ink); }
+.review-name a { color: inherit; text-decoration: none; }
+.review-name a:hover { text-decoration: underline; }
+.review-date { font-size: 0.8rem; color: var(--tg-muted); margin: 0; font-weight: 400; }
+.review-rating { color: #f5b301; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
+.review-content { flex: 1; }
+.review-text-preview, .review-text-full { font-size: 0.95rem; }
+.review-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--tg-line);
+    font-size: 0.75rem;
+}
+.review-source {
+    font-weight: 600;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+}
+.review-source:empty { display: none; }
+.review-source-airbnb { background: #fdecef; color: #d4334f; }
+.review-source-google { background: #e8f0fe; color: #1a5fd0; }
+.review-translated { color: var(--tg-muted); font-style: italic; }
+.rating-stars { letter-spacing: 2px; }
+
+.reviews-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+.reviews-more {
+    background: #fff;
+    color: var(--tg-blue);
+    border: 2px solid var(--tg-blue);
+    border-radius: 999px;
+    padding: 0.75rem 1.6rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.reviews-more:hover { background: var(--tg-blue); color: #fff; }
+.reviews-google-link { color: var(--tg-blue); font-weight: 600; font-size: 0.9rem; }
+.reviews-more[hidden], .reviews-google-link[hidden] { display: none; }
+
+@media (max-width: 480px) {
+    .review-card { padding: 1.3rem; }
+    .reviews-grid { gap: 1rem; }
+}
+
+/* ---------- Mappa su richiesta ---------- */
+.map-consent {
+    min-height: 260px;
+    background: var(--tg-blue-tint);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 1.5rem;
+}
+.map-consent-icon { color: var(--tg-blue); }
+.map-consent-note { font-size: 0.82rem; color: var(--tg-muted); max-width: 320px; margin: 0; line-height: 1.5; }
+.map-load-btn {
+    background: var(--tg-blue);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 0.7rem 1.5rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.map-load-btn:hover { background: var(--tg-blue-dark); }
+.map-open-link { font-size: 0.85rem; color: var(--tg-blue); font-weight: 600; }
+
+/* ---------- Modulo contatti ---------- */
+.form-status { margin-top: 1rem; font-size: 0.92rem; font-weight: 500; }
+.form-status:empty { display: none; }
+.form-status-ok { color: #1f7a45; }
+.form-status-err { color: var(--tg-red); }
+.form-status-wait { color: var(--tg-muted); }
+.form-privacy { margin-top: 1rem; font-size: 0.78rem; color: var(--tg-muted); line-height: 1.5; }
+.form-privacy a { color: var(--tg-blue); }
+.contact-form .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+/* ---------- Footer ---------- */
+.footer p { margin: 0.2rem 0; font-size: 0.9rem; }
+.footer .footer-legal { font-size: 0.8rem; opacity: 0.8; }
+.footer a { color: #fff; }
+
+/* ---------- Mobile: titoli un po' più compatti ---------- */
+@media (max-width: 480px) {
+    .section { padding: 2.6rem 0; }
+    .section-title { font-size: 1.8rem; margin-bottom: 1.8rem; }
+}
+
+/* ---------- Guida alla città: voce attiva nel menu ---------- */
+.nav-link-current { color: var(--tg-blue); font-weight: 600; }

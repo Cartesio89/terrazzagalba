@@ -41,7 +41,8 @@
       "toggle": {
         "show": "Mostra",
         "hide": "Nascondi"
-      }
+      },
+      "swipe": "Scorri per vedere tutte le foto"
     },
     "reviews": {
       "title": "Recensioni",
@@ -89,7 +90,14 @@
           "rating": 5,
           "text": "Host super cordiale"
         }
-      ]
+      ],
+      "countOne": "recensione",
+      "countMany": "recensioni",
+      "showAll": "Mostra tutte le recensioni",
+      "showFewer": "Mostra meno recensioni",
+      "translated": "Tradotta automaticamente",
+      "allOnGoogle": "Leggi tutte le recensioni su Google",
+      "sources": "Airbnb e Google"
     },
     "cityguide": {
       "title": "Guida alla città",
@@ -161,7 +169,12 @@
         "name": "Nome",
         "email": "Email",
         "message": "Messaggio",
-        "submit": "Invia"
+        "submit": "Invia",
+        "privacy": "I dati inviati servono solo a rispondere alla tua richiesta.",
+        "privacyLink": "Informativa privacy",
+        "sending": "Invio in corso…",
+        "ok": "Messaggio inviato! Ti rispondiamo al più presto.",
+        "err": "Invio non riuscito. Riprova o scrivici su WhatsApp."
       }
     },
     "info": {
@@ -183,12 +196,16 @@
         "naples": "Napoli (150 km)"
       },
       "map": {
-        "title": "Posizione"
+        "title": "Posizione",
+        "note": "La mappa è di Google Maps: si carica solo se lo chiedi, perché Google riceve alcuni dati di navigazione.",
+        "load": "Mostra la mappa",
+        "open": "Apri in Google Maps"
       }
     },
     "footer": {
       "rights": "Tutti i diritti riservati",
-      "cir": "CIR: IT059032C293SBVPQB"
+      "privacy": "Privacy e cookie",
+      "cin": "CIN: IT059032C293SBVPQB"
     }
   },
   "en": {
@@ -233,7 +250,8 @@
       "toggle": {
         "show": "Show",
         "hide": "Hide"
-      }
+      },
+      "swipe": "Swipe to see all photos"
     },
     "reviews": {
       "title": "Reviews",
@@ -281,7 +299,14 @@
           "rating": 5,
           "text": "Super friendly host"
         }
-      ]
+      ],
+      "countOne": "review",
+      "countMany": "reviews",
+      "showAll": "Show all reviews",
+      "showFewer": "Show fewer reviews",
+      "translated": "Automatically translated",
+      "allOnGoogle": "Read all reviews on Google",
+      "sources": "Airbnb and Google"
     },
     "cityguide": {
       "title": "City Guide",
@@ -353,7 +378,12 @@
         "name": "Name",
         "email": "Email",
         "message": "Message",
-        "submit": "Send"
+        "submit": "Send",
+        "privacy": "Your data is only used to reply to your request.",
+        "privacyLink": "Privacy policy",
+        "sending": "Sending…",
+        "ok": "Message sent! We will reply as soon as possible.",
+        "err": "Sending failed. Please try again or message us on WhatsApp."
       }
     },
     "info": {
@@ -375,12 +405,16 @@
         "naples": "Naples (150 km)"
       },
       "map": {
-        "title": "Location"
+        "title": "Location",
+        "note": "The map is provided by Google Maps: it only loads if you ask, because Google receives some browsing data.",
+        "load": "Show the map",
+        "open": "Open in Google Maps"
       }
     },
     "footer": {
       "rights": "All rights reserved",
-      "cir": "CIR: IT059032C293SBVPQB"
+      "privacy": "Privacy & cookies",
+      "cin": "CIN: IT059032C293SBVPQB"
     }
   }
 }

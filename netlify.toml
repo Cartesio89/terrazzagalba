@@ -20,12 +20,29 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# CSS e JS: il browser ricontrolla sempre se c'è una versione nuova
+# (prima erano "immutable" per un anno: gli aggiornamenti non arrivavano ai visitatori di ritorno)
 [[headers]]
-  for = "/*.css"
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/*.js"
+  for = "/admin-recensioni.html"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    X-Robots-Tag = "noindex, nofollow"

@@ -26,6 +26,9 @@ function initializePage() {
 }
 
 function setupMobileMenu() {
+    // viene chiamata due volte (avvio + initializePage): il menu va collegato una volta sola
+    if (setupMobileMenu.done) return;
+    setupMobileMenu.done = true;
     const navToggle = document.getElementById('navToggle');
     
     if (!navToggle) {
