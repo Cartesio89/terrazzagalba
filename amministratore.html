@@ -44,6 +44,22 @@ button { font: inherit; font-weight: 600; border: none; border-radius: 999px; pa
 .tab { flex: 1; background: #fff; color: var(--blue); border: 2px solid var(--blue); }
 .tab.active { background: var(--blue); color: #fff; }
 .date-badge { font-size: .78rem; font-weight: 600; color: var(--red); }
+.editor { border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+.editor:focus-within { border-color: var(--blue); }
+.editor textarea { border: none; border-radius: 0; min-height: 180px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: .3rem; padding: .45rem; background: #f5f7f9; border-bottom: 1px solid var(--line); }
+.tb { min-width: 40px; height: 38px; padding: 0 .6rem; border-radius: 8px; background: #fff; color: var(--ink); border: 1px solid var(--line); font-size: .95rem; font-weight: 600; }
+.tb:hover, .tb[aria-expanded="true"] { border-color: var(--blue); color: var(--blue); }
+.emoji-panel { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: .2rem; padding: .5rem; background: #fff; border-bottom: 1px solid var(--line); }
+.emoji-panel[hidden] { display: none; }
+.emoji-panel button { background: none; border: none; font-size: 1.4rem; padding: .3rem; border-radius: 8px; }
+.emoji-panel button:hover { background: var(--tint); }
+.preview { border: 1.5px dashed var(--line); border-radius: 10px; padding: 1rem 1.1rem; background: #fcfdfe; font-size: .95rem; line-height: 1.65; }
+.preview p { margin: 0 0 .7rem; color: #333; }
+.preview h4 { color: var(--blue); margin: .8rem 0 .4rem; font-size: 1.02rem; }
+.preview ul, .preview ol { margin: 0 0 .7rem 1.3rem; }
+.preview li { margin-bottom: .25rem; }
+.preview a { color: var(--blue); font-weight: 600; word-break: break-word; }
 @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -84,7 +100,22 @@ button { font: inherit; font-weight: 600; border: none; border-radius: 999px; pa
       <label for="nTitolo">Titolo (facoltativo)</label>
       <input id="nTitolo" maxlength="160" placeholder="es. Sagra della Tellina">
       <label for="nTesto">Testo</label>
-      <textarea id="nTesto" maxlength="5000" placeholder="Descrizione, orari, luogo, link di approfondimento..."></textarea>
+      <div class="editor">
+        <div class="toolbar" role="toolbar" aria-label="Formattazione">
+          <button type="button" class="tb" data-fmt="bold" title="Grassetto (Ctrl+B)"><b>B</b></button>
+          <button type="button" class="tb" data-fmt="italic" title="Corsivo (Ctrl+I)"><i>I</i></button>
+          <button type="button" class="tb" data-fmt="heading" title="Titoletto">T</button>
+          <button type="button" class="tb" data-fmt="ul" title="Elenco puntato">• ≡</button>
+          <button type="button" class="tb" data-fmt="ol" title="Elenco numerato">1. ≡</button>
+          <button type="button" class="tb" data-fmt="link" title="Inserisci link">🔗</button>
+          <button type="button" class="tb" data-fmt="emoji" title="Emoji" aria-expanded="false">😀</button>
+        </div>
+        <div class="emoji-panel" id="emojiPanel" hidden></div>
+        <textarea id="nTesto" maxlength="5000" placeholder="Descrizione, orari, luogo, link di approfondimento..."></textarea>
+      </div>
+      <p class="hint">Seleziona una parte di testo e premi un pulsante per formattarla. Le emoji si possono anche scrivere direttamente dalla tastiera del telefono.</p>
+      <label>Anteprima <span style="font-weight:400;color:var(--muted);">(come apparirà sul sito)</span></label>
+      <div class="preview" id="nPreview"><p class="hint" style="margin:0;">Scrivi il testo per vedere l'anteprima.</p></div>
       <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;">
         <button class="primary" id="nSave" type="button">Pubblica</button>
         <button class="ghost" id="nCancel" type="button" hidden>Annulla modifica</button>
@@ -145,6 +176,7 @@ button { font: inherit; font-weight: 600; border: none; border-radius: 999px; pa
   </div>
 </main>
 
+<script src="js/news-format.js?v=20261126f"></script>
 <script>
 const API = 'https://prmyrmpmfavppkbzdqyg.supabase.co/functions/v1/galba-reviews';
 const KEY = 'sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW';
@@ -261,7 +293,7 @@ function renderNews(rows) {
   const today = new Date().toISOString().slice(0, 10);
   $('nList').innerHTML = rows.map(r => {
     const t = r.testo || {}, ti = r.titolo || {};
-    const txt = t.it || Object.values(t)[0] || '';
+    const txt = NewsFormat.toPlain(t.it || Object.values(t)[0] || '');
     const when = r.data_fine && r.data_fine !== r.data_inizio ? fmtDay(r.data_inizio) + ' – ' + fmtDay(r.data_fine) : fmtDay(r.data_inizio);
     const fut = (r.data_fine || r.data_inizio) >= today;
     return `<div class="rev ${r.visibile ? '' : 'hidden-rev'}">
@@ -281,7 +313,7 @@ function renderNews(rows) {
 async function refreshNews() { const r = await callNews({ action: 'list' }); if (r.status === 200) renderNews(r.data.rows || []); }
 function resetNewsForm() {
   editingId = null;
-  ['nInizio', 'nFine', 'nTitolo', 'nTesto'].forEach(id => $(id).value = '');
+  ['nInizio', 'nFine', 'nTitolo', 'nTesto'].forEach(id => $(id).value = ''); updatePreview();
   $('nSave').textContent = 'Pubblica'; $('nCancel').hidden = true; $('newsFormTitle').textContent = 'Aggiungi news o evento';
 }
 $('nList').addEventListener('click', async e => {
@@ -293,7 +325,7 @@ $('nList').addEventListener('click', async e => {
     const src = r.lingua || 'it';
     editingId = id;
     $('nInizio').value = r.data_inizio; $('nFine').value = r.data_fine || '';
-    $('nTitolo').value = (r.titolo || {})[src] || ''; $('nTesto').value = (r.testo || {})[src] || '';
+    $('nTitolo').value = (r.titolo || {})[src] || ''; $('nTesto').value = (r.testo || {})[src] || ''; updatePreview();
     $('nSave').textContent = 'Salva modifiche'; $('nCancel').hidden = false; $('newsFormTitle').textContent = 'Modifica news';
     $('panel-news').scrollIntoView({ behavior: 'smooth' });
     return;
@@ -321,6 +353,57 @@ $('nSave').addEventListener('click', async () => {
     setMsg($('nMsg'), 'Non è stato possibile salvarla. Controlla i campi e riprova.', false);
   }
 });
+// ---------------- Editor del testo ----------------
+const ta = $('nTesto');
+const EMOJI = ['🎉','🎶','🎵','🎭','🎨','📸','🍕','🍝','🐟','🍷','🍦','☕','🌅','🌊','🏖️','⛵','🚤','🚴','🥾','⛪','🏛️','🎆','🎄','🎃','📅','🕘','📍','🎟️','💶','🆓','ℹ️','⚠️','❤️','⭐','👉','✅'];
+$('emojiPanel').innerHTML = EMOJI.map(e => `<button type="button" data-emoji="${e}">${e}</button>`).join('');
+function updatePreview() {
+  const v = ta.value.trim();
+  $('nPreview').innerHTML = v ? NewsFormat.toHtml(v) : '<p class="hint" style="margin:0;">Scrivi il testo per vedere l\'anteprima.</p>';
+}
+function insertAt(before, after, placeholder) {
+  const s = ta.selectionStart, e = ta.selectionEnd, had = e > s, sel = had ? ta.value.slice(s, e) : placeholder;
+  ta.setRangeText(before + sel + after, s, e, 'end');
+  if (!had) ta.setSelectionRange(s + before.length, s + before.length + sel.length); // seleziona il testo d'esempio da sovrascrivere
+  ta.focus(); updatePreview();
+}
+function prefixLines(kind) {
+  const v = ta.value;
+  let s = v.lastIndexOf('\n', ta.selectionStart - 1) + 1;
+  let e = v.indexOf('\n', ta.selectionEnd); if (e === -1) e = v.length;
+  const lines = v.slice(s, e).split('\n');
+  const out = lines.map((l, i) => {
+    const clean = l.replace(/^\s*([-•*]|\d+[.)]|#{1,3})\s+/, '');
+    if (kind === 'ul') return '- ' + clean;
+    if (kind === 'ol') return (i + 1) + '. ' + clean;
+    return '## ' + clean;
+  }).join('\n');
+  ta.setRangeText(out, s, e, 'select');
+  ta.focus(); updatePreview();
+}
+document.querySelectorAll('.tb').forEach(b => b.addEventListener('click', () => {
+  const f = b.dataset.fmt;
+  if (f === 'bold') insertAt('**', '**', 'testo in grassetto');
+  else if (f === 'italic') insertAt('*', '*', 'testo in corsivo');
+  else if (f === 'heading' || f === 'ul' || f === 'ol') prefixLines(f === 'heading' ? 'h' : f);
+  else if (f === 'link') {
+    const url = prompt('Indirizzo del link (https://...)', 'https://');
+    if (!url || !/^(https?:\/\/|www\.)\S+$/.test(url.trim())) return;
+    insertAt('[', '](' + url.trim() + ')', 'testo del link');
+  } else if (f === 'emoji') {
+    const p = $('emojiPanel'); p.hidden = !p.hidden; b.setAttribute('aria-expanded', String(!p.hidden));
+  }
+}));
+$('emojiPanel').addEventListener('click', e => {
+  const b = e.target.closest('button[data-emoji]'); if (!b) return;
+  ta.setRangeText(b.dataset.emoji, ta.selectionStart, ta.selectionEnd, 'end'); ta.focus(); updatePreview();
+});
+ta.addEventListener('input', updatePreview);
+ta.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') { e.preventDefault(); insertAt('**', '**', 'testo in grassetto'); }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'i') { e.preventDefault(); insertAt('*', '*', 'testo in corsivo'); }
+});
+
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
   document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x === t));
   $('panel-news').hidden = t.dataset.tab !== 'news';

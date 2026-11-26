@@ -413,3 +413,14 @@ html, body { overflow-x: hidden; }
 .carousel-btn:disabled { opacity: 0.3; cursor: default; }
 .carousel-counter { min-width: 4.5rem; text-align: center; font-weight: 600; color: var(--tg-blue); font-size: 0.9rem; }
 .reviews-actions { margin-top: 0.8rem; }
+
+/* ---------- News: formattazione (titoletti, elenchi) ---------- */
+.news-item .article-full h4 { color: var(--tg-blue); font-size: 1.05rem; margin: 1.2rem 25px 0.5rem; padding: 0; }
+.news-item .article-full ul, .news-item .article-full ol { margin: 0 25px 1rem; padding: 0 0 0 1.3rem; border-top: none; }
+.news-item .article-full li { margin-bottom: 0.35rem; line-height: 1.6; color: #333; }
+@media (max-width: 768px) {
+    .news-item .article-full h4, .news-item .article-full ul, .news-item .article-full ol { margin-left: 20px; margin-right: 20px; }
+}
+.news-item .article-full > h4:first-child, .news-item .article-full > ul:first-child, .news-item .article-full > ol:first-child { padding-top: 20px; margin-top: 0; }
+.news-item .article-full > p { padding-bottom: 6px; }
+.news-item .article-full > h4 { margin-top: 0.6rem; }

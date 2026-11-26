@@ -13,17 +13,10 @@ function escNews(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-// testo semplice -> paragrafi con link cliccabili (sicuro: prima si fa l'escape)
+// testo della news -> HTML (grassetto, elenchi, titoletti, link): vedi js/news-format.js
 function newsTextToHtml(text) {
-    const linkify = s => s.replace(/(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, m => {
-        let url = m, tail = '';
-        while (/[.,;:!?)\]]$/.test(url)) { tail = url.slice(-1) + tail; url = url.slice(0, -1); }
-        const href = url.startsWith('http') ? url : 'https://' + url;
-        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>${tail}`;
-    });
-    return String(text || '').split(/\n\s*\n/).map(par =>
-        '<p>' + linkify(escNews(par.trim())).replace(/\n/g, '<br>') + '</p>'
-    ).join('');
+    if (window.NewsFormat) return window.NewsFormat.toHtml(text);
+    return '<p>' + escNews(text).replace(/\n/g, '<br>') + '</p>';
 }
 
 function todayIso() {
@@ -105,7 +98,7 @@ async function renderEvents() {
 
     container.innerHTML = '';
     list.forEach(n => {
-        const plain = String(n.testo || '').replace(/\s+/g, ' ').trim();
+        const plain = window.NewsFormat ? window.NewsFormat.toPlain(n.testo) : String(n.testo || '').replace(/\s+/g, ' ').trim();
         let preview = plain;
         if (plain.length > 180) {
             preview = plain.slice(0, 160);

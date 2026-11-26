@@ -42,6 +42,8 @@ async function translate(titolo: string, testo: string): Promise<Tr> {
     `${LANGS.map((l) => LANG_NAMES[l]).join(", ")}.\n` +
     `Rules: keep every URL, email address, phone number, date, time and price EXACTLY as written; ` +
     `keep names of places, events and venues unchanged; keep line breaks; do not add or remove content. ` +
+    `The text may use simple Markdown: keep **bold**, *italic*, "## " headings, "- " and "1. " list markers, ` +
+    `[link text](url) links and all emoji exactly in place, translating only the words (inside links translate the link text, never the url). ` +
     `If the title is empty, return empty strings for the titles.\n` +
     `Respond with ONLY a raw JSON object (no markdown) shaped like ` +
     `{"source":"<ISO 639-1>", ${LANGS.map((l) => `"${l}":{"titolo":"...","testo":"..."}`).join(", ")}}. ` +
