@@ -148,7 +148,12 @@
       "notizie": {
         "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!",
         "articles": []
-      }
+      },
+      "newsUpcoming": "In arrivo",
+      "newsPast": "Ultimi 12 mesi",
+      "newsEmptyUpcoming": "Nessun evento in programma al momento.",
+      "newsEmptyPast": "Nessuna notizia negli ultimi 12 mesi.",
+      "newsTranslated": "Tradotto automaticamente"
     },
     "houseguide": {
       "title": "Guida della Casa",
@@ -357,7 +362,12 @@
       "notizie": {
         "empty": "No news at the moment. Check back soon for updates!",
         "articles": []
-      }
+      },
+      "newsUpcoming": "Upcoming",
+      "newsPast": "Last 12 months",
+      "newsEmptyUpcoming": "No upcoming events at the moment.",
+      "newsEmptyPast": "No news in the last 12 months.",
+      "newsTranslated": "Automatically translated"
     },
     "houseguide": {
       "title": "House Guide",

@@ -236,3 +236,21 @@ html, body { overflow-x: hidden; }
 
 /* ---------- Guida alla città: voce attiva nel menu ---------- */
 .nav-link-current { color: var(--tg-blue); font-weight: 600; }
+
+/* ---------- Guida alla città: bacheca News ed eventi ---------- */
+.news-filters { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin: 0 0 1.5rem; }
+.news-filter {
+    font: inherit; font-weight: 600; font-size: 0.9rem;
+    background: #fff; color: var(--tg-blue);
+    border: 2px solid var(--tg-blue); border-radius: 999px;
+    padding: 0.5rem 1.1rem; cursor: pointer;
+}
+.news-filter span {
+    display: inline-block; min-width: 1.4em; margin-left: 0.3rem; padding: 0 0.35rem;
+    border-radius: 999px; background: var(--tg-blue-tint); font-size: 0.78rem;
+}
+.news-filter.active { background: var(--tg-blue); color: #fff; }
+.news-filter.active span { background: rgba(255, 255, 255, 0.25); }
+.news-date { font-weight: 600; color: var(--tg-red) !important; margin: 0 0 0.2rem !important; }
+.news-item .article-full a { color: var(--tg-blue); font-weight: 600; word-break: break-word; }
+.news-translated { font-size: 0.8rem; color: var(--tg-muted); font-style: italic; }

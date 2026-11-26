@@ -119,6 +119,10 @@ function updateTabLabels() {
     
     if (storiaTab) storiaTab.textContent = content[currentLang].cityguide?.tabs?.storia || 'Storia';
     if (notizieTab) notizieTab.textContent = content[currentLang].cityguide?.tabs?.notizie || 'Notizie';
+    const cgTitle = document.getElementById('cityGuideTitle');
+    const cgSub = document.getElementById('cityGuideSubtitle');
+    if (cgTitle && content[currentLang].cityguide?.title) cgTitle.textContent = content[currentLang].cityguide.title;
+    if (cgSub && content[currentLang].cityguide?.subtitle) cgSub.textContent = content[currentLang].cityguide.subtitle;
 }
 
 function renderStoriaArticles() {
@@ -162,48 +166,138 @@ function renderStoriaArticles() {
     });
 }
 
-function renderNotizieArticles() {
+// ---------- News ed eventi: lette da Supabase, inserite dalla pagina amministratore ----------
+const NEWS_API = 'https://prmyrmpmfavppkbzdqyg.supabase.co/functions/v1/galba-news';
+const NEWS_KEY = 'sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW';
+const newsCache = {};
+let newsFilter = null; // 'upcoming' | 'past'
+
+function escNews(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// testo semplice -> paragrafi con link cliccabili (sicuro: prima si fa l'escape)
+function newsTextToHtml(text) {
+    const linkify = s => s.replace(/(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, m => {
+        let url = m, tail = '';
+        while (/[.,;:!?)\]]$/.test(url)) { tail = url.slice(-1) + tail; url = url.slice(0, -1); }
+        const href = url.startsWith('http') ? url : 'https://' + url;
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>${tail}`;
+    });
+    return String(text || '').split(/\n\s*\n/).map(par =>
+        '<p>' + linkify(escNews(par.trim())).replace(/\n/g, '<br>') + '</p>'
+    ).join('');
+}
+
+function todayIso() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function newsDateLabel(a, b) {
+    const loc = currentLang === 'it' ? 'it-IT' : 'en-GB';
+    const d = iso => new Date(iso + 'T12:00:00');
+    const f = (iso, o) => d(iso).toLocaleDateString(loc, o);
+    const full = { day: 'numeric', month: 'long', year: 'numeric' };
+    if (!b || b === a) return f(a, full);
+    const A = d(a), B = d(b);
+    if (A.getFullYear() === B.getFullYear() && A.getMonth() === B.getMonth())
+        return A.getDate() + '–' + f(b, full);                       // 21–28 novembre 2026
+    if (A.getFullYear() === B.getFullYear())
+        return f(a, { day: 'numeric', month: 'long' }) + ' – ' + f(b, full); // 21 novembre – 3 dicembre 2026
+    return f(a, full) + ' – ' + f(b, full);
+}
+
+async function fetchNews(lang) {
+    if (newsCache[lang]) return newsCache[lang];
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 6000);
+        const res = await fetch(NEWS_API + '?lang=' + lang, { headers: { apikey: NEWS_KEY }, signal: controller.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('news ' + res.status);
+        const data = await res.json();
+        newsCache[lang] = Array.isArray(data.items) ? data.items : [];
+    } catch (e) {
+        console.warn('News non disponibili', e);
+        // ripiego: eventuali notizie scritte in content.json
+        const old = (content?.[lang]?.cityguide?.notizie?.articles) || [];
+        return old.map((a, i) => ({ id: a.id || 'n' + i, dataInizio: (a.date || '').slice(0, 10), dataFine: null, titolo: a.title, testo: (a.content || '').replace(/<[^>]+>/g, '\n'), tradotto: false }));
+    }
+    return newsCache[lang];
+}
+
+async function renderNotizieArticles() {
     const container = document.getElementById('notizie-articles');
     if (!container || !content?.[currentLang]) return;
-    
-    const articles = content[currentLang].cityguide?.notizie?.articles || [];
-    
-    if (articles.length === 0) {
-        container.innerHTML = `<p class="empty-content">Nessuna notizia al momento</p>`;
+    const cg = content[currentLang].cityguide || {};
+    const lang = currentLang;
+    const items = await fetchNews(lang);
+    if (lang !== currentLang) return;
+
+    const today = todayIso();
+    const limit = new Date(); limit.setFullYear(limit.getFullYear() - 1);
+    const limitIso = limit.toISOString().slice(0, 10);
+    const upcoming = items.filter(n => (n.dataFine || n.dataInizio) >= today)
+                          .sort((a, b) => a.dataInizio.localeCompare(b.dataInizio));
+    const past = items.filter(n => (n.dataFine || n.dataInizio) < today && n.dataInizio >= limitIso)
+                      .sort((a, b) => b.dataInizio.localeCompare(a.dataInizio));
+    if (!newsFilter) newsFilter = upcoming.length || !past.length ? 'upcoming' : 'past';
+
+    // filtri
+    let bar = document.getElementById('newsFilters');
+    if (!bar) {
+        bar = document.createElement('div');
+        bar.id = 'newsFilters';
+        bar.className = 'news-filters';
+        container.parentElement.insertBefore(bar, container);
+    }
+    bar.innerHTML = `
+        <button type="button" class="news-filter${newsFilter === 'upcoming' ? ' active' : ''}" data-f="upcoming">${escNews(cg.newsUpcoming || 'In arrivo')} <span>${upcoming.length}</span></button>
+        <button type="button" class="news-filter${newsFilter === 'past' ? ' active' : ''}" data-f="past">${escNews(cg.newsPast || 'Ultimi 12 mesi')} <span>${past.length}</span></button>`;
+    bar.querySelectorAll('.news-filter').forEach(b => b.addEventListener('click', () => {
+        newsFilter = b.dataset.f;
+        renderNotizieArticles();
+    }));
+
+    const list = newsFilter === 'upcoming' ? upcoming : past;
+    if (!list.length) {
+        container.innerHTML = `<p class="empty-content">${escNews(newsFilter === 'upcoming' ? (cg.newsEmptyUpcoming || 'Nessun evento in programma al momento.') : (cg.newsEmptyPast || 'Nessuna notizia negli ultimi 12 mesi.'))}</p>`;
         return;
     }
-    
-    const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
-    
+
     container.innerHTML = '';
-    sorted.forEach(article => {
-        const date = new Date(article.date).toLocaleDateString(
-            currentLang === 'it' ? 'it-IT' : 'en-GB',
-            { year: 'numeric', month: 'long', day: 'numeric' }
-        );
-        
-        const articleEl = document.createElement('div');
-        articleEl.className = 'article-item';
-        articleEl.setAttribute('data-article-id', article.id);
-        articleEl.innerHTML = `
+    list.forEach(n => {
+        const plain = String(n.testo || '').replace(/\s+/g, ' ').trim();
+        let preview = plain;
+        if (plain.length > 180) {
+            preview = plain.slice(0, 160);
+            const sp = preview.lastIndexOf(' ');
+            if (sp > 80) preview = preview.slice(0, sp);
+            preview += '…';
+        }
+        const el = document.createElement('div');
+        el.className = 'article-item news-item';
+        el.setAttribute('data-article-id', 'news-' + n.id);
+        el.innerHTML = `
             <div class="article-header">
                 <div>
-                    <h3>${article.title}</h3>
-                    <p class="article-date">${date}</p>
+                    <p class="article-date news-date">${escNews(newsDateLabel(n.dataInizio, n.dataFine))}</p>
+                    ${n.titolo ? `<h3>${escNews(n.titolo)}</h3>` : ''}
                 </div>
                 <span class="article-toggle">▼</span>
             </div>
             <div class="article-content">
-                <div class="article-preview">${article.preview}</div>
-                <div class="article-full">${article.content}</div>
-            </div>
-        `;
-        container.appendChild(articleEl);
+                <div class="article-preview">${escNews(preview)}</div>
+                <div class="article-full">${newsTextToHtml(n.testo)}${n.tradotto ? `<p class="news-translated">${escNews(cg.newsTranslated || '')}</p>` : ''}</div>
+            </div>`;
+        container.appendChild(el);
     });
-    
     container.querySelectorAll('.article-header').forEach(header => {
         header.addEventListener('click', () => toggleArticle(header));
     });
+    // i link nel testo non devono chiudere/aprire la scheda
+    container.querySelectorAll('.article-full a').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
 }
 
 function toggleArticle(header) {
