@@ -22,12 +22,12 @@
     <link rel="shortcut icon" href="favicon.ico">
     
     <!-- Fonts (ospitati sul sito, nessuna richiesta a Google) -->
-    <link rel="stylesheet" href="css/fonts.css?v=20261126c">
+    <link rel="stylesheet" href="css/fonts.css?v=20261126d">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20261126c">
-    <link rel="stylesheet" href="css/new-masthead.css?v=20261126c">
-    <link rel="stylesheet" href="css/refresh.css?v=20261126c">
+    <link rel="stylesheet" href="css/style.css?v=20261126d">
+    <link rel="stylesheet" href="css/new-masthead.css?v=20261126d">
+    <link rel="stylesheet" href="css/refresh.css?v=20261126d">
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -53,6 +53,9 @@
       "url": "https://holidayhouse-terrazzagalba.com",
       "telephone": "+393291908536",
       "priceRange": "$$",
+      "checkinTime": "15:00",
+      "checkoutTime": "11:00",
+      "petsAllowed": false,
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
@@ -219,6 +222,24 @@
     <section class="section info" id="info">
         <div class="container">
             <h2 class="section-title" data-translate="info.title">Info Utili</h2>
+
+            <!-- La casa in breve: servizi, regole, come arrivare -->
+            <div class="details-box" id="detailsBox">
+                <div class="details-tabs" role="tablist">
+                    <button type="button" class="details-tab active" role="tab" aria-selected="true" data-panel="services" data-translate="details.tabs.services">Servizi</button>
+                    <button type="button" class="details-tab" role="tab" aria-selected="false" data-panel="rules" data-translate="details.tabs.rules">Regole</button>
+                    <button type="button" class="details-tab" role="tab" aria-selected="false" data-panel="arrive" data-translate="details.tabs.arrive">Come arrivare</button>
+                </div>
+                <div class="details-panel active" data-panel="services" role="tabpanel"><ul class="details-list" id="detailsServices"></ul></div>
+                <div class="details-panel" data-panel="rules" role="tabpanel"><ul class="details-list" id="detailsRules"></ul></div>
+                <div class="details-panel" data-panel="arrive" role="tabpanel">
+                    <p class="details-intro" id="detailsArriveIntro"></p>
+                    <h3 class="details-subtitle" data-translate="details.distTitle">Distanze</h3>
+                    <ul class="details-distances" id="detailsDistances"></ul>
+                    <p class="details-note" data-translate="details.distNote"></p>
+                </div>
+            </div>
+
             <div class="info-grid">
                 <div class="info-card">
                     <h3 data-translate="info.transport.title">Trasporti - Link utili</h3>
@@ -330,6 +351,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/app.js?v=20261126c"></script>
+    <script src="js/app.js?v=20261126d"></script>
 </body>
 </html>

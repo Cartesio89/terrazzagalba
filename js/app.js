@@ -96,8 +96,37 @@ function updateContent() {
     
     // Update reviews
     updateReviews();
+    renderDetails();
     // Update gallery toggle text
     updateGalleryToggleText();
+}
+
+// La casa in breve: servizi, regole, come arrivare
+function renderDetails() {
+    const d = content[currentLang] && content[currentLang].details;
+    if (!d) return;
+    const li = arr => (arr || []).map(x => `<li>${escapeHtml(x)}</li>`).join('');
+    const sv = document.getElementById('detailsServices'); if (sv) sv.innerHTML = li(d.services);
+    const ru = document.getElementById('detailsRules'); if (ru) ru.innerHTML = li(d.rules);
+    const ai = document.getElementById('detailsArriveIntro'); if (ai) ai.textContent = d.arriveIntro || '';
+    const ds = document.getElementById('detailsDistances');
+    if (ds) ds.innerHTML = (d.distances || []).map(x => `
+        <li><span class="dist-name">${escapeHtml(x.name)}</span>
+            <span class="dist-values">${x.walk ? `<span class="dist-walk">🚶 ${escapeHtml(x.walk)}</span>` : ''}${x.car ? `<span class="dist-car">🚗 ${escapeHtml(x.car)}</span>` : ''}</span></li>`).join('');
+}
+
+function setupDetailsTabs() {
+    const box = document.getElementById('detailsBox');
+    if (!box) return;
+    box.querySelectorAll('.details-tab').forEach(tab => tab.addEventListener('click', () => {
+        const id = tab.getAttribute('data-panel');
+        box.querySelectorAll('.details-tab').forEach(t => {
+            const on = t === tab;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        box.querySelectorAll('.details-panel').forEach(pn => pn.classList.toggle('active', pn.getAttribute('data-panel') === id));
+    }));
 }
 
 // Update reviews
@@ -579,6 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupContactForm();
     setupHouseGuide();
     setupMap();
+    setupDetailsTabs();
     setupGalleryCounter();
     const y = document.getElementById('footerYear');
     if (y) y.textContent = new Date().getFullYear();
