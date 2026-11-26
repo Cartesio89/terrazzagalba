@@ -22,12 +22,12 @@
     <link rel="shortcut icon" href="favicon.ico">
     
     <!-- Fonts (ospitati sul sito, nessuna richiesta a Google) -->
-    <link rel="stylesheet" href="css/fonts.css?v=20261126d">
+    <link rel="stylesheet" href="css/fonts.css?v=20261126e">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20261126d">
-    <link rel="stylesheet" href="css/new-masthead.css?v=20261126d">
-    <link rel="stylesheet" href="css/refresh.css?v=20261126d">
+    <link rel="stylesheet" href="css/style.css?v=20261126e">
+    <link rel="stylesheet" href="css/new-masthead.css?v=20261126e">
+    <link rel="stylesheet" href="css/refresh.css?v=20261126e">
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -211,6 +211,11 @@
                 </div>
             </div>
             <div class="reviews-grid" id="reviewsGrid"></div>
+            <div class="carousel-nav" id="reviewsNav">
+                <button type="button" class="carousel-btn" id="reviewsPrev" aria-label="Recensione precedente">‹</button>
+                <span class="carousel-counter" id="reviewsCounter"></span>
+                <button type="button" class="carousel-btn" id="reviewsNext" aria-label="Recensione successiva">›</button>
+            </div>
             <div class="reviews-actions">
                 <button type="button" class="reviews-more" id="reviewsMore" hidden></button>
                 <a class="reviews-google-link" id="reviewsGoogleLink" href="#" target="_blank" rel="noopener noreferrer" hidden></a>
@@ -225,19 +230,23 @@
 
             <!-- La casa in breve: servizi, regole, come arrivare -->
             <div class="details-box" id="detailsBox">
-                <div class="details-tabs" role="tablist">
-                    <button type="button" class="details-tab active" role="tab" aria-selected="true" data-panel="services" data-translate="details.tabs.services">Servizi</button>
-                    <button type="button" class="details-tab" role="tab" aria-selected="false" data-panel="rules" data-translate="details.tabs.rules">Regole</button>
-                    <button type="button" class="details-tab" role="tab" aria-selected="false" data-panel="arrive" data-translate="details.tabs.arrive">Come arrivare</button>
-                </div>
-                <div class="details-panel active" data-panel="services" role="tabpanel"><ul class="details-list" id="detailsServices"></ul></div>
-                <div class="details-panel" data-panel="rules" role="tabpanel"><ul class="details-list" id="detailsRules"></ul></div>
-                <div class="details-panel" data-panel="arrive" role="tabpanel">
-                    <p class="details-intro" id="detailsArriveIntro"></p>
-                    <h3 class="details-subtitle" data-translate="details.distTitle">Distanze</h3>
-                    <ul class="details-distances" id="detailsDistances"></ul>
-                    <p class="details-note" data-translate="details.distNote"></p>
-                </div>
+                <details class="details-item">
+                    <summary><span class="details-head"><span class="details-name" data-translate="details.tabs.services">Servizi</span><span class="details-sum" data-translate="details.summary.services"></span></span><span class="details-chevron" aria-hidden="true"></span></summary>
+                    <div class="details-body"><ul class="details-list" id="detailsServices"></ul></div>
+                </details>
+                <details class="details-item">
+                    <summary><span class="details-head"><span class="details-name" data-translate="details.tabs.rules">Regole</span><span class="details-sum" data-translate="details.summary.rules"></span></span><span class="details-chevron" aria-hidden="true"></span></summary>
+                    <div class="details-body"><ul class="details-list" id="detailsRules"></ul></div>
+                </details>
+                <details class="details-item">
+                    <summary><span class="details-head"><span class="details-name" data-translate="details.tabs.arrive">Come arrivare</span><span class="details-sum" data-translate="details.summary.arrive"></span></span><span class="details-chevron" aria-hidden="true"></span></summary>
+                    <div class="details-body">
+                        <p class="details-intro" id="detailsArriveIntro"></p>
+                        <h3 class="details-subtitle" data-translate="details.distTitle">Distanze</h3>
+                        <ul class="details-distances" id="detailsDistances"></ul>
+                        <p class="details-note" data-translate="details.distNote"></p>
+                    </div>
+                </details>
             </div>
 
             <div class="info-grid">
@@ -351,6 +360,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/app.js?v=20261126d"></script>
+    <script src="js/app.js?v=20261126e"></script>
 </body>
 </html>

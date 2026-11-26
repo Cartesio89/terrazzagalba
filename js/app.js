@@ -101,6 +101,47 @@ function updateContent() {
     updateGalleryToggleText();
 }
 
+// Carosello recensioni: frecce + contatore "2 / 7"
+function updateReviewsCarousel(reset) {
+    const grid = document.getElementById('reviewsGrid');
+    const counter = document.getElementById('reviewsCounter');
+    const prev = document.getElementById('reviewsPrev');
+    const next = document.getElementById('reviewsNext');
+    if (!grid || !counter) return;
+    if (reset) grid.scrollLeft = 0;
+    const cards = grid.querySelectorAll('.review-card');
+    if (!cards.length) { counter.textContent = ''; return; }
+    const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].offsetWidth;
+    const perView = Math.max(1, Math.round(grid.clientWidth / step));
+    const first = Math.round(grid.scrollLeft / step);
+    const last = Math.min(cards.length, first + perView);
+    counter.textContent = (perView > 1 ? (first + 1) + '–' + last : (first + 1)) + ' / ' + cards.length;
+    if (prev) prev.disabled = grid.scrollLeft <= 2;
+    if (next) next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2;
+    const nav = document.getElementById('reviewsNav');
+    if (nav) nav.hidden = cards.length <= perView;
+    const t = (content[currentLang] && content[currentLang].reviews) || {};
+    if (prev && t.prev) prev.setAttribute('aria-label', t.prev);
+    if (next && t.next) next.setAttribute('aria-label', t.next);
+}
+
+function setupReviewsCarousel() {
+    const grid = document.getElementById('reviewsGrid');
+    if (!grid) return;
+    const move = dir => {
+        const cards = grid.querySelectorAll('.review-card');
+        if (!cards.length) return;
+        const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].offsetWidth;
+        grid.scrollBy({ left: dir * step, behavior: 'smooth' });
+    };
+    const prev = document.getElementById('reviewsPrev');
+    const next = document.getElementById('reviewsNext');
+    if (prev) prev.addEventListener('click', () => move(-1));
+    if (next) next.addEventListener('click', () => move(1));
+    grid.addEventListener('scroll', () => window.requestAnimationFrame(() => updateReviewsCarousel(false)), { passive: true });
+    window.addEventListener('resize', () => updateReviewsCarousel(false));
+}
+
 // La casa in breve: servizi, regole, come arrivare
 function renderDetails() {
     const d = content[currentLang] && content[currentLang].details;
@@ -210,7 +251,7 @@ function updateReviews() {
 
     const readMoreText = t.readMore || 'Leggi tutto';
     const readLessText = t.readLess || 'Mostra meno';
-    const visibleCount = window.matchMedia('(max-width: 768px)').matches ? 3 : 6;
+    const visibleCount = Infinity; // ora le recensioni scorrono di lato: tutte presenti
 
     reviewsGrid.innerHTML = '';
     list.forEach((review, index) => {
@@ -268,7 +309,9 @@ function updateReviews() {
         });
     });
 
-    // "Mostra tutte le recensioni"
+    updateReviewsCarousel(true);
+
+    // "Mostra tutte le recensioni" (non più usato: carosello)
     const more = document.getElementById('reviewsMore');
     if (more) {
         if (list.length > visibleCount) {
@@ -609,6 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupHouseGuide();
     setupMap();
     setupDetailsTabs();
+    setupReviewsCarousel();
     setupGalleryCounter();
     const y = document.getElementById('footerYear');
     if (y) y.textContent = new Date().getFullYear();

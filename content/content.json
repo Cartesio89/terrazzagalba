@@ -98,7 +98,9 @@
       "showFewer": "Mostra meno recensioni",
       "translated": "Tradotta automaticamente",
       "allOnGoogle": "Leggi tutte le recensioni su Google",
-      "sources": "Airbnb e Google"
+      "sources": "Airbnb e Google",
+      "prev": "Recensione precedente",
+      "next": "Recensione successiva"
     },
     "cityguide": {
       "title": "Guida alla città",
@@ -291,7 +293,12 @@
           "car": "circa 184 km · 2 h 20"
         }
       ],
-      "distNote": "Distanze calcolate sul percorso stradale e pedonale (OpenStreetMap); i tempi in auto sono senza traffico."
+      "distNote": "Distanze calcolate sul percorso stradale e pedonale (OpenStreetMap); i tempi in auto sono senza traffico.",
+      "summary": {
+        "services": "Wi-Fi, aria condizionata, lavatrice, teli mare e altro",
+        "rules": "Check-in 15:00 · Check-out 11:00 · max 2 ospiti",
+        "arrive": "Parcheggio gratuito vicino · distanze a piedi e in auto"
+      }
     }
   },
   "en": {
@@ -393,7 +400,9 @@
       "showFewer": "Show fewer reviews",
       "translated": "Automatically translated",
       "allOnGoogle": "Read all reviews on Google",
-      "sources": "Airbnb and Google"
+      "sources": "Airbnb and Google",
+      "prev": "Previous review",
+      "next": "Next review"
     },
     "cityguide": {
       "title": "City Guide",
@@ -586,7 +595,12 @@
           "car": "about 184 km · 2 h 20"
         }
       ],
-      "distNote": "Distances calculated on the road and walking route (OpenStreetMap); driving times without traffic."
+      "distNote": "Distances calculated on the road and walking route (OpenStreetMap); driving times without traffic.",
+      "summary": {
+        "services": "Wi-Fi, air conditioning, washing machine, beach towels and more",
+        "rules": "Check-in 3 pm · Check-out 11 am · max 2 guests",
+        "arrive": "Free parking nearby · walking and driving distances"
+      }
     }
   }
 }
