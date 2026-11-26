@@ -266,3 +266,30 @@ html, body { overflow-x: hidden; }
 
 /* Pulsante menu: niente riquadro dopo il tocco (resta per chi usa la tastiera) */
 .nav-toggle-mobile:focus:not(:focus-visible) { outline: none; }
+
+/* ---------- Schede espandibili (Cenni storici ed Eventi) ---------- */
+.articles-container::after { height: 0; }               /* tolto lo spazio vuoto di 50vh in fondo */
+.article-full > * { border-top: none; }                  /* niente righe tra un paragrafo e l'altro */
+.article-full > :first-child { border-top: 1px solid #e0e0e0; padding-top: 20px; }
+.article-header { -webkit-tap-highlight-color: transparent; }
+.article-header:focus-visible { outline: 2px solid var(--tg-blue); outline-offset: -2px; }
+.article-toggle {
+    width: 34px; height: 34px; min-width: 34px;
+    border-radius: 50%;
+    background: var(--tg-blue-tint);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+}
+.article-item.expanded .article-toggle { background: var(--tg-blue); color: #fff; }
+.article-more-wrap { padding-top: 0.9rem; }
+.article-full > .article-more-wrap { border-top: none; padding: 0 25px 22px; }
+.article-more {
+    font: inherit; font-weight: 600; font-size: 0.9rem;
+    color: var(--tg-blue); background: #fff;
+    border: 1.5px solid var(--tg-blue); border-radius: 999px;
+    padding: 0.45rem 1.1rem; cursor: pointer;
+}
+.article-more:hover { background: var(--tg-blue); color: #fff; }
+@media (max-width: 768px) {
+    .article-full > .article-more-wrap { padding-left: 20px; padding-right: 20px; }
+}

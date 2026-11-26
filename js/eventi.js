@@ -133,22 +133,65 @@ async function renderEvents() {
     container.querySelectorAll('.article-header').forEach(header => {
         header.addEventListener('click', () => toggleArticle(header));
     });
+    addReadMoreButtons(container);
     // i link nel testo non devono chiudere/aprire la scheda
     container.querySelectorAll('.article-full a').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
 }
 
 
-// articolo aperto/chiuso (stesso comportamento della Guida alla città)
+// ---------- Schede espandibili: pulsanti "Leggi tutto" / "Mostra meno" ben visibili ----------
+function addReadMoreButtons(container) {
+    const t = (content && content[currentLang] && content[currentLang].reviews) || {};
+    const more = t.readMore || 'Leggi tutto';
+    const less = t.readLess || 'Mostra meno';
+    container.querySelectorAll('.article-item').forEach(item => {
+        const header = item.querySelector('.article-header');
+        const preview = item.querySelector('.article-preview');
+        const full = item.querySelector('.article-full');
+        if (!header || !preview || !full || item.querySelector('.article-more')) return;
+        const open = document.createElement('button');
+        open.type = 'button';
+        open.className = 'article-more';
+        open.innerHTML = `${more} <span aria-hidden="true">▾</span>`;
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'article-more article-less';
+        close.innerHTML = `${less} <span aria-hidden="true">▴</span>`;
+        const wrapOpen = document.createElement('div');
+        wrapOpen.className = 'article-more-wrap';
+        wrapOpen.appendChild(open);
+        preview.appendChild(wrapOpen);
+        const wrapClose = document.createElement('div');
+        wrapClose.className = 'article-more-wrap';
+        wrapClose.appendChild(close);
+        full.appendChild(wrapClose);
+        [open, close].forEach(b => b.addEventListener('click', e => { e.stopPropagation(); toggleArticle(header); }));
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleArticle(header); } });
+    });
+}
+
 function toggleArticle(header) {
     const item = header.closest('.article-item');
-    const arrow = header.querySelector('.article-toggle');
     const container = item.parentElement;
-    const open = !item.classList.contains('expanded');
-    container.querySelectorAll('.article-item').forEach(i => {
+    const willOpen = !item.classList.contains('expanded');
+    container.querySelectorAll('.article-item.expanded').forEach(i => {
         i.classList.remove('expanded');
-        const t = i.querySelector('.article-toggle'); if (t) t.textContent = '▼';
+        const h = i.querySelector('.article-header'); if (h) h.setAttribute('aria-expanded', 'false');
     });
-    if (open) { item.classList.add('expanded'); if (arrow) arrow.textContent = '▲'; }
+    if (willOpen) {
+        item.classList.add('expanded');
+        header.setAttribute('aria-expanded', 'true');
+    }
+    // la freccia ruota solo via CSS (prima veniva girata due volte e restava sempre verso il basso)
+    // dopo l'apertura/chiusura riporta il titolo in vista: chiudere la scheda sopra non deve far "saltare" la pagina
+    requestAnimationFrame(() => {
+        const top = item.getBoundingClientRect().top;
+        if (top < 70 || top > window.innerHeight * 0.6) {
+            window.scrollTo({ top: window.pageYOffset + top - 80, behavior: 'smooth' });
+        }
+    });
 }
 
 function translatePage() {

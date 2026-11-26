@@ -166,24 +166,62 @@ function renderStoriaArticles() {
     container.querySelectorAll('.article-header').forEach(header => {
         header.addEventListener('click', () => toggleArticle(header));
     });
+    addReadMoreButtons(container);
+}
+
+// ---------- Schede espandibili: pulsanti "Leggi tutto" / "Mostra meno" ben visibili ----------
+function addReadMoreButtons(container) {
+    const t = (content && content[currentLang] && content[currentLang].reviews) || {};
+    const more = t.readMore || 'Leggi tutto';
+    const less = t.readLess || 'Mostra meno';
+    container.querySelectorAll('.article-item').forEach(item => {
+        const header = item.querySelector('.article-header');
+        const preview = item.querySelector('.article-preview');
+        const full = item.querySelector('.article-full');
+        if (!header || !preview || !full || item.querySelector('.article-more')) return;
+        const open = document.createElement('button');
+        open.type = 'button';
+        open.className = 'article-more';
+        open.innerHTML = `${more} <span aria-hidden="true">▾</span>`;
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'article-more article-less';
+        close.innerHTML = `${less} <span aria-hidden="true">▴</span>`;
+        const wrapOpen = document.createElement('div');
+        wrapOpen.className = 'article-more-wrap';
+        wrapOpen.appendChild(open);
+        preview.appendChild(wrapOpen);
+        const wrapClose = document.createElement('div');
+        wrapClose.className = 'article-more-wrap';
+        wrapClose.appendChild(close);
+        full.appendChild(wrapClose);
+        [open, close].forEach(b => b.addEventListener('click', e => { e.stopPropagation(); toggleArticle(header); }));
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleArticle(header); } });
+    });
 }
 
 function toggleArticle(header) {
     const item = header.closest('.article-item');
-    const arrow = header.querySelector('.article-toggle');
     const container = item.parentElement;
-    
-    if (item.classList.contains('expanded')) {
-        item.classList.remove('expanded');
-        arrow.textContent = '▼';
-    } else {
-        container.querySelectorAll('.article-item').forEach(i => {
-            i.classList.remove('expanded');
-            i.querySelector('.article-toggle').textContent = '▼';
-        });
+    const willOpen = !item.classList.contains('expanded');
+    container.querySelectorAll('.article-item.expanded').forEach(i => {
+        i.classList.remove('expanded');
+        const h = i.querySelector('.article-header'); if (h) h.setAttribute('aria-expanded', 'false');
+    });
+    if (willOpen) {
         item.classList.add('expanded');
-        arrow.textContent = '▲';
+        header.setAttribute('aria-expanded', 'true');
     }
+    // la freccia ruota solo via CSS (prima veniva girata due volte e restava sempre verso il basso)
+    // dopo l'apertura/chiusura riporta il titolo in vista: chiudere la scheda sopra non deve far "saltare" la pagina
+    requestAnimationFrame(() => {
+        const top = item.getBoundingClientRect().top;
+        if (top < 70 || top > window.innerHeight * 0.6) {
+            window.scrollTo({ top: window.pageYOffset + top - 80, behavior: 'smooth' });
+        }
+    });
 }
 
 function handleAnchorLinks() {
@@ -195,7 +233,7 @@ function handleAnchorLinks() {
         if (article) {
             const header = article.querySelector('.article-header');
             if (header) {
-                toggleArticle(header);
+                if (!article.classList.contains('expanded')) toggleArticle(header);
                 
                 // Aspetta espansione, poi scroll preciso al titolo
                 setTimeout(() => {
@@ -213,6 +251,8 @@ function handleAnchorLinks() {
         }
     }, 500);
 }
+
+window.addEventListener('hashchange', handleAnchorLinks);
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
