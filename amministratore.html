@@ -57,7 +57,6 @@ button { font: inherit; font-weight: 600; border: none; border-radius: 999px; pa
     <h2>Accedi</h2>
     <label for="pwd">Password di gestione</label>
     <input type="password" id="pwd" autocomplete="current-password">
-    <p class="hint">È la password impostata su Supabase nel secret <code>GALBA_ADMIN_PASSWORD</code>.</p>
     <div style="margin-top:1rem;"><button class="primary" id="loginBtn" type="button">Entra</button></div>
     <p class="msg" id="loginMsg"></p>
   </section>
@@ -181,7 +180,7 @@ async function login() {
   } else if (r.status === 401) {
     setMsg($('loginMsg'), 'Password errata.', false);
   } else if (r.status === 503) {
-    setMsg($('loginMsg'), 'La password di gestione non è ancora impostata su Supabase.', false);
+    setMsg($('loginMsg'), 'Accesso non disponibile al momento.', false);
   } else {
     setMsg($('loginMsg'), 'Servizio non raggiungibile. Riprova tra poco.', false);
   }

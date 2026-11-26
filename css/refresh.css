@@ -254,3 +254,15 @@ html, body { overflow-x: hidden; }
 .news-date { font-weight: 600; color: var(--tg-red) !important; margin: 0 0 0.2rem !important; }
 .news-item .article-full a { color: var(--tg-blue); font-weight: 600; word-break: break-word; }
 .news-translated { font-size: 0.8rem; color: var(--tg-muted); font-style: italic; }
+
+/* ---------- Pagina Eventi ---------- */
+.events-page { padding-top: 120px; min-height: 70vh; }
+.events-title { text-align: center; color: #2c5f7c; margin-bottom: 10px; font-size: 2.5rem; }
+.events-subtitle { text-align: center; color: #666; margin-bottom: 32px; font-size: 1.1rem; }
+@media (max-width: 480px) {
+    .events-page { padding-top: 100px; }
+    .events-title { font-size: 2rem; }
+}
+
+/* Pulsante menu: niente riquadro dopo il tocco (resta per chi usa la tastiera) */
+.nav-toggle-mobile:focus:not(:focus-visible) { outline: none; }

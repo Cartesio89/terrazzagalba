@@ -6,7 +6,8 @@
       "info": "Info Utili",
       "contact": "Contattaci",
       "cityguide": "Guida alla città",
-      "houseguide": "Guida Casa"
+      "houseguide": "Guida Casa",
+      "events": "Eventi"
     },
     "hero": {
       "subtitle": "Appartamento accogliente con vista mozzafiato su Terracina",
@@ -101,7 +102,7 @@
     },
     "cityguide": {
       "title": "Guida alla città",
-      "subtitle": "Scopri la storia e le notizie di Terracina",
+      "subtitle": "Scopri la storia di Terracina e dei dintorni",
       "tabs": {
         "storia": "Cenni storici",
         "notizie": "News ed eventi"
@@ -148,12 +149,7 @@
       "notizie": {
         "empty": "Nessuna notizia al momento. Torna presto per aggiornamenti!",
         "articles": []
-      },
-      "newsUpcoming": "In arrivo",
-      "newsPast": "Ultimi 12 mesi",
-      "newsEmptyUpcoming": "Nessun evento in programma al momento.",
-      "newsEmptyPast": "Nessuna notizia negli ultimi 12 mesi.",
-      "newsTranslated": "Tradotto automaticamente"
+      }
     },
     "houseguide": {
       "title": "Guida della Casa",
@@ -211,6 +207,16 @@
       "rights": "Tutti i diritti riservati",
       "privacy": "Privacy e cookie",
       "cin": "CIN: IT059032C293SBVPQB"
+    },
+    "events": {
+      "title": "News ed eventi",
+      "subtitle": "Cosa succede a Terracina e dintorni",
+      "upcoming": "In arrivo",
+      "past": "Ultimi 12 mesi",
+      "emptyUpcoming": "Nessun evento in programma al momento.",
+      "emptyPast": "Nessuna notizia negli ultimi 12 mesi.",
+      "translated": "Tradotto automaticamente",
+      "loading": "Caricamento…"
     }
   },
   "en": {
@@ -220,7 +226,8 @@
       "info": "Useful Info",
       "contact": "Contact us",
       "cityguide": "City Guide",
-      "houseguide": "House Guide"
+      "houseguide": "House Guide",
+      "events": "Events"
     },
     "hero": {
       "subtitle": "Cozy apartment with breathtaking views of Terracina",
@@ -315,7 +322,7 @@
     },
     "cityguide": {
       "title": "City Guide",
-      "subtitle": "Discover the history and news of Terracina",
+      "subtitle": "Discover the history of Terracina and its surroundings",
       "tabs": {
         "storia": "Historical notes",
         "notizie": "News and events"
@@ -362,12 +369,7 @@
       "notizie": {
         "empty": "No news at the moment. Check back soon for updates!",
         "articles": []
-      },
-      "newsUpcoming": "Upcoming",
-      "newsPast": "Last 12 months",
-      "newsEmptyUpcoming": "No upcoming events at the moment.",
-      "newsEmptyPast": "No news in the last 12 months.",
-      "newsTranslated": "Automatically translated"
+      }
     },
     "houseguide": {
       "title": "House Guide",
@@ -425,6 +427,16 @@
       "rights": "All rights reserved",
       "privacy": "Privacy & cookies",
       "cin": "CIN: IT059032C293SBVPQB"
+    },
+    "events": {
+      "title": "News and events",
+      "subtitle": "What's on in Terracina and nearby",
+      "upcoming": "Upcoming",
+      "past": "Last 12 months",
+      "emptyUpcoming": "No upcoming events at the moment.",
+      "emptyPast": "No news in the last 12 months.",
+      "translated": "Automatically translated",
+      "loading": "Loading…"
     }
   }
 }

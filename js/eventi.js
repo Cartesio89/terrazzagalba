@@ -1,0 +1,205 @@
+// Pagina Eventi: news ed eventi inserite dalla pagina amministratore (Supabase), tradotte in automatico
+let currentLang = 'it';
+try { const s = localStorage.getItem('language'); if (s === 'it' || s === 'en') currentLang = s; } catch (e) {}
+let content = null;
+
+// ---------- News ed eventi: lette da Supabase, inserite dalla pagina amministratore ----------
+const NEWS_API = 'https://prmyrmpmfavppkbzdqyg.supabase.co/functions/v1/galba-news';
+const NEWS_KEY = 'sb_publishable_M_ihkB0s9phBxPwDwQFd5g_KDzlQmDW';
+const newsCache = {};
+let newsFilter = null; // 'upcoming' | 'past'
+
+function escNews(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// testo semplice -> paragrafi con link cliccabili (sicuro: prima si fa l'escape)
+function newsTextToHtml(text) {
+    const linkify = s => s.replace(/(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, m => {
+        let url = m, tail = '';
+        while (/[.,;:!?)\]]$/.test(url)) { tail = url.slice(-1) + tail; url = url.slice(0, -1); }
+        const href = url.startsWith('http') ? url : 'https://' + url;
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>${tail}`;
+    });
+    return String(text || '').split(/\n\s*\n/).map(par =>
+        '<p>' + linkify(escNews(par.trim())).replace(/\n/g, '<br>') + '</p>'
+    ).join('');
+}
+
+function todayIso() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function newsDateLabel(a, b) {
+    const loc = currentLang === 'it' ? 'it-IT' : 'en-GB';
+    const d = iso => new Date(iso + 'T12:00:00');
+    const f = (iso, o) => d(iso).toLocaleDateString(loc, o);
+    const full = { day: 'numeric', month: 'long', year: 'numeric' };
+    if (!b || b === a) return f(a, full);
+    const A = d(a), B = d(b);
+    if (A.getFullYear() === B.getFullYear() && A.getMonth() === B.getMonth())
+        return A.getDate() + '–' + f(b, full);                       // 21–28 novembre 2026
+    if (A.getFullYear() === B.getFullYear())
+        return f(a, { day: 'numeric', month: 'long' }) + ' – ' + f(b, full); // 21 novembre – 3 dicembre 2026
+    return f(a, full) + ' – ' + f(b, full);
+}
+
+async function fetchNews(lang) {
+    if (newsCache[lang]) return newsCache[lang];
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 6000);
+        const res = await fetch(NEWS_API + '?lang=' + lang, { headers: { apikey: NEWS_KEY }, signal: controller.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('news ' + res.status);
+        const data = await res.json();
+        newsCache[lang] = Array.isArray(data.items) ? data.items : [];
+    } catch (e) {
+        console.warn('News non disponibili', e);
+        // ripiego: eventuali notizie scritte in content.json
+        const old = (content?.[lang]?.cityguide?.notizie?.articles) || [];
+        return old.map((a, i) => ({ id: a.id || 'n' + i, dataInizio: (a.date || '').slice(0, 10), dataFine: null, titolo: a.title, testo: (a.content || '').replace(/<[^>]+>/g, '\n'), tradotto: false }));
+    }
+    return newsCache[lang];
+}
+
+async function renderEvents() {
+    const container = document.getElementById('events-list');
+    if (!container || !content?.[currentLang]) return;
+    const cg = content[currentLang].events || {};
+    const lang = currentLang;
+    const items = await fetchNews(lang);
+    if (lang !== currentLang) return;
+
+    const today = todayIso();
+    const limit = new Date(); limit.setFullYear(limit.getFullYear() - 1);
+    const limitIso = limit.toISOString().slice(0, 10);
+    const upcoming = items.filter(n => (n.dataFine || n.dataInizio) >= today)
+                          .sort((a, b) => a.dataInizio.localeCompare(b.dataInizio));
+    const past = items.filter(n => (n.dataFine || n.dataInizio) < today && n.dataInizio >= limitIso)
+                      .sort((a, b) => b.dataInizio.localeCompare(a.dataInizio));
+    if (!newsFilter) newsFilter = upcoming.length || !past.length ? 'upcoming' : 'past';
+
+    // filtri
+    let bar = document.getElementById('newsFilters');
+    if (!bar) {
+        bar = document.createElement('div');
+        bar.id = 'newsFilters';
+        bar.className = 'news-filters';
+        container.parentElement.insertBefore(bar, container);
+    }
+    bar.innerHTML = `
+        <button type="button" class="news-filter${newsFilter === 'upcoming' ? ' active' : ''}" data-f="upcoming">${escNews(cg.upcoming || 'In arrivo')} <span>${upcoming.length}</span></button>
+        <button type="button" class="news-filter${newsFilter === 'past' ? ' active' : ''}" data-f="past">${escNews(cg.past || 'Ultimi 12 mesi')} <span>${past.length}</span></button>`;
+    bar.querySelectorAll('.news-filter').forEach(b => b.addEventListener('click', () => {
+        newsFilter = b.dataset.f;
+        renderEvents();
+    }));
+
+    const list = newsFilter === 'upcoming' ? upcoming : past;
+    if (!list.length) {
+        container.innerHTML = `<p class="empty-content">${escNews(newsFilter === 'upcoming' ? (cg.emptyUpcoming || 'Nessun evento in programma al momento.') : (cg.emptyPast || 'Nessuna notizia negli ultimi 12 mesi.'))}</p>`;
+        return;
+    }
+
+    container.innerHTML = '';
+    list.forEach(n => {
+        const plain = String(n.testo || '').replace(/\s+/g, ' ').trim();
+        let preview = plain;
+        if (plain.length > 180) {
+            preview = plain.slice(0, 160);
+            const sp = preview.lastIndexOf(' ');
+            if (sp > 80) preview = preview.slice(0, sp);
+            preview += '…';
+        }
+        const el = document.createElement('div');
+        el.className = 'article-item news-item';
+        el.setAttribute('data-article-id', 'news-' + n.id);
+        el.innerHTML = `
+            <div class="article-header">
+                <div>
+                    <p class="article-date news-date">${escNews(newsDateLabel(n.dataInizio, n.dataFine))}</p>
+                    ${n.titolo ? `<h3>${escNews(n.titolo)}</h3>` : ''}
+                </div>
+                <span class="article-toggle">▼</span>
+            </div>
+            <div class="article-content">
+                <div class="article-preview">${escNews(preview)}</div>
+                <div class="article-full">${newsTextToHtml(n.testo)}${n.tradotto ? `<p class="news-translated">${escNews(cg.translated || '')}</p>` : ''}</div>
+            </div>`;
+        container.appendChild(el);
+    });
+    container.querySelectorAll('.article-header').forEach(header => {
+        header.addEventListener('click', () => toggleArticle(header));
+    });
+    // i link nel testo non devono chiudere/aprire la scheda
+    container.querySelectorAll('.article-full a').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
+}
+
+
+// articolo aperto/chiuso (stesso comportamento della Guida alla città)
+function toggleArticle(header) {
+    const item = header.closest('.article-item');
+    const arrow = header.querySelector('.article-toggle');
+    const container = item.parentElement;
+    const open = !item.classList.contains('expanded');
+    container.querySelectorAll('.article-item').forEach(i => {
+        i.classList.remove('expanded');
+        const t = i.querySelector('.article-toggle'); if (t) t.textContent = '▼';
+    });
+    if (open) { item.classList.add('expanded'); if (arrow) arrow.textContent = '▲'; }
+}
+
+function translatePage() {
+    const t = content?.[currentLang];
+    if (!t) return;
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const v = el.getAttribute('data-translate').split('.').reduce((o, k) => o && o[k], t);
+        if (typeof v === 'string') el.textContent = v;
+    });
+    document.querySelectorAll('#langSwitch .lang-option').forEach(o =>
+        o.classList.toggle('active', o.getAttribute('data-lang') === currentLang));
+    document.documentElement.lang = currentLang;
+}
+
+function setupMenu() {
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', e => {
+        e.preventDefault();
+        menu.classList.toggle('active');
+        toggle.classList.toggle('active');
+    });
+    menu.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+        menu.classList.remove('active'); toggle.classList.remove('active');
+    }));
+}
+
+function setupLang() {
+    const sw = document.getElementById('langSwitch');
+    if (!sw) return;
+    sw.addEventListener('click', () => {
+        currentLang = currentLang === 'it' ? 'en' : 'it';
+        try { localStorage.setItem('language', currentLang); } catch (e) {}
+        translatePage();
+        renderEvents();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    setupMenu();
+    setupLang();
+    const y = document.getElementById('footerYear');
+    if (y) y.textContent = new Date().getFullYear();
+    try {
+        const r = await fetch('content/content.json');
+        content = await r.json();
+    } catch (e) {
+        console.error('content.json non caricato', e);
+        content = {};
+    }
+    translatePage();
+    renderEvents();
+});
