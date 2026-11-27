@@ -424,3 +424,16 @@ html, body { overflow-x: hidden; }
 .news-item .article-full > h4:first-child, .news-item .article-full > ul:first-child, .news-item .article-full > ol:first-child { padding-top: 20px; margin-top: 0; }
 .news-item .article-full > p { padding-bottom: 6px; }
 .news-item .article-full > h4 { margin-top: 0.6rem; }
+
+/* News: l'anteprima mostra già grassetti, corsivi, emoji e link (prime righe, sfumate in fondo) */
+.news-preview-rich { max-height: 7.2em; overflow: hidden; position: relative; }
+.news-preview-rich::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2.2em;
+    background: linear-gradient(rgba(255,255,255,0), #fff);
+}
+.news-preview-rich p { margin: 0 0 0.5em; padding: 0; border: none; }
+.news-preview-rich h4 { color: var(--tg-blue); font-size: 1rem; margin: 0 0 0.3em; }
+.news-preview-rich ul, .news-preview-rich ol { margin: 0 0 0.5em 1.2em; padding: 0; }
+.news-preview-rich a { color: var(--tg-blue); font-weight: 600; word-break: break-word; }
+.news-item .article-full strong, .news-preview-rich strong { font-weight: 700; color: #222; }
+.news-item .article-full em, .news-preview-rich em { font-style: italic; }

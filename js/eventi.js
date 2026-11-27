@@ -118,7 +118,7 @@ async function renderEvents() {
                 <span class="article-toggle">▼</span>
             </div>
             <div class="article-content">
-                <div class="article-preview">${escNews(preview)}</div>
+                <div class="article-preview"><div class="news-preview-rich">${newsTextToHtml(n.testo)}</div></div>
                 <div class="article-full">${newsTextToHtml(n.testo)}${n.tradotto ? `<p class="news-translated">${escNews(cg.translated || '')}</p>` : ''}</div>
             </div>`;
         container.appendChild(el);
